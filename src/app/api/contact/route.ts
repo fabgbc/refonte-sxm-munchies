@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { z, ZodError } from "zod";
 import { headers } from "next/headers";
+import { Resend } from "resend";
 
 // Rate limiting store (in production, use Redis)
 const rateLimitStore = new Map<string, { count: number; resetTime: number }>();
@@ -206,17 +207,84 @@ export async function POST(request: Request) {
       message: validatedData.message,
     };
 
-    // Log the data (in production, you would send an email here)
+    // Log the data
     console.log("New contact form submission:", cleanData);
 
-    // TODO: Integrate with email service (Resend, SendGrid, etc.)
-    // Example with Resend:
-    // await resend.emails.send({
-    //   from: 'SXM Private Chef <contact@sxmprivatechef.com>',
-    //   to: 'sxmprivatechef@gmail.com',
-    //   subject: `Nouvelle demande de ${cleanData.name}`,
-    //   html: `...`,
-    // });
+    // Send email via Resend
+    const resend = new Resend(process.env.RESEND_API_KEY);
+
+    const serviceTypeLabels: Record<string, string> = {
+      villa: "Villa privée",
+      yacht: "Yacht / Bateau",
+      event: "Événement",
+      buffet: "Buffet / Réception",
+    };
+
+    const { error } = await resend.emails.send({
+      from: "SXM Private Chef <onboarding@resend.dev>", // Change to your verified domain
+      to: "sxmprivatechef@gmail.com",
+      replyTo: cleanData.email,
+      subject: `Nouvelle demande de ${cleanData.name} - ${serviceTypeLabels[cleanData.serviceType] || cleanData.serviceType}`,
+      html: `
+        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+          <h1 style="color: #D4A574; border-bottom: 2px solid #D4A574; padding-bottom: 10px;">
+            Nouvelle demande de réservation
+          </h1>
+
+          <table style="width: 100%; border-collapse: collapse; margin: 20px 0;">
+            <tr>
+              <td style="padding: 10px; border-bottom: 1px solid #eee; font-weight: bold; width: 150px;">Nom</td>
+              <td style="padding: 10px; border-bottom: 1px solid #eee;">${cleanData.name}</td>
+            </tr>
+            <tr>
+              <td style="padding: 10px; border-bottom: 1px solid #eee; font-weight: bold;">Email</td>
+              <td style="padding: 10px; border-bottom: 1px solid #eee;">
+                <a href="mailto:${cleanData.email}">${cleanData.email}</a>
+              </td>
+            </tr>
+            <tr>
+              <td style="padding: 10px; border-bottom: 1px solid #eee; font-weight: bold;">Téléphone</td>
+              <td style="padding: 10px; border-bottom: 1px solid #eee;">
+                <a href="tel:${cleanData.phone}">${cleanData.phone}</a>
+              </td>
+            </tr>
+            <tr>
+              <td style="padding: 10px; border-bottom: 1px solid #eee; font-weight: bold;">Date souhaitée</td>
+              <td style="padding: 10px; border-bottom: 1px solid #eee;">${cleanData.date}</td>
+            </tr>
+            <tr>
+              <td style="padding: 10px; border-bottom: 1px solid #eee; font-weight: bold;">Type de prestation</td>
+              <td style="padding: 10px; border-bottom: 1px solid #eee;">${serviceTypeLabels[cleanData.serviceType] || cleanData.serviceType}</td>
+            </tr>
+            <tr>
+              <td style="padding: 10px; border-bottom: 1px solid #eee; font-weight: bold;">Nombre de convives</td>
+              <td style="padding: 10px; border-bottom: 1px solid #eee;">${cleanData.guests}</td>
+            </tr>
+          </table>
+
+          ${cleanData.message ? `
+            <div style="margin: 20px 0;">
+              <h3 style="color: #333;">Message</h3>
+              <p style="background: #f5f5f5; padding: 15px; border-left: 3px solid #D4A574;">
+                ${cleanData.message.replace(/\n/g, "<br>")}
+              </p>
+            </div>
+          ` : ""}
+
+          <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #eee; color: #666; font-size: 12px;">
+            <p>Email envoyé depuis le formulaire de contact de sxmprivatechef.com</p>
+          </div>
+        </div>
+      `,
+    });
+
+    if (error) {
+      console.error("Error sending email:", error);
+      return NextResponse.json(
+        { message: "Erreur lors de l'envoi de l'email" },
+        { status: 500 }
+      );
+    }
 
     return NextResponse.json(
       { message: "Demande envoyée avec succès" },
