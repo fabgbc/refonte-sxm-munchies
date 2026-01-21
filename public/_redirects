@@ -1,0 +1,143 @@
+# Redirections des anciennes pages vers les nouvelles
+
+# Pages de navigation obsolètes
+/our-buffets              /private-chef-services    301
+/our-services             /private-chef-services    301
+/our-menus                /#menus                   301
+
+# Pages de thème/démo (rediriger vers homepage)
+/home-layout-02           /                         301
+/home-layout-03           /                         301
+/home-layout-05           /                         301
+/menu-1                   /grill-menu               301
+/menu-2                   /caribbean-menu           301
+/menu-3                   /mediterranean-menu       301
+/menu-4                   /gourmet-menu             301
+/menu-5                   /bourgogne-menu           301
+/about-2                  /chefs                    301
+/services                 /private-chef-services    301
+/features                 /private-chef-services    301
+/pricing                  /private-chef-services    301
+/faq                      /contact                  301
+
+# E-commerce (rediriger vers contact)
+/shop                     /contact                  301
+/shop-2                   /contact                  301
+/cart-2                   /contact                  301
+/checkout-2               /contact                  301
+/my-account-2             /contact                  301
+
+# Blog (rediriger vers homepage)
+/blog                     /                         301
+/blog-1                   /                         301
+/blog-2                   /                         301
+/hello-world-655643       /                         301
+
+# Galleries (rediriger vers homepage)
+/image-gallery            /                         301
+/video-gallery            /                         301
+
+# Sample pages
+/sample-page              /                         301
+/sample-page-2            /                         301
+
+# Produits - Grill Menu
+/product/lobster                                    /grill-menu    301
+/product/whole-snapper                              /grill-menu    301
+/product/tuna-steak                                 /grill-menu    301
+/product/shrimps-skewers                            /grill-menu    301
+/product/beef-tenderloin-300g-10-5-oz               /grill-menu    301
+/product/beef-tenderloin-500g-17-5-oz               /grill-menu    301
+/product/beef-prime-rib                             /grill-menu    301
+/product/royal-skewer-300g-10-5-oz                  /grill-menu    301
+/product/duck-breast                                /grill-menu    301
+/product/classic-cheeseburger                       /grill-menu    301
+/product/rossini-twist                              /grill-menu    301
+
+# Produits - Gourmet Menu
+/product/pan-seared-scallops-with-cognac            /gourmet-menu  301
+/product/beef-tenderloin-with-truffle-sauce         /gourmet-menu  301
+/product/foie-gras-mango-gyoza                      /gourmet-menu  301
+/product/tuna-tartare                               /gourmet-menu  301
+/product/cold-asparagus                             /gourmet-menu  301
+/product/omelette-norvegienne-baked-alaska          /gourmet-menu  301
+/product/chicken-ballotine-with-foie-gras           /gourmet-menu  301
+/product/wahoo-gravlax-with-crisp-salad-and-green-curry-dressing  /gourmet-menu  301
+/product/lobster-tail-and-beef-tenderloin-bisque-sauce-green-asparagus-and-polenta  /gourmet-menu  301
+
+# Produits - Mediterranean Menu
+/product/lamb-confit-moussaka                       /mediterranean-menu  301
+/product/tiramisu                                   /mediterranean-menu  301
+/product/red-pesto-focaccia-with-fresh-burrata-and-tomato-salad  /mediterranean-menu  301
+/product/stuffed-calamari-tube-with-provencal-sauce /mediterranean-menu  301
+/product/chilled-gazpacho-shot-as-an-amuse-bouche   /mediterranean-menu  301
+
+# Produits - Caribbean Menu
+/product/mahi-mahi-with-passion-fruit-sauce         /caribbean-menu  301
+/product/guava-flan                                 /caribbean-menu  301
+/product/mango-cheesecake                           /caribbean-menu  301
+/product/gratin-of-giromon-caribbean-squash         /caribbean-menu  301
+/product/creole-rice                                /caribbean-menu  301
+/product/mango-and-passion-fruit-pavlova-served-with-a-spiced-infused-rum  /caribbean-menu  301
+/product/coconut-breaded-chicken-with-sweet-spicy-mango-dip  /caribbean-menu  301
+/product/shrimp-and-pineapple-salad-with-ginger-lime-dressing  /caribbean-menu  301
+
+# Produits - Bourgogne Menu
+/product/snail-casserole-in-puff-pastry-creamy-chardonnay-sauce  /bourgogne-menu  301
+/product/poached-egg-in-red-wine-sauce-oeuf-en-meurette  /bourgogne-menu  301
+/product/red-wine-poached-pear-with-blackcurrant-sorbet  /bourgogne-menu  301
+/product/frozen-marc-de-bourgogne-granita           /bourgogne-menu  301
+/product/caramelized-braised-pork-cheek             /bourgogne-menu  301
+
+# Produits - Surf & Turf Menu
+/product/flaked-cod-with-artichoke-parmesan-and-parsley-garlic-seasoning  /surf-turf-menu  301
+
+# Produits - Salads & Tapas
+/product/guacamole-hummus-duo-with-toasted-tortillas  /salads-tapas-buffet  301
+/product/caesar-salad                               /salads-tapas-buffet  301
+/product/mild-spicy-lentil-salad                    /salads-tapas-buffet  301
+/product/mint-tabouleh                              /salads-tapas-buffet  301
+/product/mango-avocado-quinoa                       /salads-tapas-buffet  301
+/product/squid-potato-salad-with-spicy-mayo         /salads-tapas-buffet  301
+/product/lobster-citrus-salad-green-curry-shrimp-salad  /salads-tapas-buffet  301
+/product/thai-beef-salad                            /salads-tapas-buffet  301
+/product/mini-salad-box                             /salads-tapas-buffet  301
+
+# Produits - Gourmet Platters
+/product/cheese-assortment                          /gourmet-platters  301
+/product/raw-veggies-platter                        /gourmet-platters  301
+/product/sashimi-platter                            /gourmet-platters  301
+/product/assortment-of-deli-meats                   /gourmet-platters  301
+/product/roasted-beef-with-gribiche-sauce           /gourmet-platters  301
+/product/beef-tataki-with-wasabi-cream              /gourmet-platters  301
+/product/rare-snacked-sesame-tuna                   /gourmet-platters  301
+/product/mini-skewers                               /gourmet-platters  301
+/product/mini-burgers                               /gourmet-platters  301
+/product/caramelized-pork-quesadillas               /gourmet-platters  301
+/product/ginger-lime-chicken-with-rice              /gourmet-platters  301
+/product/vegetarian-mini-club-sandwich              /gourmet-platters  301
+/product/smoked-salmon-or-lobster-mini-wraps        /gourmet-platters  301
+
+# Produits - Buffet Patisserie
+/product/macarons-3-pieces                          /buffet-patisserie  301
+/product/fresh-fruit-cups                           /buffet-patisserie  301
+/product/cookies-4-pieces                           /buffet-patisserie  301
+/product/financier                                  /buffet-patisserie  301
+/product/caramel-fudge-cake                         /buffet-patisserie  301
+/product/mango-chocolate-cheesecake                 /buffet-patisserie  301
+/product/pecan-brownie                              /buffet-patisserie  301
+/product/passion-fruit-cream-puffs                  /buffet-patisserie  301
+/product/frozen-nougat                              /buffet-patisserie  301
+
+# Produits - Wine
+/product/valle-berta-gavis                          /wine  301
+/product/valle-berta-gavi                           /wine  301
+/product/amarone-classicos                          /wine  301
+/product/amarone-classico                           /wine  301
+/product/dom-perignons                              /wine  301
+/product/dom-perignon                               /wine  301
+/product/riscoss-malbec                             /wine  301
+/product/riscos-malbec                              /wine  301
+
+# Catch-all pour les autres produits
+/product/*                                          /private-chef-services  301
