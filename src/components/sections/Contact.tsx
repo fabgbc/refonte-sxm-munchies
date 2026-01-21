@@ -210,39 +210,54 @@ export default function Contact() {
 
               {/* Name */}
               <div className="form-group">
+                <label htmlFor="contact-name" className="sr-only">Votre nom</label>
                 <input
                   type="text"
+                  id="contact-name"
                   {...register("name")}
                   placeholder="Votre nom"
                   className="form-input"
+                  aria-required="true"
+                  aria-invalid={errors.name ? "true" : "false"}
+                  aria-describedby={errors.name ? "contact-name-error" : undefined}
                 />
                 {errors.name && (
-                  <p className="form-error">{errors.name.message}</p>
+                  <p id="contact-name-error" className="form-error" role="alert">{errors.name.message}</p>
                 )}
               </div>
 
               {/* Email & Phone */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <div className="form-group">
+                  <label htmlFor="contact-email" className="sr-only">Email</label>
                   <input
                     type="email"
+                    id="contact-email"
                     {...register("email")}
                     placeholder="Email"
                     className="form-input"
+                    aria-required="true"
+                    aria-invalid={errors.email ? "true" : "false"}
+                    aria-describedby={errors.email ? "contact-email-error" : undefined}
                   />
                   {errors.email && (
-                    <p className="form-error">{errors.email.message}</p>
+                    <p id="contact-email-error" className="form-error" role="alert">{errors.email.message}</p>
                   )}
                 </div>
                 <div className="form-group">
+                  <label htmlFor="contact-phone" className="sr-only">Téléphone</label>
                   <input
                     type="tel"
+                    id="contact-phone"
                     {...register("phone")}
                     placeholder="Téléphone"
                     className="form-input"
+                    aria-required="true"
+                    aria-invalid={errors.phone ? "true" : "false"}
+                    aria-describedby={errors.phone ? "contact-phone-error" : undefined}
                   />
                   {errors.phone && (
-                    <p className="form-error">{errors.phone.message}</p>
+                    <p id="contact-phone-error" className="form-error" role="alert">{errors.phone.message}</p>
                   )}
                 </div>
               </div>
@@ -250,17 +265,30 @@ export default function Contact() {
               {/* Date & Service Type */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <div className="form-group">
+                  <label htmlFor="contact-date" className="sr-only">Date souhaitée</label>
                   <input
                     type="date"
+                    id="contact-date"
                     {...register("date")}
                     className="form-input"
+                    aria-required="true"
+                    aria-invalid={errors.date ? "true" : "false"}
+                    aria-describedby={errors.date ? "contact-date-error" : undefined}
                   />
                   {errors.date && (
-                    <p className="form-error">{errors.date.message}</p>
+                    <p id="contact-date-error" className="form-error" role="alert">{errors.date.message}</p>
                   )}
                 </div>
                 <div className="form-group">
-                  <select {...register("serviceType")} className="form-select">
+                  <label htmlFor="contact-service" className="sr-only">Type de prestation</label>
+                  <select
+                    id="contact-service"
+                    {...register("serviceType")}
+                    className="form-select"
+                    aria-required="true"
+                    aria-invalid={errors.serviceType ? "true" : "false"}
+                    aria-describedby={errors.serviceType ? "contact-service-error" : undefined}
+                  >
                     <option value="">Type de prestation</option>
                     <option value="villa">Villa privée</option>
                     <option value="yacht">Yacht / Bateau</option>
@@ -268,14 +296,22 @@ export default function Contact() {
                     <option value="buffet">Buffet / Réception</option>
                   </select>
                   {errors.serviceType && (
-                    <p className="form-error">{errors.serviceType.message}</p>
+                    <p id="contact-service-error" className="form-error" role="alert">{errors.serviceType.message}</p>
                   )}
                 </div>
               </div>
 
               {/* Guests */}
               <div className="form-group">
-                <select {...register("guests")} className="form-select">
+                <label htmlFor="contact-guests" className="sr-only">Nombre de convives</label>
+                <select
+                  id="contact-guests"
+                  {...register("guests")}
+                  className="form-select"
+                  aria-required="true"
+                  aria-invalid={errors.guests ? "true" : "false"}
+                  aria-describedby={errors.guests ? "contact-guests-error" : undefined}
+                >
                   <option value="">Nombre de convives</option>
                   <option value="2-4">2 à 4 personnes</option>
                   <option value="5-8">5 à 8 personnes</option>
@@ -284,17 +320,20 @@ export default function Contact() {
                   <option value="30+">Plus de 30 personnes</option>
                 </select>
                 {errors.guests && (
-                  <p className="form-error">{errors.guests.message}</p>
+                  <p id="contact-guests-error" className="form-error" role="alert">{errors.guests.message}</p>
                 )}
               </div>
 
               {/* Message */}
               <div className="form-group">
+                <label htmlFor="contact-message" className="sr-only">Votre message</label>
                 <textarea
+                  id="contact-message"
                   {...register("message")}
                   placeholder="Votre message (optionnel) — préférences alimentaires, occasion spéciale, etc."
                   rows={4}
                   className="form-input resize-none"
+                  aria-required="false"
                 />
               </div>
 

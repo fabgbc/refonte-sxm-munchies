@@ -249,46 +249,69 @@ export default function ContactPage() {
                 <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
                   {/* Name */}
                   <div className="form-group">
+                    <label htmlFor="contact-name" className="sr-only">Your name</label>
                     <input
                       type="text"
+                      id="contact-name"
                       {...register("name")}
                       placeholder="Your name"
                       className="form-input"
+                      aria-required="true"
+                      aria-invalid={errors.name ? "true" : "false"}
+                      aria-describedby={errors.name ? "contact-name-error" : undefined}
                     />
                     {errors.name && (
-                      <p className="form-error">{errors.name.message}</p>
+                      <p id="contact-name-error" className="form-error" role="alert">{errors.name.message}</p>
                     )}
                   </div>
 
                   {/* Email & Phone */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                     <div className="form-group">
+                      <label htmlFor="contact-email" className="sr-only">Your email</label>
                       <input
                         type="email"
+                        id="contact-email"
                         {...register("email")}
                         placeholder="Your email"
                         className="form-input"
+                        aria-required="true"
+                        aria-invalid={errors.email ? "true" : "false"}
+                        aria-describedby={errors.email ? "contact-email-error" : undefined}
                       />
                       {errors.email && (
-                        <p className="form-error">{errors.email.message}</p>
+                        <p id="contact-email-error" className="form-error" role="alert">{errors.email.message}</p>
                       )}
                     </div>
                     <div className="form-group">
+                      <label htmlFor="contact-phone" className="sr-only">Your phone</label>
                       <input
                         type="tel"
+                        id="contact-phone"
                         {...register("phone")}
                         placeholder="Your phone"
                         className="form-input"
+                        aria-required="true"
+                        aria-invalid={errors.phone ? "true" : "false"}
+                        aria-describedby={errors.phone ? "contact-phone-error" : undefined}
                       />
                       {errors.phone && (
-                        <p className="form-error">{errors.phone.message}</p>
+                        <p id="contact-phone-error" className="form-error" role="alert">{errors.phone.message}</p>
                       )}
                     </div>
                   </div>
 
                   {/* Subject */}
                   <div className="form-group">
-                    <select {...register("subject")} className="form-select">
+                    <label htmlFor="contact-subject" className="sr-only">Subject</label>
+                    <select
+                      id="contact-subject"
+                      {...register("subject")}
+                      className="form-select"
+                      aria-required="true"
+                      aria-invalid={errors.subject ? "true" : "false"}
+                      aria-describedby={errors.subject ? "contact-subject-error" : undefined}
+                    >
                       <option value="">Subject</option>
                       <option value="villa">Private Chef in Villa</option>
                       <option value="yacht">Private Chef Onboard</option>
@@ -297,17 +320,20 @@ export default function ContactPage() {
                       <option value="other">Other inquiry</option>
                     </select>
                     {errors.subject && (
-                      <p className="form-error">{errors.subject.message}</p>
+                      <p id="contact-subject-error" className="form-error" role="alert">{errors.subject.message}</p>
                     )}
                   </div>
 
                   {/* Message */}
                   <div className="form-group">
+                    <label htmlFor="contact-message" className="sr-only">Your message</label>
                     <textarea
+                      id="contact-message"
                       {...register("message")}
                       placeholder="Your message (optional)"
                       rows={5}
                       className="form-input resize-none"
+                      aria-required="false"
                     />
                   </div>
 
@@ -496,11 +522,26 @@ export default function ContactPage() {
               <h3 className="font-[family-name:var(--font-cormorant)] text-2xl">Contact Us</h3>
             </motion.div>
             <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} className="max-w-xl mx-auto space-y-6">
-              <input type="text" placeholder="Your name" className="form-input" />
-              <input type="email" placeholder="Your email" className="form-input" />
-              <input type="tel" placeholder="Your phone" className="form-input" />
-              <input type="text" placeholder="Subject" className="form-input" />
-              <textarea placeholder="Your message (optional)" rows={4} className="form-input resize-none" />
+              <div className="form-group">
+                <label htmlFor="reservation-name" className="sr-only">Your name</label>
+                <input type="text" id="reservation-name" placeholder="Your name" className="form-input" aria-required="true" />
+              </div>
+              <div className="form-group">
+                <label htmlFor="reservation-email" className="sr-only">Your email</label>
+                <input type="email" id="reservation-email" placeholder="Your email" className="form-input" aria-required="true" />
+              </div>
+              <div className="form-group">
+                <label htmlFor="reservation-phone" className="sr-only">Your phone</label>
+                <input type="tel" id="reservation-phone" placeholder="Your phone" className="form-input" aria-required="true" />
+              </div>
+              <div className="form-group">
+                <label htmlFor="reservation-subject" className="sr-only">Subject</label>
+                <input type="text" id="reservation-subject" placeholder="Subject" className="form-input" aria-required="true" />
+              </div>
+              <div className="form-group">
+                <label htmlFor="reservation-message" className="sr-only">Your message</label>
+                <textarea id="reservation-message" placeholder="Your message (optional)" rows={4} className="form-input resize-none" aria-required="false" />
+              </div>
               <button type="button" className="btn btn-primary w-full">SUBMIT</button>
             </motion.div>
           </div>
