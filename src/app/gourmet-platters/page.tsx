@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
+import Image from "next/image";
 import Navigation from "@/components/layout/Navigation";
 import Footer from "@/components/layout/Footer";
 import { gourmetPlatters } from "@/data/menus";
@@ -44,182 +45,401 @@ export default function GourmetPlattersPage() {
       <Navigation />
       <main>
         {/* Hero Section */}
-        <section className="relative min-h-[50vh] flex items-center justify-center bg-[var(--color-bg-secondary)]">
-          <div className="absolute inset-0 bg-gradient-to-b from-[var(--color-bg-primary)] to-transparent opacity-50" />
+        <section className="relative min-h-[70vh] flex items-center justify-center pt-24 pb-16 lg:pt-32 lg:pb-24 vignette">
+          {/* Background Image */}
+          <div className="absolute inset-0">
+            <Image
+              src="/images/hero-menus/platters.jpg"
+              alt="Gourmet Platters"
+              fill
+              className="object-cover"
+              priority
+            />
+            <div className="absolute inset-0 bg-gradient-to-b from-[#0C0A09]/80 via-[#0C0A09]/60 to-[#0C0A09]/95" />
+          </div>
+
+          {/* Decorative corner elements */}
+          <div className="absolute top-24 left-8 lg:left-16 w-20 h-20 border-t border-l border-[var(--color-accent)]/30 z-10" />
+          <div className="absolute top-24 right-8 lg:right-16 w-20 h-20 border-t border-r border-[var(--color-accent)]/30 z-10" />
+          <div className="absolute bottom-8 left-8 lg:left-16 w-20 h-20 border-b border-l border-[var(--color-accent)]/30 z-10" />
+          <div className="absolute bottom-8 right-8 lg:right-16 w-20 h-20 border-b border-r border-[var(--color-accent)]/30 z-10" />
+
+          <div className="container relative z-10">
+            <motion.div
+              variants={heroTextContainer}
+              initial="hidden"
+              animate="visible"
+              className="text-center max-w-4xl mx-auto"
+            >
+              {/* Decorative line */}
+              <motion.div
+                variants={heroTextItem}
+                className="flex items-center justify-center gap-4 mb-6"
+              >
+                <span className="w-12 h-[1px] bg-[var(--color-accent)]" />
+                <span className="section-number">Elegant Sharing</span>
+                <span className="w-12 h-[1px] bg-[var(--color-accent)]" />
+              </motion.div>
+
+              <motion.h1
+                variants={heroTextItem}
+                className="mb-6 golden-glow-text"
+              >
+                Gourmet Platters
+              </motion.h1>
+
+              <motion.p
+                variants={heroTextItem}
+                className="text-[var(--color-text-secondary)] text-lg lg:text-xl mb-10 max-w-2xl mx-auto font-[family-name:var(--font-cormorant)] italic"
+              >
+                Beautiful, artfully arranged platters perfect for entertaining
+                guests or enjoying a sophisticated evening at your villa.
+              </motion.p>
+
+              <motion.div
+                variants={heroTextItem}
+                className="inline-block"
+              >
+                <div className="px-8 py-4 border border-[var(--color-accent)]/50 bg-[var(--color-bg-primary)]/30 backdrop-blur-sm">
+                  <span className="text-[var(--color-accent)] font-[family-name:var(--font-cormorant)] text-lg italic">Minimum 4 guests required</span>
+                </div>
+              </motion.div>
+            </motion.div>
+          </div>
+
+          {/* Scroll indicator */}
           <motion.div
-            variants={heroTextContainer}
-            initial="hidden"
-            animate="visible"
-            className="container relative text-center py-32 lg:py-40"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 1.5 }}
+            className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 z-10"
           >
-            <motion.span
-              variants={heroTextItem}
-              className="section-number block mb-4"
+            <span className="text-xs tracking-widest uppercase text-[var(--color-text-secondary)]">
+              Discover
+            </span>
+            <motion.div
+              animate={{ y: [0, 8, 0] }}
+              transition={{ duration: 1.5, repeat: Infinity }}
             >
-              Elegant Sharing
-            </motion.span>
-            <motion.h1 variants={heroTextItem} className="mb-6">
-              Gourmet Platters
-            </motion.h1>
-            <motion.p
-              variants={heroTextItem}
-              className="text-[var(--color-text-secondary)] max-w-2xl mx-auto text-lg"
-            >
-              Beautiful, artfully arranged platters perfect for entertaining
-              guests or enjoying a sophisticated evening at your villa.
-            </motion.p>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" strokeWidth="1.5">
+                <path d="M12 5v14M19 12l-7 7-7-7" />
+              </svg>
+            </motion.div>
           </motion.div>
         </section>
 
-        {/* Minimum Guests Notice */}
-        <section className="py-8 bg-[var(--color-bg-tertiary)]">
-          <div className="container">
-            <motion.div
-              variants={fadeUp}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              className="flex items-center justify-center gap-4"
-            >
-              <svg
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="var(--color-accent)"
-                strokeWidth="1.5"
-              >
-                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
-                <circle cx="9" cy="7" r="4" />
-                <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
-                <path d="M16 3.13a4 4 0 0 1 0 7.75" />
-              </svg>
-              <span className="text-lg">
-                Minimum <span className="text-[var(--color-accent)] font-medium">4 guests</span> required
-              </span>
-            </motion.div>
-          </div>
-        </section>
+        {/* Platters Section */}
+        <section className="section bg-[var(--color-bg-primary)] relative">
+          {/* Decorative background pattern */}
+          <div className="absolute inset-0 opacity-[0.02]" style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0L60 30L30 60L0 30z' fill='%23D4A574' fill-opacity='1'/%3E%3C/svg%3E")`,
+            backgroundSize: '60px 60px'
+          }} />
 
-        {/* Platters Grid */}
-        <section className="section bg-[var(--color-bg-primary)]">
-          <div className="container">
+          <div className="container relative">
             <motion.div
               variants={staggerContainer}
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, margin: "-100px" }}
-              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+              className="max-w-6xl mx-auto"
             >
-              {gourmetPlatters.map((platter, index) => (
-                <motion.div
-                  key={index}
-                  variants={staggerItem}
-                  className="card p-8 flex flex-col"
-                >
-                  <div className="mb-4">
-                    <span className="section-number">
-                      {String(index + 1).padStart(2, "0")}
-                    </span>
-                  </div>
-                  <h3 className="text-[var(--color-accent)] mb-4">
-                    {platter.name}
-                  </h3>
-                  <p className="text-[var(--color-text-secondary)] flex-1">
-                    {platter.description}
+              {/* Service Info Box */}
+              <motion.div
+                variants={staggerItem}
+                className="text-center mb-20"
+              >
+                <div className="inline-block px-10 py-6 bg-[var(--color-bg-secondary)] border border-[var(--color-accent-light)] relative">
+                  {/* Corner accents */}
+                  <div className="absolute -top-2 -left-2 w-4 h-4 border-t-2 border-l-2 border-[var(--color-accent)]" />
+                  <div className="absolute -top-2 -right-2 w-4 h-4 border-t-2 border-r-2 border-[var(--color-accent)]" />
+                  <div className="absolute -bottom-2 -left-2 w-4 h-4 border-b-2 border-l-2 border-[var(--color-accent)]" />
+                  <div className="absolute -bottom-2 -right-2 w-4 h-4 border-b-2 border-r-2 border-[var(--color-accent)]" />
+                  <p className="text-[var(--color-accent)] text-lg font-[family-name:var(--font-cormorant)] italic">
+                    All platters priced per person - Delivered ready to serve
                   </p>
-                  {platter.pricePerPerson && (
-                    <div className="mt-6 pt-4 border-t border-[var(--color-accent-light)]">
-                      <span className="text-sm text-[var(--color-text-secondary)]">
-                        Priced per person
+                </div>
+              </motion.div>
+
+              {/* Section Title */}
+              <motion.div variants={staggerItem} className="text-center mb-12">
+                <span className="section-number">Selection</span>
+                <h2 className="font-[family-name:var(--font-cormorant)] mt-4">Our Gourmet Platters</h2>
+              </motion.div>
+
+              {/* Platters Grid */}
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {gourmetPlatters.map((platter, index) => (
+                  <motion.div
+                    key={index}
+                    variants={staggerItem}
+                    whileHover={{ y: -8, transition: { duration: 0.3 } }}
+                    className="group relative bg-[var(--color-bg-secondary)] border border-[var(--color-accent-light)] p-8 hover:border-[var(--color-accent)] transition-all duration-300"
+                  >
+                    {/* Corner accents on hover */}
+                    <div className="absolute -top-1 -left-1 w-3 h-3 border-t border-l border-transparent group-hover:border-[var(--color-accent)] transition-colors" />
+                    <div className="absolute -top-1 -right-1 w-3 h-3 border-t border-r border-transparent group-hover:border-[var(--color-accent)] transition-colors" />
+                    <div className="absolute -bottom-1 -left-1 w-3 h-3 border-b border-l border-transparent group-hover:border-[var(--color-accent)] transition-colors" />
+                    <div className="absolute -bottom-1 -right-1 w-3 h-3 border-b border-r border-transparent group-hover:border-[var(--color-accent)] transition-colors" />
+
+                    <div className="flex items-center gap-3 mb-4">
+                      {/* Platter icon */}
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" strokeWidth="1.5" className="opacity-60 group-hover:opacity-100 transition-opacity">
+                        <ellipse cx="12" cy="14" rx="10" ry="4" />
+                        <path d="M2 14v2c0 2.21 4.48 4 10 4s10-1.79 10-4v-2" />
+                        <path d="M12 10V6M9 6h6" />
+                      </svg>
+                      <span className="section-number">
+                        {String(index + 1).padStart(2, "0")}
                       </span>
                     </div>
-                  )}
-                </motion.div>
-              ))}
+                    <h3 className="text-[var(--color-accent)] mb-4 font-[family-name:var(--font-cormorant)] text-xl group-hover:text-[var(--color-text-primary)] transition-colors">
+                      {platter.name}
+                    </h3>
+                    <p className="text-[var(--color-text-secondary)] text-sm leading-relaxed">
+                      {platter.description}
+                    </p>
+                    {platter.pricePerPerson && (
+                      <div className="mt-6 pt-4 border-t border-[var(--color-accent-light)]/30">
+                        <span className="text-xs uppercase tracking-wider text-[var(--color-accent)]">
+                          Priced per person
+                        </span>
+                      </div>
+                    )}
+                  </motion.div>
+                ))}
+              </div>
             </motion.div>
           </div>
         </section>
 
-        {/* Good to Know */}
-        <section className="section bg-[var(--color-bg-secondary)]">
-          <div className="container">
+        {/* Good to Know Section */}
+        <section className="py-20 lg:py-28 bg-[var(--color-bg-secondary)] relative overflow-hidden">
+          {/* Decorative blur elements */}
+          <div className="absolute top-0 left-0 w-64 h-64 bg-[var(--color-accent)]/5 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2" />
+          <div className="absolute bottom-0 right-0 w-64 h-64 bg-[var(--color-accent)]/5 rounded-full blur-3xl translate-x-1/2 translate-y-1/2" />
+
+          <div className="container relative">
             <motion.div
-              variants={staggerContainer}
+              variants={fadeUp}
               initial="hidden"
               whileInView="visible"
-              viewport={{ once: true }}
-              className="max-w-3xl mx-auto"
+              viewport={{ once: true, margin: "-100px" }}
+              className="max-w-4xl mx-auto"
             >
-              <motion.div variants={staggerItem} className="text-center mb-12">
-                <span className="section-number block mb-4">Important</span>
-                <h2>Good to Know</h2>
-              </motion.div>
-              <motion.div
-                variants={staggerItem}
-                className="card p-8 lg:p-12 text-center"
-              >
-                <div className="flex items-center justify-center gap-4 mb-6">
-                  <svg
-                    width="32"
-                    height="32"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="var(--color-accent)"
-                    strokeWidth="1.5"
-                  >
-                    <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
-                    <polyline points="3.27 6.96 12 12.01 20.73 6.96" />
-                    <line x1="12" y1="22.08" x2="12" y2="12" />
+              <div className="text-center mb-12">
+                <div className="flex items-center justify-center gap-4 mb-4">
+                  <span className="w-12 h-[1px] bg-[var(--color-accent)]" />
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" strokeWidth="1.5">
+                    <circle cx="12" cy="12" r="10" />
+                    <path d="M12 16v-4M12 8h.01" />
                   </svg>
-                  <span className="text-xl font-[family-name:var(--font-cormorant)] text-[var(--color-accent)]">
-                    Ready to Serve
-                  </span>
+                  <span className="w-12 h-[1px] bg-[var(--color-accent)]" />
                 </div>
-                <p className="text-[var(--color-text-secondary)] text-lg">
-                  Delivered ready to serve, with all sauces and condiments
-                  included. Simply unwrap and enjoy with your guests.
-                </p>
-              </motion.div>
+                <h3 className="text-[var(--color-accent)] text-2xl font-[family-name:var(--font-cormorant)]">
+                  Good to Know
+                </h3>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div className="text-center p-6">
+                  <div className="w-12 h-12 mx-auto mb-4 flex items-center justify-center border border-[var(--color-accent)] rounded-full">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" strokeWidth="1.5">
+                      <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                      <circle cx="9" cy="7" r="4" />
+                      <path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" />
+                    </svg>
+                  </div>
+                  <h4 className="text-[var(--color-text-primary)] mb-2">Minimum 4 Guests</h4>
+                  <p className="text-[var(--color-text-secondary)] text-sm">
+                    All platters require a minimum of 4 guests
+                  </p>
+                </div>
+                <div className="text-center p-6">
+                  <div className="w-12 h-12 mx-auto mb-4 flex items-center justify-center border border-[var(--color-accent)] rounded-full">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" strokeWidth="1.5">
+                      <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
+                      <polyline points="3.27 6.96 12 12.01 20.73 6.96" />
+                      <line x1="12" y1="22.08" x2="12" y2="12" />
+                    </svg>
+                  </div>
+                  <h4 className="text-[var(--color-text-primary)] mb-2">Ready to Serve</h4>
+                  <p className="text-[var(--color-text-secondary)] text-sm">
+                    Delivered beautifully arranged and ready to enjoy
+                  </p>
+                </div>
+                <div className="text-center p-6">
+                  <div className="w-12 h-12 mx-auto mb-4 flex items-center justify-center border border-[var(--color-accent)] rounded-full">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" strokeWidth="1.5">
+                      <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+                      <polyline points="22 4 12 14.01 9 11.01" />
+                    </svg>
+                  </div>
+                  <h4 className="text-[var(--color-text-primary)] mb-2">All Inclusive</h4>
+                  <p className="text-[var(--color-text-secondary)] text-sm">
+                    Sauces and condiments included with every platter
+                  </p>
+                </div>
+              </div>
             </motion.div>
           </div>
         </section>
 
         {/* Booking Section */}
-        <section className="section bg-[var(--color-bg-primary)]">
-          <div className="container">
-            <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} className="text-center mb-12">
-              <h2 className="mb-4">Treat your guests with elegant gourmet platters</h2>
-            </motion.div>
-            <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} className="flex flex-col items-center gap-4 mb-12">
-              <span className="text-xs uppercase tracking-wider text-[var(--color-accent)]">Reservation</span>
-              <a href="tel:+590690535739" className="flex items-center gap-3 text-xl hover:text-[var(--color-accent)] transition-colors">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="text-[var(--color-accent)]"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" /></svg>
-                +590 690 53.57.39
-              </a>
-              <span className="text-xs uppercase tracking-wider text-[var(--color-accent)] mt-2">Reservation</span>
-              <a href="mailto:sxmprivatechef@gmail.com" className="flex items-center gap-3 hover:text-[var(--color-accent)] transition-colors">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="text-[var(--color-accent)]"><rect width="20" height="16" x="2" y="4" rx="2" /><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" /></svg>
-                sxmprivatechef@gmail.com
-              </a>
-            </motion.div>
-          </div>
-        </section>
+        <section className="section bg-[var(--color-bg-primary)] relative overflow-hidden">
+          {/* Decorative dotted background */}
+          <div className="absolute inset-0 opacity-[0.03]" style={{
+            backgroundImage: `radial-gradient(circle at 2px 2px, var(--color-accent) 1px, transparent 0)`,
+            backgroundSize: '40px 40px'
+          }} />
 
-        <section className="section bg-[var(--color-bg-tertiary)]">
-          <div className="container">
-            <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} className="text-center mb-12">
-              <h3 className="font-[family-name:var(--font-cormorant)] text-2xl">Contact Us</h3>
-            </motion.div>
-            <motion.form variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} onSubmit={handleSubmit} className="max-w-xl mx-auto space-y-6">
-              <input type="text" placeholder="Your name" value={formData.name} onChange={(e) => setFormData({ ...formData, name: e.target.value })} required className="form-input" />
-              <input type="email" placeholder="Your email" value={formData.email} onChange={(e) => setFormData({ ...formData, email: e.target.value })} required className="form-input" />
-              <input type="tel" placeholder="Your phone" value={formData.phone} onChange={(e) => setFormData({ ...formData, phone: e.target.value })} className="form-input" />
-              <input type="text" placeholder="Subject" value={formData.subject} onChange={(e) => setFormData({ ...formData, subject: e.target.value })} className="form-input" />
-              <textarea placeholder="Your message (optional)" value={formData.message} onChange={(e) => setFormData({ ...formData, message: e.target.value })} rows={4} className="form-input resize-none" />
-              <button type="submit" disabled={isSubmitting} className="btn btn-primary w-full">{isSubmitting ? "Sending..." : "SUBMIT"}</button>
-              {isSuccess && <p className="text-green-400 text-center">Thank you! Your message has been sent.</p>}
-            </motion.form>
+          <div className="container relative">
+            <div className="max-w-4xl mx-auto">
+              <motion.div
+                variants={fadeUp}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-100px" }}
+                className="text-center mb-16"
+              >
+                <div className="flex items-center justify-center gap-4 mb-6">
+                  <span className="w-12 h-[1px] bg-[var(--color-accent)]" />
+                  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" strokeWidth="1.5">
+                    <ellipse cx="12" cy="14" rx="10" ry="4" />
+                    <path d="M2 14v2c0 2.21 4.48 4 10 4s10-1.79 10-4v-2" />
+                    <path d="M12 10V6M9 6h6" />
+                  </svg>
+                  <span className="w-12 h-[1px] bg-[var(--color-accent)]" />
+                </div>
+                <h2 className="mb-4 golden-glow-text">Treat Your Guests to Elegant Platters</h2>
+                <p className="text-[var(--color-text-secondary)] max-w-xl mx-auto">
+                  Let us bring artfully crafted gourmet platters to your villa or yacht
+                </p>
+              </motion.div>
+
+              {/* Contact Cards */}
+              <motion.div
+                variants={staggerContainer}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-100px" }}
+                className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16"
+              >
+                <motion.a
+                  variants={staggerItem}
+                  href="tel:+590690535739"
+                  className="group p-8 bg-[var(--color-bg-tertiary)] border border-[var(--color-accent-light)] hover:border-[var(--color-accent)] transition-all duration-300 text-center"
+                >
+                  <div className="w-16 h-16 mx-auto mb-4 flex items-center justify-center border border-[var(--color-accent)] rounded-full group-hover:bg-[var(--color-accent)] transition-colors">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="text-[var(--color-accent)] group-hover:text-[var(--color-bg-primary)] transition-colors">
+                      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+                    </svg>
+                  </div>
+                  <span className="text-xs uppercase tracking-wider text-[var(--color-accent)] block mb-2">Call Us</span>
+                  <span className="text-xl font-[family-name:var(--font-cormorant)] group-hover:text-[var(--color-accent)] transition-colors">
+                    +590 690 53.57.39
+                  </span>
+                </motion.a>
+
+                <motion.a
+                  variants={staggerItem}
+                  href="mailto:sxmprivatechef@gmail.com"
+                  className="group p-8 bg-[var(--color-bg-tertiary)] border border-[var(--color-accent-light)] hover:border-[var(--color-accent)] transition-all duration-300 text-center"
+                >
+                  <div className="w-16 h-16 mx-auto mb-4 flex items-center justify-center border border-[var(--color-accent)] rounded-full group-hover:bg-[var(--color-accent)] transition-colors">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="text-[var(--color-accent)] group-hover:text-[var(--color-bg-primary)] transition-colors">
+                      <rect width="20" height="16" x="2" y="4" rx="2" />
+                      <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+                    </svg>
+                  </div>
+                  <span className="text-xs uppercase tracking-wider text-[var(--color-accent)] block mb-2">Email Us</span>
+                  <span className="text-lg font-[family-name:var(--font-cormorant)] group-hover:text-[var(--color-accent)] transition-colors">
+                    sxmprivatechef@gmail.com
+                  </span>
+                </motion.a>
+              </motion.div>
+
+              {/* Contact Form */}
+              <motion.div
+                variants={fadeUp}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-100px" }}
+                className="bg-[var(--color-bg-tertiary)] border border-[var(--color-accent-light)] p-8 lg:p-12 relative"
+              >
+                {/* Corner accents */}
+                <div className="absolute -top-2 -left-2 w-6 h-6 border-t-2 border-l-2 border-[var(--color-accent)]" />
+                <div className="absolute -top-2 -right-2 w-6 h-6 border-t-2 border-r-2 border-[var(--color-accent)]" />
+                <div className="absolute -bottom-2 -left-2 w-6 h-6 border-b-2 border-l-2 border-[var(--color-accent)]" />
+                <div className="absolute -bottom-2 -right-2 w-6 h-6 border-b-2 border-r-2 border-[var(--color-accent)]" />
+
+                <h3 className="font-[family-name:var(--font-cormorant)] text-2xl text-center mb-8">
+                  Send Us a Message
+                </h3>
+
+                <form onSubmit={handleSubmit} className="space-y-6">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <input
+                      type="text"
+                      placeholder="Your name"
+                      value={formData.name}
+                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                      required
+                      className="form-input"
+                    />
+                    <input
+                      type="email"
+                      placeholder="Your email"
+                      value={formData.email}
+                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                      required
+                      className="form-input"
+                    />
+                  </div>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <input
+                      type="tel"
+                      placeholder="Your phone"
+                      value={formData.phone}
+                      onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                      className="form-input"
+                    />
+                    <input
+                      type="text"
+                      placeholder="Subject"
+                      value={formData.subject}
+                      onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
+                      className="form-input"
+                    />
+                  </div>
+                  <textarea
+                    placeholder="Tell us about your event..."
+                    value={formData.message}
+                    onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                    rows={4}
+                    className="form-input resize-none"
+                  />
+                  <div className="text-center">
+                    <button
+                      type="submit"
+                      disabled={isSubmitting}
+                      className="btn btn-primary px-12"
+                    >
+                      <span>{isSubmitting ? "Sending..." : "Request a Quote"}</span>
+                    </button>
+                  </div>
+                  {isSuccess && (
+                    <motion.p
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      className="text-green-400 text-center"
+                    >
+                      Thank you! Your message has been sent.
+                    </motion.p>
+                  )}
+                </form>
+              </motion.div>
+            </div>
           </div>
         </section>
       </main>

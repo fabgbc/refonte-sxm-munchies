@@ -5,6 +5,7 @@ import SmoothScroll from "@/components/effects/SmoothScroll";
 import CustomCursor from "@/components/effects/CustomCursor";
 import GrainOverlay from "@/components/effects/GrainOverlay";
 import WhatsAppButton from "@/components/effects/WhatsAppButton";
+import ScrollToTop from "@/components/effects/ScrollToTop";
 
 const cormorant = Cormorant_Garamond({
   variable: "--font-cormorant",
@@ -52,6 +53,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${cormorant.variable} ${inter.variable}`}>
+        <ScrollToTop />
         <SmoothScroll>
           {children}
           <CustomCursor />

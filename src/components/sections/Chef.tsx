@@ -19,16 +19,21 @@ export default function Chef() {
             viewport={{ once: true, margin: "-100px" }}
             className="relative"
           >
-            <div className="relative aspect-[4/5] overflow-hidden">
+            <div className="relative aspect-[4/5] overflow-hidden image-premium vignette">
               <Image
                 src={chefInfo.image}
                 alt={chefInfo.name}
                 fill
-                className="object-cover"
+                className="object-cover transition-transform duration-700 hover:scale-105"
                 sizes="(max-width: 1024px) 100vw, 50vw"
               />
               {/* Decorative frame */}
-              <div className="absolute inset-4 border border-[var(--color-accent-light)] pointer-events-none" />
+              <div className="absolute inset-4 border border-[var(--color-accent-light)] pointer-events-none z-10" />
+              {/* Golden corner accents */}
+              <div className="absolute top-4 left-4 w-8 h-8 border-t-2 border-l-2 border-[var(--color-accent)] z-10" />
+              <div className="absolute top-4 right-4 w-8 h-8 border-t-2 border-r-2 border-[var(--color-accent)] z-10" />
+              <div className="absolute bottom-4 left-4 w-8 h-8 border-b-2 border-l-2 border-[var(--color-accent)] z-10" />
+              <div className="absolute bottom-4 right-4 w-8 h-8 border-b-2 border-r-2 border-[var(--color-accent)] z-10" />
             </div>
             {/* Decorative element */}
             <div className="absolute -bottom-6 -right-6 w-32 h-32 border border-[var(--color-accent)] opacity-30 hidden lg:block" />

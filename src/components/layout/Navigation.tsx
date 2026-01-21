@@ -46,6 +46,7 @@ const navLinks = [
     ],
   },
   { href: "/chefs", label: "The Chef" },
+  { href: "/#testimonials", label: "Testimonials" },
 ];
 
 export default function Navigation() {

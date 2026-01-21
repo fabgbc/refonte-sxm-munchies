@@ -116,7 +116,7 @@ export default function WeekMenuPage() {
       <Navigation />
       <main>
         {/* Hero Section */}
-        <section className="relative h-[70vh] min-h-[500px] flex items-center justify-center overflow-hidden">
+        <section className="relative min-h-[70vh] flex items-center justify-center pt-24 pb-16 lg:pt-32 lg:pb-24 vignette">
           <motion.div
             variants={fadeIn}
             initial="hidden"
@@ -124,14 +124,20 @@ export default function WeekMenuPage() {
             className="absolute inset-0 z-0"
           >
             <Image
-              src={weekService.image}
+              src="/images/home-page-chef-week.jpg"
               alt={weekService.title}
               fill
               className="object-cover"
               priority
             />
-            <div className="absolute inset-0 bg-gradient-to-b from-[#0C0A09]/70 via-[#0C0A09]/50 to-[#0C0A09]/90" />
+            <div className="absolute inset-0 bg-gradient-to-b from-[#0C0A09]/80 via-[#0C0A09]/60 to-[#0C0A09]/95" />
           </motion.div>
+
+          {/* Decorative corner elements */}
+          <div className="absolute top-24 left-8 lg:left-16 w-20 h-20 border-t border-l border-[var(--color-accent)]/30 z-10" />
+          <div className="absolute top-24 right-8 lg:right-16 w-20 h-20 border-t border-r border-[var(--color-accent)]/30 z-10" />
+          <div className="absolute bottom-8 left-8 lg:left-16 w-20 h-20 border-b border-l border-[var(--color-accent)]/30 z-10" />
+          <div className="absolute bottom-8 right-8 lg:right-16 w-20 h-20 border-b border-r border-[var(--color-accent)]/30 z-10" />
 
           <div className="container relative z-10 text-center">
             <motion.div
@@ -144,31 +150,72 @@ export default function WeekMenuPage() {
                 variants={heroTextItem}
                 className="flex items-center justify-center gap-4 mb-8"
               >
-                <span className="decorative-line" />
+                <span className="w-12 h-[1px] bg-[var(--color-accent)]" />
                 <span className="section-number">{weekService.shortTitle}</span>
-                <span className="decorative-line" />
+                <span className="w-12 h-[1px] bg-[var(--color-accent)]" />
               </motion.div>
 
               <motion.h1
                 variants={heroTextItem}
-                className="font-[family-name:var(--font-cormorant)] text-[clamp(2rem,6vw,4rem)] leading-[1.1] mb-6"
+                className="font-[family-name:var(--font-cormorant)] text-[clamp(2rem,6vw,4rem)] leading-[1.1] mb-6 golden-glow-text"
               >
                 {weekService.title}
               </motion.h1>
 
               <motion.p
                 variants={heroTextItem}
-                className="text-[var(--color-text-secondary)] text-lg md:text-xl max-w-2xl mx-auto"
+                className="text-[var(--color-text-secondary)] text-lg md:text-xl max-w-2xl mx-auto mb-10 font-[family-name:var(--font-cormorant)] italic"
               >
                 {weekService.longDescription}
               </motion.p>
+
+              {/* Premium pricing box with CTA */}
+              <motion.div
+                variants={heroTextItem}
+                className="inline-block"
+              >
+                <a
+                  href="#journey"
+                  className="block group"
+                >
+                  <div className="px-8 py-5 border border-[var(--color-accent)]/50 bg-[var(--color-bg-primary)]/30 backdrop-blur-sm transition-all duration-300 group-hover:border-[var(--color-accent)] group-hover:bg-[var(--color-bg-primary)]/50">
+                    <span className="text-[var(--color-accent)] font-[family-name:var(--font-cormorant)] text-xl block mb-3">
+                      7 Nights of Culinary Excellence
+                    </span>
+                    <div className="flex items-center justify-center gap-2">
+                      <span className="text-xs tracking-[0.2em] uppercase text-[var(--color-text-secondary)] group-hover:text-[var(--color-text-primary)] transition-colors">
+                        Discover The Journey
+                      </span>
+                      <motion.svg
+                        width="16"
+                        height="16"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="1.5"
+                        className="text-[var(--color-accent)]"
+                        animate={{ y: [0, 4, 0] }}
+                        transition={{ duration: 1.5, repeat: Infinity }}
+                      >
+                        <path d="M12 5v14M19 12l-7 7-7-7" />
+                      </motion.svg>
+                    </div>
+                  </div>
+                </a>
+              </motion.div>
             </motion.div>
           </div>
         </section>
 
         {/* Service Description */}
-        <section className="section bg-[var(--color-bg-primary)]">
-          <div className="container">
+        <section id="journey" className="section bg-[var(--color-bg-primary)] relative">
+          {/* Decorative background pattern */}
+          <div className="absolute inset-0 opacity-[0.02]" style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0L60 30L30 60L0 30z' fill='%23D4A574' fill-opacity='1'/%3E%3C/svg%3E")`,
+            backgroundSize: '60px 60px'
+          }} />
+
+          <div className="container relative">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
               <motion.div
                 variants={slideInLeft}
@@ -176,7 +223,10 @@ export default function WeekMenuPage() {
                 whileInView="visible"
                 viewport={{ once: true, margin: "-100px" }}
               >
-                <span className="section-number">01 - Week-Long Excellence</span>
+                <div className="flex items-center gap-4 mb-4">
+                  <span className="w-12 h-[1px] bg-[var(--color-accent)]" />
+                  <span className="section-number">01 - Week-Long Excellence</span>
+                </div>
                 <h2 className="font-[family-name:var(--font-cormorant)] mt-4 mb-6">
                   7 Days of Culinary Bliss
                 </h2>
@@ -223,22 +273,30 @@ export default function WeekMenuPage() {
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true, margin: "-100px" }}
-                className="relative aspect-[4/5] overflow-hidden"
+                className="relative aspect-[4/5] overflow-hidden group image-premium"
               >
                 <Image
                   src="/images/day-1.jpg"
                   alt="Week-long dining experience"
                   fill
-                  className="object-cover"
+                  className="object-cover transition-all duration-700 group-hover:scale-105"
                 />
+                {/* Hover overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0C0A09]/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                {/* Corner frame on hover */}
+                <div className="absolute inset-4 border border-[var(--color-accent)]/0 group-hover:border-[var(--color-accent)]/50 transition-all duration-500 pointer-events-none" />
               </motion.div>
             </div>
           </div>
         </section>
 
         {/* The Journey */}
-        <section className="section bg-[var(--color-bg-secondary)]">
-          <div className="container">
+        <section className="section bg-[var(--color-bg-secondary)] relative overflow-hidden">
+          {/* Decorative blur circles */}
+          <div className="absolute top-0 left-0 w-64 h-64 bg-[var(--color-accent)]/5 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2" />
+          <div className="absolute bottom-0 right-0 w-64 h-64 bg-[var(--color-accent)]/5 rounded-full blur-3xl translate-x-1/2 translate-y-1/2" />
+
+          <div className="container relative">
             <motion.div
               variants={fadeUp}
               initial="hidden"
@@ -246,7 +304,11 @@ export default function WeekMenuPage() {
               viewport={{ once: true, margin: "-100px" }}
               className="text-center mb-16"
             >
-              <span className="section-number">02 - The Journey</span>
+              <div className="flex items-center justify-center gap-4 mb-4">
+                <span className="w-16 h-[1px] bg-gradient-to-r from-transparent to-[var(--color-accent)]" />
+                <span className="section-number">02 - The Journey</span>
+                <span className="w-16 h-[1px] bg-gradient-to-l from-transparent to-[var(--color-accent)]" />
+              </div>
               <h2 className="font-[family-name:var(--font-cormorant)] mt-4 mb-6">
                 How It Works
               </h2>
@@ -285,13 +347,17 @@ export default function WeekMenuPage() {
                     "Relax and enjoy while we handle everything from cooking to cleanup",
                 },
               ].map((item, idx) => (
-                <motion.div key={idx} variants={staggerItem} className="text-center">
-                  <div className="w-16 h-16 mx-auto mb-4 flex items-center justify-center border border-[var(--color-accent)] text-[var(--color-accent)]">
-                    <span className="font-[family-name:var(--font-cormorant)] text-2xl">
+                <motion.div
+                  key={idx}
+                  variants={staggerItem}
+                  className="text-center group"
+                >
+                  <div className="w-16 h-16 mx-auto mb-4 flex items-center justify-center border border-[var(--color-accent)] text-[var(--color-accent)] rounded-full group-hover:bg-[var(--color-accent)] transition-colors duration-300">
+                    <span className="font-[family-name:var(--font-cormorant)] text-2xl group-hover:text-[var(--color-bg-primary)] transition-colors duration-300">
                       {item.step}
                     </span>
                   </div>
-                  <h3 className="font-[family-name:var(--font-cormorant)] text-xl mb-2">
+                  <h3 className="font-[family-name:var(--font-cormorant)] text-xl mb-2 group-hover:text-[var(--color-accent)] transition-colors">
                     {item.title}
                   </h3>
                   <p className="text-[var(--color-text-secondary)] text-sm">
@@ -304,8 +370,11 @@ export default function WeekMenuPage() {
         </section>
 
         {/* Sample 7-Day Menu */}
-        <section className="section bg-[var(--color-bg-primary)]">
-          <div className="container">
+        <section className="section bg-[var(--color-bg-primary)] relative">
+          {/* Decorative gradient line */}
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-px h-20 bg-gradient-to-b from-transparent via-[var(--color-accent)] to-transparent" />
+
+          <div className="container relative">
             <motion.div
               variants={fadeUp}
               initial="hidden"
@@ -313,8 +382,12 @@ export default function WeekMenuPage() {
               viewport={{ once: true, margin: "-100px" }}
               className="text-center mb-16"
             >
-              <span className="section-number">03 - Sample Menu</span>
-              <h2 className="font-[family-name:var(--font-cormorant)] mt-4 mb-6">
+              <div className="flex items-center justify-center gap-4 mb-4">
+                <span className="w-16 h-[1px] bg-gradient-to-r from-transparent to-[var(--color-accent)]" />
+                <span className="section-number">03 - Sample Menu</span>
+                <span className="w-16 h-[1px] bg-gradient-to-l from-transparent to-[var(--color-accent)]" />
+              </div>
+              <h2 className="font-[family-name:var(--font-cormorant)] mt-4 mb-6 golden-glow-text">
                 A Week of Culinary Excellence
               </h2>
               <p className="text-[var(--color-text-secondary)] max-w-2xl mx-auto">
@@ -334,17 +407,24 @@ export default function WeekMenuPage() {
                 <motion.div
                   key={idx}
                   variants={staggerItem}
-                  className={`bg-[var(--color-bg-secondary)] border border-[var(--color-accent-light)] overflow-hidden group hover:border-[var(--color-accent)] transition-colors ${
+                  whileHover={{ scale: 1.02, y: -5 }}
+                  className={`bg-[var(--color-bg-secondary)] border border-[var(--color-accent-light)] overflow-hidden group hover:border-[var(--color-accent)] transition-all duration-300 relative hover:shadow-[0_10px_40px_rgba(212,165,116,0.15)] ${
                     idx === 6 ? "md:col-span-2 lg:col-span-1" : ""
                   }`}
                 >
+                  {/* Corner accents */}
+                  <div className="absolute -top-[1px] -left-[1px] w-4 h-4 border-t-2 border-l-2 border-[var(--color-accent)] opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-20" />
+                  <div className="absolute -top-[1px] -right-[1px] w-4 h-4 border-t-2 border-r-2 border-[var(--color-accent)] opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-20" />
+                  <div className="absolute -bottom-[1px] -left-[1px] w-4 h-4 border-b-2 border-l-2 border-[var(--color-accent)] opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-20" />
+                  <div className="absolute -bottom-[1px] -right-[1px] w-4 h-4 border-b-2 border-r-2 border-[var(--color-accent)] opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-20" />
+
                   {/* Day Image */}
                   <div className="relative h-48 overflow-hidden">
                     <Image
                       src={menu.image}
                       alt={menu.theme}
                       fill
-                      className="object-cover group-hover:scale-105 transition-transform duration-500"
+                      className="object-cover group-hover:scale-110 transition-transform duration-700"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-[#0C0A09]/80 to-transparent" />
                     <div className="absolute bottom-4 left-4">
@@ -352,6 +432,8 @@ export default function WeekMenuPage() {
                         {idx + 1}
                       </span>
                     </div>
+                    {/* Hover overlay frame */}
+                    <div className="absolute inset-2 border border-[var(--color-accent)]/0 group-hover:border-[var(--color-accent)]/40 transition-all duration-500 pointer-events-none" />
                   </div>
                   {/* Content */}
                   <div className="p-6">
@@ -359,13 +441,15 @@ export default function WeekMenuPage() {
                       <span className="text-xs uppercase tracking-wider text-[var(--color-accent)]">
                         {menu.day}
                       </span>
-                      <h3 className="font-[family-name:var(--font-cormorant)] text-lg">
+                      <h3 className="font-[family-name:var(--font-cormorant)] text-lg group-hover:text-[var(--color-accent)] transition-colors">
                         {menu.theme}
                       </h3>
                     </div>
                     <p className="text-sm text-[var(--color-text-secondary)] mb-4 italic">
                       {menu.description}
                     </p>
+                    {/* Decorative divider */}
+                    <div className="w-12 h-px bg-gradient-to-r from-[var(--color-accent)] to-transparent mb-4" />
                     <ul className="space-y-2">
                       {menu.dishes.map((dish, dishIdx) => (
                         <li
@@ -389,19 +473,30 @@ export default function WeekMenuPage() {
               viewport={{ once: true, margin: "-100px" }}
               className="mt-12 text-center"
             >
-              <p className="text-[var(--color-text-secondary)] text-sm">
-                <strong className="text-[var(--color-text-primary)]">Note:</strong>{" "}
-                This is a sample menu. Your actual menu will be customized based
-                on your preferences, dietary requirements, and seasonal
-                availability.
-              </p>
+              <div className="inline-block px-8 py-4 bg-[var(--color-bg-secondary)] border border-[var(--color-accent-light)] relative">
+                {/* Corner accents */}
+                <div className="absolute -top-2 -left-2 w-4 h-4 border-t-2 border-l-2 border-[var(--color-accent)]" />
+                <div className="absolute -top-2 -right-2 w-4 h-4 border-t-2 border-r-2 border-[var(--color-accent)]" />
+                <div className="absolute -bottom-2 -left-2 w-4 h-4 border-b-2 border-l-2 border-[var(--color-accent)]" />
+                <div className="absolute -bottom-2 -right-2 w-4 h-4 border-b-2 border-r-2 border-[var(--color-accent)]" />
+                <p className="text-[var(--color-text-secondary)] text-sm">
+                  <strong className="text-[var(--color-accent)]">Note:</strong>{" "}
+                  This is a sample menu. Your actual menu will be customized based
+                  on your preferences, dietary requirements, and seasonal
+                  availability.
+                </p>
+              </div>
             </motion.div>
           </div>
         </section>
 
         {/* Package Benefits */}
-        <section className="section bg-[var(--color-bg-secondary)]">
-          <div className="container">
+        <section className="section bg-[var(--color-bg-secondary)] relative overflow-hidden">
+          {/* Decorative blur circles */}
+          <div className="absolute top-1/4 left-0 w-96 h-96 bg-[var(--color-accent)]/5 rounded-full blur-3xl -translate-x-1/2" />
+          <div className="absolute bottom-1/4 right-0 w-96 h-96 bg-[var(--color-accent)]/5 rounded-full blur-3xl translate-x-1/2" />
+
+          <div className="container relative">
             <motion.div
               variants={fadeUp}
               initial="hidden"
@@ -409,7 +504,11 @@ export default function WeekMenuPage() {
               viewport={{ once: true, margin: "-100px" }}
               className="text-center mb-16"
             >
-              <span className="section-number">04 - Benefits</span>
+              <div className="flex items-center justify-center gap-4 mb-4">
+                <span className="w-16 h-[1px] bg-gradient-to-r from-transparent to-[var(--color-accent)]" />
+                <span className="section-number">04 - Benefits</span>
+                <span className="w-16 h-[1px] bg-gradient-to-l from-transparent to-[var(--color-accent)]" />
+              </div>
               <h2 className="font-[family-name:var(--font-cormorant)] mt-4 mb-6">
                 Why Choose the Week Package
               </h2>
@@ -544,12 +643,13 @@ export default function WeekMenuPage() {
                 <motion.div
                   key={idx}
                   variants={staggerItem}
-                  className="bg-[var(--color-bg-tertiary)] p-8 text-center"
+                  whileHover={{ y: -5 }}
+                  className="bg-[var(--color-bg-tertiary)] p-8 text-center border border-[var(--color-accent-light)] hover:border-[var(--color-accent)] transition-all duration-300 group"
                 >
-                  <div className="w-16 h-16 mx-auto mb-4 flex items-center justify-center bg-[var(--color-bg-primary)] text-[var(--color-accent)]">
+                  <div className="w-16 h-16 mx-auto mb-4 flex items-center justify-center rounded-full border border-[var(--color-accent)] bg-[var(--color-bg-primary)] text-[var(--color-accent)] group-hover:bg-[var(--color-accent)] group-hover:text-[var(--color-bg-primary)] transition-all duration-300">
                     {item.icon}
                   </div>
-                  <h3 className="font-[family-name:var(--font-cormorant)] text-xl mb-2">
+                  <h3 className="font-[family-name:var(--font-cormorant)] text-xl mb-2 group-hover:text-[var(--color-accent)] transition-colors">
                     {item.title}
                   </h3>
                   <p className="text-[var(--color-text-secondary)] text-sm">
@@ -562,8 +662,11 @@ export default function WeekMenuPage() {
         </section>
 
         {/* Our Signature Themes */}
-        <section className="section bg-[var(--color-bg-primary)]">
-          <div className="container">
+        <section className="section bg-[var(--color-bg-primary)] relative">
+          {/* Decorative gradient line */}
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-px h-20 bg-gradient-to-b from-transparent via-[var(--color-accent)] to-transparent" />
+
+          <div className="container relative">
             <motion.div
               variants={fadeUp}
               initial="hidden"
@@ -571,7 +674,11 @@ export default function WeekMenuPage() {
               viewport={{ once: true, margin: "-100px" }}
               className="text-center mb-16"
             >
-              <span className="section-number">05 - Our Signature Themes</span>
+              <div className="flex items-center justify-center gap-4 mb-4">
+                <span className="w-16 h-[1px] bg-gradient-to-r from-transparent to-[var(--color-accent)]" />
+                <span className="section-number">05 - Our Signature Themes</span>
+                <span className="w-16 h-[1px] bg-gradient-to-l from-transparent to-[var(--color-accent)]" />
+              </div>
               <h2 className="font-[family-name:var(--font-cormorant)] mt-4 mb-6">
                 Explore Our Menus
               </h2>
@@ -597,11 +704,20 @@ export default function WeekMenuPage() {
                 { name: "Grill Menu", href: "/grill-menu" },
                 { name: "Weekly Menu", href: "/weekly-menu" },
               ].map((menu, idx) => (
-                <motion.div key={idx} variants={staggerItem}>
+                <motion.div
+                  key={idx}
+                  variants={staggerItem}
+                  whileHover={{ scale: 1.03, y: -3 }}
+                >
                   <Link
                     href={menu.href}
-                    className="block p-4 bg-[var(--color-bg-secondary)] border border-[var(--color-accent-light)] text-center hover:border-[var(--color-accent)] hover:bg-[var(--color-bg-tertiary)] transition-all group"
+                    className="block p-6 bg-[var(--color-bg-secondary)] border border-[var(--color-accent-light)] text-center hover:border-[var(--color-accent)] hover:bg-[var(--color-bg-tertiary)] transition-all duration-300 group relative"
                   >
+                    {/* Corner accents on hover */}
+                    <div className="absolute -top-[1px] -left-[1px] w-3 h-3 border-t-2 border-l-2 border-[var(--color-accent)] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                    <div className="absolute -top-[1px] -right-[1px] w-3 h-3 border-t-2 border-r-2 border-[var(--color-accent)] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                    <div className="absolute -bottom-[1px] -left-[1px] w-3 h-3 border-b-2 border-l-2 border-[var(--color-accent)] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                    <div className="absolute -bottom-[1px] -right-[1px] w-3 h-3 border-b-2 border-r-2 border-[var(--color-accent)] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                     <span className="font-[family-name:var(--font-cormorant)] text-lg group-hover:text-[var(--color-accent)] transition-colors">
                       {menu.name}
                     </span>
@@ -613,8 +729,12 @@ export default function WeekMenuPage() {
         </section>
 
         {/* Wine Pairing */}
-        <section className="section bg-[var(--color-bg-secondary)]">
-          <div className="container">
+        <section className="section bg-[var(--color-bg-secondary)] relative overflow-hidden">
+          {/* Decorative elements */}
+          <div className="absolute top-0 left-0 w-64 h-64 bg-[var(--color-accent)]/5 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2" />
+          <div className="absolute bottom-0 right-0 w-64 h-64 bg-[var(--color-accent)]/5 rounded-full blur-3xl translate-x-1/2 translate-y-1/2" />
+
+          <div className="container relative">
             <motion.div
               variants={fadeUp}
               initial="hidden"
@@ -622,8 +742,15 @@ export default function WeekMenuPage() {
               viewport={{ once: true, margin: "-100px" }}
               className="max-w-3xl mx-auto text-center"
             >
+              <div className="flex items-center justify-center gap-4 mb-6">
+                <span className="w-12 h-[1px] bg-[var(--color-accent)]" />
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" strokeWidth="1.5">
+                  <path d="M8 22h8M12 11v11M7 2h10l-1 8c-.5 2.5-2 3-4 3s-3.5-.5-4-3L7 2z" />
+                </svg>
+                <span className="w-12 h-[1px] bg-[var(--color-accent)]" />
+              </div>
               <span className="section-number">06 - Wine Pairing</span>
-              <h2 className="font-[family-name:var(--font-cormorant)] mt-4 mb-6">
+              <h2 className="font-[family-name:var(--font-cormorant)] mt-4 mb-6 golden-glow-text">
                 Wine Pairing Available
               </h2>
               <p className="text-[var(--color-text-secondary)] mb-8">
@@ -631,7 +758,7 @@ export default function WeekMenuPage() {
                 selection. Our sommelier recommendations perfectly complement
                 each evening&apos;s menu.
               </p>
-              <Link href="/wine" className="btn btn-outline">
+              <Link href="/wine" className="btn btn-outline btn-shine">
                 <span>View Wine Selection</span>
               </Link>
             </motion.div>
@@ -639,67 +766,106 @@ export default function WeekMenuPage() {
         </section>
 
         {/* Contact Section */}
-        <section className="section bg-[var(--color-bg-primary)]">
-          <div className="container">
+        <section className="section bg-[var(--color-bg-primary)] relative overflow-hidden">
+          {/* Decorative dotted pattern */}
+          <div className="absolute inset-0 opacity-[0.03]" style={{
+            backgroundImage: `radial-gradient(circle at 2px 2px, var(--color-accent) 1px, transparent 0)`,
+            backgroundSize: '40px 40px'
+          }} />
+
+          <div className="container relative">
             <motion.div
               variants={fadeUp}
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, margin: "-100px" }}
-              className="max-w-3xl mx-auto text-center"
+              className="max-w-4xl mx-auto"
             >
-              <span className="section-number">07 - Contact Us</span>
-              <h2 className="font-[family-name:var(--font-cormorant)] mt-4 mb-6">
-                Plan Your Week of Culinary Excellence
-              </h2>
-              <p className="text-[var(--color-text-secondary)] mb-8">
-                Contact us to discuss your week-long private chef experience. We
-                will create a personalized menu journey for your Saint-Martin
-                vacation.
-              </p>
-
-              <div className="flex flex-col sm:flex-row items-center justify-center gap-6 mb-8">
-                <a
-                  href="tel:+590690535739"
-                  className="flex items-center gap-3 text-[var(--color-text-secondary)] hover:text-[var(--color-accent)] transition-colors"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="20"
-                    height="20"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="1.5"
-                    className="text-[var(--color-accent)]"
-                  >
-                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+              <div className="text-center mb-12">
+                <div className="flex items-center justify-center gap-4 mb-6">
+                  <span className="w-12 h-[1px] bg-[var(--color-accent)]" />
+                  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" strokeWidth="1.5">
+                    <rect width="18" height="18" x="3" y="4" rx="2" ry="2" />
+                    <line x1="16" x2="16" y1="2" y2="6" />
+                    <line x1="8" x2="8" y1="2" y2="6" />
+                    <line x1="3" x2="21" y1="10" y2="10" />
                   </svg>
-                  +590 690 53 57 39
-                </a>
-                <a
-                  href="mailto:sxmprivatechef@gmail.com"
-                  className="flex items-center gap-3 text-[var(--color-text-secondary)] hover:text-[var(--color-accent)] transition-colors"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="20"
-                    height="20"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="1.5"
-                    className="text-[var(--color-accent)]"
-                  >
-                    <rect width="20" height="16" x="2" y="4" rx="2" />
-                    <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
-                  </svg>
-                  sxmprivatechef@gmail.com
-                </a>
+                  <span className="w-12 h-[1px] bg-[var(--color-accent)]" />
+                </div>
+                <span className="section-number">07 - Contact Us</span>
+                <h2 className="font-[family-name:var(--font-cormorant)] mt-4 mb-6 golden-glow-text">
+                  Plan Your Week of Culinary Excellence
+                </h2>
+                <p className="text-[var(--color-text-secondary)] mb-8 max-w-xl mx-auto">
+                  Contact us to discuss your week-long private chef experience. We
+                  will create a personalized menu journey for your Saint-Martin
+                  vacation.
+                </p>
               </div>
 
+              {/* Contact Cards */}
+              <motion.div
+                variants={staggerContainer}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-100px" }}
+                className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12"
+              >
+                <motion.a
+                  variants={staggerItem}
+                  href="tel:+590690535739"
+                  className="group p-8 bg-[var(--color-bg-tertiary)] border border-[var(--color-accent-light)] hover:border-[var(--color-accent)] transition-all duration-300 text-center"
+                >
+                  <div className="w-16 h-16 mx-auto mb-4 flex items-center justify-center border border-[var(--color-accent)] rounded-full group-hover:bg-[var(--color-accent)] transition-colors">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="1.5"
+                      className="text-[var(--color-accent)] group-hover:text-[var(--color-bg-primary)] transition-colors"
+                    >
+                      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+                    </svg>
+                  </div>
+                  <span className="text-xs uppercase tracking-wider text-[var(--color-accent)] block mb-2">Call Us</span>
+                  <span className="text-xl font-[family-name:var(--font-cormorant)] group-hover:text-[var(--color-accent)] transition-colors">
+                    +590 690 53.57.39
+                  </span>
+                </motion.a>
+
+                <motion.a
+                  variants={staggerItem}
+                  href="mailto:sxmprivatechef@gmail.com"
+                  className="group p-8 bg-[var(--color-bg-tertiary)] border border-[var(--color-accent-light)] hover:border-[var(--color-accent)] transition-all duration-300 text-center"
+                >
+                  <div className="w-16 h-16 mx-auto mb-4 flex items-center justify-center border border-[var(--color-accent)] rounded-full group-hover:bg-[var(--color-accent)] transition-colors">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="1.5"
+                      className="text-[var(--color-accent)] group-hover:text-[var(--color-bg-primary)] transition-colors"
+                    >
+                      <rect width="20" height="16" x="2" y="4" rx="2" />
+                      <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+                    </svg>
+                  </div>
+                  <span className="text-xs uppercase tracking-wider text-[var(--color-accent)] block mb-2">Email Us</span>
+                  <span className="text-lg font-[family-name:var(--font-cormorant)] group-hover:text-[var(--color-accent)] transition-colors">
+                    sxmprivatechef@gmail.com
+                  </span>
+                </motion.a>
+              </motion.div>
+
+              {/* CTA Buttons */}
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-                <Link href="/#contact" className="btn btn-primary">
+                <Link href="/#contact" className="btn btn-primary btn-shine px-12">
                   <span>Book Week Package</span>
                 </Link>
                 <a

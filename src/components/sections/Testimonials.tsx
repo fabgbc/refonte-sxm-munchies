@@ -66,7 +66,7 @@ export default function Testimonials() {
   );
 
   return (
-    <section className="section">
+    <section id="testimonials" className="section">
       <div className="container">
         {/* Header */}
         <motion.div

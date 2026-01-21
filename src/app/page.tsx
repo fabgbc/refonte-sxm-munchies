@@ -8,6 +8,7 @@ import Chef from "@/components/sections/Chef";
 import Buffets from "@/components/sections/Buffets";
 import Testimonials from "@/components/sections/Testimonials";
 import Contact from "@/components/sections/Contact";
+import SectionDivider from "@/components/ui/SectionDivider";
 
 export default function Home() {
   return (
@@ -17,9 +18,13 @@ export default function Home() {
         <Hero />
         <Services />
         <FlipCards />
+        <SectionDivider variant="diamond" />
         <Menus />
+        <SectionDivider variant="line" />
         <Chef />
+        <SectionDivider variant="dots" />
         <Buffets />
+        <SectionDivider variant="diamond" />
         <Testimonials />
         <Contact />
       </main>

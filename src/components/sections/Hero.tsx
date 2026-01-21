@@ -134,7 +134,7 @@ export default function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3 }}
-              className="font-[family-name:var(--font-cormorant)] text-[clamp(2.5rem,8vw,5rem)] leading-[1.1] mb-4 text-white"
+              className="font-[family-name:var(--font-cormorant)] text-[clamp(2.5rem,8vw,5rem)] leading-[1.1] mb-4 text-white golden-glow-text"
             >
               {slides[currentSlide].title}
             </motion.h1>
@@ -157,7 +157,7 @@ export default function Hero() {
             >
               <Link
                 href={slides[currentSlide].href}
-                className="inline-block px-10 py-4 border border-[var(--color-accent)] text-sm tracking-widest uppercase text-white hover:bg-[var(--color-accent)] hover:text-[var(--color-bg-primary)] transition-all duration-300"
+                className="inline-block px-10 py-4 border border-[var(--color-accent)] text-sm tracking-widest uppercase text-white hover:bg-[var(--color-accent)] hover:text-[var(--color-bg-primary)] transition-all duration-300 btn-shine"
               >
                 {slides[currentSlide].cta}
               </Link>
