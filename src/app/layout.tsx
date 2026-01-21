@@ -4,6 +4,7 @@ import "./globals.css";
 import SmoothScroll from "@/components/effects/SmoothScroll";
 import CustomCursor from "@/components/effects/CustomCursor";
 import GrainOverlay from "@/components/effects/GrainOverlay";
+import WhatsAppButton from "@/components/effects/WhatsAppButton";
 
 const cormorant = Cormorant_Garamond({
   variable: "--font-cormorant",
@@ -21,24 +22,24 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Chef Francis | Private Chef Saint-Martin",
+  title: "SXM Private Chef | Private Chef Services in Saint-Martin",
   description:
-    "Expériences gastronomiques exclusives en villa, yacht et événements à Saint-Martin. Chef privé pour une clientèle d'exception.",
+    "Exclusive gourmet experiences at your villa, yacht, or events in Saint-Martin. Private chef for discerning clientele.",
   keywords: [
-    "chef privé",
+    "private chef",
     "Saint-Martin",
-    "gastronomie",
+    "gourmet",
     "villa",
     "yacht",
     "catering",
-    "private chef",
     "Caribbean",
+    "Chef Francis",
   ],
   openGraph: {
-    title: "Chef Francis | Private Chef Saint-Martin",
+    title: "SXM Private Chef | Private Chef Services in Saint-Martin",
     description:
-      "Expériences gastronomiques exclusives en villa, yacht et événements à Saint-Martin.",
-    locale: "fr_FR",
+      "Exclusive gourmet experiences at your villa, yacht, or events in Saint-Martin.",
+    locale: "en_US",
     type: "website",
   },
 };
@@ -49,12 +50,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="fr">
+    <html lang="en">
       <body className={`${cormorant.variable} ${inter.variable}`}>
         <SmoothScroll>
           {children}
           <CustomCursor />
           <GrainOverlay />
+          <WhatsAppButton />
         </SmoothScroll>
       </body>
     </html>

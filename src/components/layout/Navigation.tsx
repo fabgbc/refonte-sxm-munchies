@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   navAnimation,
@@ -86,9 +87,14 @@ export default function Navigation() {
         <nav className="container flex items-center justify-between h-20 lg:h-24">
           {/* Logo - Left */}
           <Link href="/" className="z-10">
-            <span className="font-[family-name:var(--font-cormorant)] text-xl lg:text-2xl tracking-wide">
-              SXM Private Chef
-            </span>
+            <Image
+              src="/images/privatechefservices_transparent_logo_2-1-300x183-1.png"
+              alt="Private Chef Services by Chef Francis"
+              width={200}
+              height={122}
+              className="h-16 lg:h-20 w-auto"
+              priority
+            />
           </Link>
 
           {/* Center Nav Links - Desktop */}

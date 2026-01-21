@@ -66,12 +66,12 @@ export default function Contact() {
           >
             <span className="section-number">06 — Contact</span>
             <h2 className="font-[family-name:var(--font-cormorant)] mt-4 mb-6">
-              Réserver votre expérience
+              Book Your Experience
             </h2>
             <p className="text-[var(--color-text-secondary)] mb-8">
-              Chaque demande est traitée personnellement. Nous vous recontactons
-              sous 24 heures pour discuter de votre projet et créer une
-              expérience sur mesure.
+              Every request is handled personally. We will get back to you
+              within 24 hours to discuss your project and create a
+              tailor-made experience.
             </p>
 
             {/* Info Cards */}
@@ -93,12 +93,12 @@ export default function Contact() {
                   </svg>
                 </div>
                 <div>
-                  <h4 className="font-medium mb-1">Téléphone</h4>
+                  <h4 className="font-medium mb-1">Phone</h4>
                   <a
-                    href="tel:+590690000000"
+                    href="tel:+590690535739"
                     className="text-[var(--color-text-secondary)] hover:text-[var(--color-accent)] transition-colors"
                   >
-                    +590 690 00 00 00
+                    +590 690 53 57 39
                   </a>
                 </div>
               </div>
@@ -122,12 +122,12 @@ export default function Contact() {
                 <div>
                   <h4 className="font-medium mb-1">WhatsApp</h4>
                   <a
-                    href="https://wa.me/590690000000"
+                    href="https://wa.me/590690535739"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-[var(--color-text-secondary)] hover:text-[var(--color-accent)] transition-colors"
                   >
-                    Envoyer un message
+                    Send a message
                   </a>
                 </div>
               </div>
@@ -152,10 +152,10 @@ export default function Contact() {
                 <div>
                   <h4 className="font-medium mb-1">Email</h4>
                   <a
-                    href="mailto:contact@cheffrancis.com"
+                    href="mailto:sxmprivatechef@gmail.com"
                     className="text-[var(--color-text-secondary)] hover:text-[var(--color-accent)] transition-colors"
                   >
-                    contact@cheffrancis.com
+                    sxmprivatechef@gmail.com
                   </a>
                 </div>
               </div>
@@ -165,10 +165,10 @@ export default function Contact() {
             <div className="mt-8 p-6 bg-[var(--color-bg-tertiary)] border-l-2 border-[var(--color-accent)]">
               <p className="text-sm text-[var(--color-text-secondary)]">
                 <strong className="text-[var(--color-text-primary)]">
-                  Délai de réservation :
+                  Booking Notice:
                 </strong>{" "}
-                Nous recommandons de réserver au moins 48 heures à l&apos;avance.
-                Pour les événements de plus de 20 personnes, prévoir 1 semaine.
+                We recommend booking at least 48 hours in advance.
+                For events with more than 20 guests, please allow 1 week.
               </p>
             </div>
           </motion.div>

@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { staggerContainer, staggerItem, fadeUp } from "@/lib/animations";
 
@@ -83,9 +84,13 @@ export default function Footer() {
           {/* Logo & About */}
           <motion.div variants={staggerItem} className="lg:col-span-2">
             <Link href="/" className="inline-block mb-4">
-              <span className="font-[family-name:var(--font-cormorant)] text-2xl tracking-wide">
-                SXM Private Chef
-              </span>
+              <Image
+                src="/images/privatechefservices_transparent_logo_2-1-300x183-1.png"
+                alt="Private Chef Services by Chef Francis"
+                width={180}
+                height={110}
+                className="h-16 w-auto"
+              />
             </Link>
             <p className="text-[var(--color-text-secondary)] max-w-xs mb-6">
               At SXM Private Chef, we bring restaurant-quality dining to your
