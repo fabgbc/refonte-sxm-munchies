@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import Navigation from "@/components/layout/Navigation";
 import Footer from "@/components/layout/Footer";
+import RelatedMenus from "@/components/ui/RelatedMenus";
 import { menus } from "@/data/menus";
 import {
   fadeUp,
@@ -547,6 +548,8 @@ export default function MediterraneanMenuPage() {
             </div>
           </div>
         </section>
+
+        <RelatedMenus currentSlug="mediterranean-menu" />
       </main>
       <Footer />
     </>

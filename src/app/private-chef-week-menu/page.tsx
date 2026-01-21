@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import Navigation from "@/components/layout/Navigation";
 import Footer from "@/components/layout/Footer";
+import RelatedServices from "@/components/ui/RelatedServices";
 import {
   fadeUp,
   fadeIn,
@@ -948,6 +949,8 @@ export default function WeekMenuPage() {
             </motion.div>
           </div>
         </section>
+
+        <RelatedServices currentSlug="private-chef-week-menu" />
       </main>
       <Footer />
     </>

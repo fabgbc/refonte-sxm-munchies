@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import Navigation from "@/components/layout/Navigation";
 import Footer from "@/components/layout/Footer";
+import RelatedMenus from "@/components/ui/RelatedMenus";
 import { patisserieOptions } from "@/data/menus";
 import {
   fadeUp,
@@ -570,6 +571,8 @@ export default function BuffetPatisseriePage() {
             </div>
           </div>
         </section>
+
+        <RelatedMenus currentSlug="buffet-patisserie" />
       </main>
       <Footer />
     </>

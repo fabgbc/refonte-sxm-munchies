@@ -6,6 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import Navigation from "@/components/layout/Navigation";
 import Footer from "@/components/layout/Footer";
+import RelatedServices from "@/components/ui/RelatedServices";
 import {
   fadeUp,
   fadeIn,
@@ -1118,6 +1119,8 @@ export default function VillaServicePage() {
             </div>
           </div>
         </section>
+
+        <RelatedServices currentSlug="book-your-chef-in-saint-martin" />
       </main>
       <Footer />
     </>

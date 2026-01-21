@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import Navigation from "@/components/layout/Navigation";
 import Footer from "@/components/layout/Footer";
+import RelatedMenus from "@/components/ui/RelatedMenus";
 import { breakfastOptions } from "@/data/menus";
 import {
   fadeUp,
@@ -567,6 +568,8 @@ export default function BreakfastBrunchPage() {
             </div>
           </div>
         </section>
+
+        <RelatedMenus currentSlug="breakfast-brunch" />
       </main>
       <Footer />
     </>
