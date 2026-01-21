@@ -10,7 +10,7 @@ export const services: Service[] = [
       "Let us create an extraordinary dining experience for you. We cater to your culinary desires with menus customized to your preferences.",
     longDescription:
       "Enjoy Private Chef Service. We cater to your culinary desires with menus customized to your preferences. Choose from gourmet dishes, themed cuisines, or special dietary options.",
-    image: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&q=80",
+    image: "/images/villa-service.jpg",
     icon: "villa",
     link: "/book-your-chef-in-saint-martin",
     features: [
@@ -38,7 +38,7 @@ export const services: Service[] = [
       "Cuisine and excellence on the sea. Our private chef services extend beyond villas to yacht charters and boat excursions.",
     longDescription:
       "Our private chef services extend beyond villas — whether you're chartering a yacht for a day trip around the island or hosting an intimate dinner on deck, Chef Francis brings the same culinary excellence to the sea.",
-    image: "https://images.unsplash.com/photo-1567899378494-47b22a2ae96a?w=800&q=80",
+    image: "/images/gourmet-day-beach.png",
     icon: "yacht",
     link: "/private-chef-onboard",
     features: [
@@ -68,7 +68,7 @@ export const services: Service[] = [
       "7 days of culinary excellence. For week-long villa stays, experience seamless private dining throughout your vacation.",
     longDescription:
       "For week-long villa stays, experience seamless private dining throughout your vacation with personalized menus every day.",
-    image: "https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=800&q=80",
+    image: "/images/full-week-experience.png",
     icon: "event",
     link: "/private-chef-week-menu",
     features: [

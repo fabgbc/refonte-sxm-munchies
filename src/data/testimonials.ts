@@ -39,7 +39,7 @@ export const chefInfo = {
     "The private chef experience is available in the privacy of your villa in St. Maarten, St. Martin & St. Barths, or during your cruise, be it on your own yacht.",
     "Catering services is also available for weddings, birthdays, bachelorette parties and other celebrations. All events will be happily organized for you at your request.",
   ],
-  image: "https://images.unsplash.com/photo-1577219491135-ce391730fb2c?w=800&q=80",
+  image: "/images/chef-francis.jpeg",
   signature: "Chef Francis",
 };
 

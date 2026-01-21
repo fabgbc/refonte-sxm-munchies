@@ -24,6 +24,7 @@ const sampleMenuDetails = [
     day: "Day 1",
     theme: "Caribbean Welcome Dinner",
     description: "A vibrant introduction to island flavors",
+    image: "/images/day-1.jpg",
     dishes: [
       "Fresh ceviche with tropical fruits",
       "Grilled Caribbean lobster",
@@ -35,6 +36,7 @@ const sampleMenuDetails = [
     day: "Day 2",
     theme: "Mediterranean Feast",
     description: "Sun-kissed flavors from the Mediterranean coast",
+    image: "/images/day2.png",
     dishes: [
       "Mezze platter with homemade hummus",
       "Herb-crusted sea bass",
@@ -46,6 +48,7 @@ const sampleMenuDetails = [
     day: "Day 3",
     theme: "Surf & Turf Night",
     description: "The best of land and sea",
+    image: "/images/day-3.png",
     dishes: [
       "Tuna tartare with avocado",
       "Filet mignon with jumbo shrimp",
@@ -57,6 +60,7 @@ const sampleMenuDetails = [
     day: "Day 4",
     theme: "French Bistro Experience",
     description: "Classic French cuisine with a Caribbean twist",
+    image: "/images/day4.png",
     dishes: [
       "French onion soup",
       "Duck confit with orange glaze",
@@ -68,6 +72,7 @@ const sampleMenuDetails = [
     day: "Day 5",
     theme: "Local Catch of the Day",
     description: "Fresh from Caribbean waters",
+    image: "/images/day5.jpg",
     dishes: [
       "Conch fritters with mango salsa",
       "Pan-seared mahi-mahi",
@@ -79,6 +84,7 @@ const sampleMenuDetails = [
     day: "Day 6",
     theme: "Grill & BBQ Evening",
     description: "Casual elegance with smoky flavors",
+    image: "/images/day6.png",
     dishes: [
       "Grilled vegetable antipasti",
       "BBQ ribs and grilled chicken",
@@ -90,6 +96,7 @@ const sampleMenuDetails = [
     day: "Day 7",
     theme: "Grand Finale Gourmet",
     description: "A memorable conclusion to your culinary journey",
+    image: "/images/day-1.jpg",
     dishes: [
       "Oysters with champagne mignonette",
       "Wagyu beef tenderloin",
@@ -219,7 +226,7 @@ export default function WeekMenuPage() {
                 className="relative aspect-[4/5] overflow-hidden"
               >
                 <Image
-                  src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800&q=80"
+                  src="/images/day-1.jpg"
                   alt="Week-long dining experience"
                   fill
                   className="object-cover"
@@ -327,15 +334,28 @@ export default function WeekMenuPage() {
                 <motion.div
                   key={idx}
                   variants={staggerItem}
-                  className={`bg-[var(--color-bg-secondary)] border border-[var(--color-accent-light)] p-6 ${
+                  className={`bg-[var(--color-bg-secondary)] border border-[var(--color-accent-light)] overflow-hidden group hover:border-[var(--color-accent)] transition-colors ${
                     idx === 6 ? "md:col-span-2 lg:col-span-1" : ""
                   }`}
                 >
-                  <div className="flex items-center gap-3 mb-4">
-                    <span className="w-10 h-10 flex items-center justify-center bg-[var(--color-accent)] text-[var(--color-bg-primary)] font-[family-name:var(--font-cormorant)] text-lg">
-                      {idx + 1}
-                    </span>
-                    <div>
+                  {/* Day Image */}
+                  <div className="relative h-48 overflow-hidden">
+                    <Image
+                      src={menu.image}
+                      alt={menu.theme}
+                      fill
+                      className="object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#0C0A09]/80 to-transparent" />
+                    <div className="absolute bottom-4 left-4">
+                      <span className="inline-flex items-center justify-center w-10 h-10 bg-[var(--color-accent)] text-[var(--color-bg-primary)] font-[family-name:var(--font-cormorant)] text-lg">
+                        {idx + 1}
+                      </span>
+                    </div>
+                  </div>
+                  {/* Content */}
+                  <div className="p-6">
+                    <div className="mb-4">
                       <span className="text-xs uppercase tracking-wider text-[var(--color-accent)]">
                         {menu.day}
                       </span>
@@ -343,21 +363,21 @@ export default function WeekMenuPage() {
                         {menu.theme}
                       </h3>
                     </div>
+                    <p className="text-sm text-[var(--color-text-secondary)] mb-4 italic">
+                      {menu.description}
+                    </p>
+                    <ul className="space-y-2">
+                      {menu.dishes.map((dish, dishIdx) => (
+                        <li
+                          key={dishIdx}
+                          className="text-sm text-[var(--color-text-secondary)] flex items-start gap-2"
+                        >
+                          <span className="text-[var(--color-accent)]">-</span>
+                          {dish}
+                        </li>
+                      ))}
+                    </ul>
                   </div>
-                  <p className="text-sm text-[var(--color-text-secondary)] mb-4 italic">
-                    {menu.description}
-                  </p>
-                  <ul className="space-y-2">
-                    {menu.dishes.map((dish, dishIdx) => (
-                      <li
-                        key={dishIdx}
-                        className="text-sm text-[var(--color-text-secondary)] flex items-start gap-2"
-                      >
-                        <span className="text-[var(--color-accent)]">-</span>
-                        {dish}
-                      </li>
-                    ))}
-                  </ul>
                 </motion.div>
               ))}
             </motion.div>
@@ -541,7 +561,84 @@ export default function WeekMenuPage() {
           </div>
         </section>
 
-        {/* CTA Section */}
+        {/* Our Signature Themes */}
+        <section className="section bg-[var(--color-bg-primary)]">
+          <div className="container">
+            <motion.div
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-100px" }}
+              className="text-center mb-16"
+            >
+              <span className="section-number">05 - Our Signature Themes</span>
+              <h2 className="font-[family-name:var(--font-cormorant)] mt-4 mb-6">
+                Explore Our Menus
+              </h2>
+              <p className="text-[var(--color-text-secondary)] max-w-2xl mx-auto">
+                Discover our carefully crafted menus, each designed to offer a
+                unique culinary experience throughout your week
+              </p>
+            </motion.div>
+
+            <motion.div
+              variants={staggerContainer}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-100px" }}
+              className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"
+            >
+              {[
+                { name: "Gourmet Menu", href: "/gourmet-menu" },
+                { name: "Surf & Turf", href: "/surf-turf-menu" },
+                { name: "Bourguignon Trails", href: "/bourgogne-menu" },
+                { name: "Caribbean", href: "/caribbean-menu" },
+                { name: "Mediterranean", href: "/mediterranean-menu" },
+                { name: "Grill Menu", href: "/grill-menu" },
+                { name: "Weekly Menu", href: "/weekly-menu" },
+              ].map((menu, idx) => (
+                <motion.div key={idx} variants={staggerItem}>
+                  <Link
+                    href={menu.href}
+                    className="block p-4 bg-[var(--color-bg-secondary)] border border-[var(--color-accent-light)] text-center hover:border-[var(--color-accent)] hover:bg-[var(--color-bg-tertiary)] transition-all group"
+                  >
+                    <span className="font-[family-name:var(--font-cormorant)] text-lg group-hover:text-[var(--color-accent)] transition-colors">
+                      {menu.name}
+                    </span>
+                  </Link>
+                </motion.div>
+              ))}
+            </motion.div>
+          </div>
+        </section>
+
+        {/* Wine Pairing */}
+        <section className="section bg-[var(--color-bg-secondary)]">
+          <div className="container">
+            <motion.div
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-100px" }}
+              className="max-w-3xl mx-auto text-center"
+            >
+              <span className="section-number">06 - Wine Pairing</span>
+              <h2 className="font-[family-name:var(--font-cormorant)] mt-4 mb-6">
+                Wine Pairing Available
+              </h2>
+              <p className="text-[var(--color-text-secondary)] mb-8">
+                Enhance your week-long dining experience with our curated wine
+                selection. Our sommelier recommendations perfectly complement
+                each evening&apos;s menu.
+              </p>
+              <Link href="/wine" className="btn btn-outline">
+                <span>View Wine Selection</span>
+              </Link>
+            </motion.div>
+          </div>
+        </section>
+
+        {/* Contact Section */}
         <section className="section bg-[var(--color-bg-primary)]">
           <div className="container">
             <motion.div
@@ -551,7 +648,8 @@ export default function WeekMenuPage() {
               viewport={{ once: true, margin: "-100px" }}
               className="max-w-3xl mx-auto text-center"
             >
-              <h2 className="font-[family-name:var(--font-cormorant)] mb-6">
+              <span className="section-number">07 - Contact Us</span>
+              <h2 className="font-[family-name:var(--font-cormorant)] mt-4 mb-6">
                 Plan Your Week of Culinary Excellence
               </h2>
               <p className="text-[var(--color-text-secondary)] mb-8">
@@ -559,12 +657,53 @@ export default function WeekMenuPage() {
                 will create a personalized menu journey for your Saint-Martin
                 vacation.
               </p>
+
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-6 mb-8">
+                <a
+                  href="tel:+590690535739"
+                  className="flex items-center gap-3 text-[var(--color-text-secondary)] hover:text-[var(--color-accent)] transition-colors"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="1.5"
+                    className="text-[var(--color-accent)]"
+                  >
+                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+                  </svg>
+                  +590 690 53 57 39
+                </a>
+                <a
+                  href="mailto:sxmprivatechef@gmail.com"
+                  className="flex items-center gap-3 text-[var(--color-text-secondary)] hover:text-[var(--color-accent)] transition-colors"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="1.5"
+                    className="text-[var(--color-accent)]"
+                  >
+                    <rect width="20" height="16" x="2" y="4" rx="2" />
+                    <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+                  </svg>
+                  sxmprivatechef@gmail.com
+                </a>
+              </div>
+
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                 <Link href="/#contact" className="btn btn-primary">
                   <span>Book Week Package</span>
                 </Link>
                 <a
-                  href="https://wa.me/590690000000"
+                  href="https://wa.me/590690535739"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="btn btn-outline"

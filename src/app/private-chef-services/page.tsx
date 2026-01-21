@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
@@ -68,6 +69,31 @@ const icons = {
 };
 
 export default function PrivateChefServicesPage() {
+  const [formData, setFormData] = useState({ name: "", email: "", phone: "", subject: "", message: "" });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ...formData, serviceType: "private-chef-services" }),
+      });
+      if (response.ok) {
+        setIsSuccess(true);
+        setFormData({ name: "", email: "", phone: "", subject: "", message: "" });
+        setTimeout(() => setIsSuccess(false), 5000);
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
     <>
       <Navigation />
@@ -81,7 +107,7 @@ export default function PrivateChefServicesPage() {
             className="absolute inset-0 z-0"
           >
             <Image
-              src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=1920&q=80"
+              src="/images/all-services-private-chef.jpg"
               alt="Private Chef Services in Saint-Martin"
               fill
               className="object-cover"
@@ -366,36 +392,103 @@ export default function PrivateChefServicesPage() {
           </div>
         </section>
 
-        {/* CTA Section */}
+        {/* Services Menu */}
         <section className="section bg-[var(--color-bg-primary)]">
           <div className="container">
-            <motion.div
-              variants={fadeUp}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: "-100px" }}
-              className="max-w-3xl mx-auto text-center"
-            >
-              <h2 className="font-[family-name:var(--font-cormorant)] mb-6">
-                Ready to Book Your Experience?
-              </h2>
-              <p className="text-[var(--color-text-secondary)] mb-8">
-                Contact us to discuss your culinary vision. We will create a
-                personalized experience tailored to your preferences.
-              </p>
-              <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-                <Link href="/#contact" className="btn btn-primary">
-                  <span>Contact Us</span>
-                </Link>
-                <a
-                  href="https://wa.me/590690000000"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn btn-outline"
-                >
-                  <span>WhatsApp</span>
-                </a>
-              </div>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20">
+              {/* Left - Services Links */}
+              <motion.div
+                variants={fadeUp}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-100px" }}
+              >
+                <div className="mb-8">
+                  <Link href="/private-chef-services" className="flex items-center gap-3 text-[var(--color-text-secondary)] hover:text-[var(--color-accent)] transition-colors mb-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+                    All Services
+                  </Link>
+                </div>
+                <nav className="space-y-4">
+                  <span className="text-xs uppercase tracking-wider text-[var(--color-text-secondary)] mb-4 block">All Services</span>
+                  <Link href="/private-chef-services" className="block text-lg hover:text-[var(--color-accent)] transition-colors">Private Chef Services</Link>
+                  <Link href="/private-chef-onboard" className="block text-lg hover:text-[var(--color-accent)] transition-colors">Private Chef Onboard</Link>
+                  <Link href="/private-chef-week-menu" className="block text-lg hover:text-[var(--color-accent)] transition-colors">Private Chef Week Menu</Link>
+                </nav>
+
+                {/* Phone & Email */}
+                <div className="mt-12 space-y-6">
+                  <div className="flex items-start gap-4">
+                    <div className="w-12 h-12 flex-shrink-0 flex items-center justify-center bg-[var(--color-bg-tertiary)] text-[var(--color-accent)]">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" /></svg>
+                    </div>
+                    <div>
+                      <h4 className="font-medium mb-1">Phone</h4>
+                      <a href="tel:+590690535739" className="text-[var(--color-text-secondary)] hover:text-[var(--color-accent)] transition-colors">590 690 53 57 39</a>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-4">
+                    <div className="w-12 h-12 flex-shrink-0 flex items-center justify-center bg-[var(--color-bg-tertiary)] text-[var(--color-accent)]">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><rect width="20" height="16" x="2" y="4" rx="2" /><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" /></svg>
+                    </div>
+                    <div>
+                      <h4 className="font-medium mb-1">E-Mail</h4>
+                      <a href="mailto:sxmprivatechef@gmail.com" className="text-[var(--color-text-secondary)] hover:text-[var(--color-accent)] transition-colors">sxmprivatechef@gmail.com</a>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+
+              {/* Right - Form */}
+              <motion.div
+                variants={fadeUp}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-100px" }}
+              >
+                <span className="section-number block mb-2">Private Chef Services by Chef Francis</span>
+                <h2 className="font-[family-name:var(--font-cormorant)] text-2xl lg:text-3xl mb-8">Get in touch</h2>
+                <p className="text-[var(--color-text-secondary)] mb-8">You have a piece of advice or a suggestion that you would like to share with us? Feel free to contact us.</p>
+                <form onSubmit={handleSubmit} className="space-y-6">
+                  <input type="text" placeholder="Your name" value={formData.name} onChange={(e) => setFormData({ ...formData, name: e.target.value })} required className="form-input" />
+                  <input type="email" placeholder="Your email" value={formData.email} onChange={(e) => setFormData({ ...formData, email: e.target.value })} required className="form-input" />
+                  <input type="tel" placeholder="Your phone" value={formData.phone} onChange={(e) => setFormData({ ...formData, phone: e.target.value })} className="form-input" />
+                  <input type="text" placeholder="Subject" value={formData.subject} onChange={(e) => setFormData({ ...formData, subject: e.target.value })} className="form-input" />
+                  <textarea placeholder="Your message (optional)" value={formData.message} onChange={(e) => setFormData({ ...formData, message: e.target.value })} rows={4} className="form-input resize-none" />
+                  <button type="submit" disabled={isSubmitting} className="btn btn-primary w-full">{isSubmitting ? "Sending..." : "SUBMIT"}</button>
+                  {isSuccess && <p className="text-green-400 text-center">Thank you! Your message has been sent.</p>}
+                </form>
+              </motion.div>
+            </div>
+          </div>
+        </section>
+
+        {/* Reservation Section */}
+        <section className="section bg-[var(--color-bg-secondary)]">
+          <div className="container">
+            <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} className="flex flex-col items-center gap-4 mb-12">
+              <span className="text-xs uppercase tracking-wider text-[var(--color-accent)]">Reservation</span>
+              <a href="tel:+590690535739" className="flex items-center gap-3 text-xl hover:text-[var(--color-accent)] transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="text-[var(--color-accent)]"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" /></svg>
+                +590 690 53.57.39
+              </a>
+              <span className="text-xs uppercase tracking-wider text-[var(--color-accent)] mt-2">Reservation</span>
+              <a href="mailto:sxmprivatechef@gmail.com" className="flex items-center gap-3 hover:text-[var(--color-accent)] transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="text-[var(--color-accent)]"><rect width="20" height="16" x="2" y="4" rx="2" /><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" /></svg>
+                sxmprivatechef@gmail.com
+              </a>
+            </motion.div>
+
+            <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} className="text-center mb-12">
+              <h3 className="font-[family-name:var(--font-cormorant)] text-2xl">Contact Us</h3>
+            </motion.div>
+            <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} className="max-w-xl mx-auto space-y-6">
+              <input type="text" placeholder="Your name" className="form-input" />
+              <input type="email" placeholder="Your email" className="form-input" />
+              <input type="tel" placeholder="Your phone" className="form-input" />
+              <input type="text" placeholder="Subject" className="form-input" />
+              <textarea placeholder="Your message (optional)" rows={4} className="form-input resize-none" />
+              <button type="button" className="btn btn-primary w-full">SUBMIT</button>
             </motion.div>
           </div>
         </section>

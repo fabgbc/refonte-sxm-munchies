@@ -2,6 +2,7 @@ import Navigation from "@/components/layout/Navigation";
 import Footer from "@/components/layout/Footer";
 import Hero from "@/components/sections/Hero";
 import Services from "@/components/sections/Services";
+import FlipCards from "@/components/sections/FlipCards";
 import Menus from "@/components/sections/Menus";
 import Chef from "@/components/sections/Chef";
 import Buffets from "@/components/sections/Buffets";
@@ -15,6 +16,7 @@ export default function Home() {
       <main>
         <Hero />
         <Services />
+        <FlipCards />
         <Menus />
         <Chef />
         <Buffets />

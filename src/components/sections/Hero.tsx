@@ -1,102 +1,169 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useState, useEffect, useCallback } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import Image from "next/image";
 import Link from "next/link";
-import { heroTextContainer, heroTextItem, fadeIn } from "@/lib/animations";
+
+const slides = [
+  {
+    id: 1,
+    image: "/images/home-page-private-chef-st-martin.jpg",
+    label: "Villa Chef Service",
+    title: "Private Chef in Saint-Martin",
+    subtitle: "Gourmet Meals, Personalized Service, Luxury Setting",
+    cta: "Book Now",
+    href: "/contact",
+  },
+  {
+    id: 2,
+    image: "/images/home-page-private-cgef-boat.jpg",
+    label: "Yacht Catering Experience",
+    title: "Chef Onboard a Motor Yacht",
+    subtitle: "Saint-Martin · Up to 8 Guests",
+    cta: "Explore the Experience",
+    href: "/private-chef-onboard",
+  },
+  {
+    id: 3,
+    image: "/images/home-page-chef-week.jpg",
+    label: "Weekly Service",
+    title: "Private Chef for the Week",
+    subtitle: "All Meals · All Week · Saint-Martin",
+    cta: "View Our Services",
+    href: "/private-chef-week-menu",
+  },
+];
 
 export default function Hero() {
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
+
+  const nextSlide = useCallback(() => {
+    setCurrentSlide((prev) => (prev + 1) % slides.length);
+  }, []);
+
+  const goToSlide = (index: number) => {
+    setCurrentSlide(index);
+    setIsAutoPlaying(false);
+    // Resume auto-play after 10 seconds
+    setTimeout(() => setIsAutoPlaying(true), 10000);
+  };
+
+  useEffect(() => {
+    if (!isAutoPlaying) return;
+    const interval = setInterval(nextSlide, 6000);
+    return () => clearInterval(interval);
+  }, [isAutoPlaying, nextSlide]);
+
   return (
     <section className="relative h-screen min-h-[600px] flex items-center justify-center overflow-hidden">
-      {/* Background Video/Image */}
-      <motion.div
-        variants={fadeIn}
-        initial="hidden"
-        animate="visible"
-        className="absolute inset-0 z-0"
-      >
-        {/* Video for desktop, image fallback for mobile */}
-        <video
-          autoPlay
-          muted
-          loop
-          playsInline
-          className="hidden md:block w-full h-full object-cover"
-          poster="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1920&q=80"
+      {/* Background Images */}
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={currentSlide}
+          initial={{ opacity: 0, scale: 1.1 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 1, ease: "easeInOut" }}
+          className="absolute inset-0 z-0"
         >
-          <source
-            src="https://player.vimeo.com/external/370467553.hd.mp4?s=ce49c8c6d8e28a89298ffb4c53a2e842bdb11546&profile_id=174&oauth2_token_id=57447761"
-            type="video/mp4"
+          <Image
+            src={slides[currentSlide].image}
+            alt={slides[currentSlide].title}
+            fill
+            className="object-cover"
+            priority={currentSlide === 0}
           />
-        </video>
-        <div
-          className="md:hidden w-full h-full bg-cover bg-center"
-          style={{
-            backgroundImage:
-              "url('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1200&q=80')",
-          }}
-        />
+          {/* Gradient Overlay */}
+          <div className="absolute inset-0 bg-gradient-to-b from-[#0C0A09]/60 via-[#0C0A09]/50 to-[#0C0A09]/80" />
+        </motion.div>
+      </AnimatePresence>
 
-        {/* Gradient Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[#0C0A09]/60 via-[#0C0A09]/40 to-[#0C0A09]/90" />
-      </motion.div>
+      {/* Slide Navigation - Left Side */}
+      <div className="absolute left-6 lg:left-12 top-1/2 -translate-y-1/2 z-20 flex flex-col items-center gap-4">
+        {slides.map((_, index) => (
+          <button
+            key={index}
+            onClick={() => goToSlide(index)}
+            className="group relative w-10 h-10 flex items-center justify-center"
+            aria-label={`Go to slide ${index + 1}`}
+          >
+            <span
+              className={`block w-3 h-3 rounded-full border-2 transition-all duration-300 ${
+                index === currentSlide
+                  ? "border-[var(--color-accent)] bg-[var(--color-accent)]"
+                  : "border-white/50 bg-transparent group-hover:border-white"
+              }`}
+            />
+            {index === currentSlide && (
+              <motion.span
+                layoutId="slideIndicator"
+                className="absolute inset-0 border border-[var(--color-accent)] rounded-full"
+                initial={false}
+                transition={{ duration: 0.3 }}
+              />
+            )}
+          </button>
+        ))}
+      </div>
 
       {/* Content */}
       <div className="container relative z-10 text-center">
-        <motion.div
-          variants={heroTextContainer}
-          initial="hidden"
-          animate="visible"
-          className="max-w-4xl mx-auto"
-        >
-          {/* Decorative line */}
+        <AnimatePresence mode="wait">
           <motion.div
-            variants={heroTextItem}
-            className="flex items-center justify-center gap-4 mb-8"
+            key={currentSlide}
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -30 }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+            className="max-w-4xl mx-auto"
           >
-            <span className="decorative-line" />
-            <span className="section-number">Saint-Martin</span>
-            <span className="decorative-line" />
+            {/* Label */}
+            <motion.span
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.2 }}
+              className="inline-block text-xs md:text-sm tracking-[0.3em] uppercase text-white/80 mb-6"
+            >
+              {slides[currentSlide].label}
+            </motion.span>
+
+            {/* Main Title */}
+            <motion.h1
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3 }}
+              className="font-[family-name:var(--font-cormorant)] text-[clamp(2.5rem,8vw,5rem)] leading-[1.1] mb-4 text-white"
+            >
+              {slides[currentSlide].title}
+            </motion.h1>
+
+            {/* Subtitle */}
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4 }}
+              className="font-[family-name:var(--font-cormorant)] text-[clamp(1.2rem,3vw,2rem)] text-[var(--color-accent)] mb-10"
+            >
+              {slides[currentSlide].subtitle}
+            </motion.p>
+
+            {/* CTA */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.5 }}
+            >
+              <Link
+                href={slides[currentSlide].href}
+                className="inline-block px-10 py-4 border border-[var(--color-accent)] text-sm tracking-widest uppercase text-white hover:bg-[var(--color-accent)] hover:text-[var(--color-bg-primary)] transition-all duration-300"
+              >
+                {slides[currentSlide].cta}
+              </Link>
+            </motion.div>
           </motion.div>
-
-          {/* Main Title */}
-          <motion.h1
-            variants={heroTextItem}
-            className="font-[family-name:var(--font-cormorant)] text-[clamp(2.5rem,8vw,5rem)] leading-[1.1] mb-4"
-          >
-            Private Chef in Saint-Martin
-          </motion.h1>
-
-          {/* Subtitle */}
-          <motion.p
-            variants={heroTextItem}
-            className="font-[family-name:var(--font-cormorant)] text-[clamp(1.5rem,4vw,2.5rem)] italic text-[var(--color-accent)] mb-6"
-          >
-            Exquisite Cuisine at Your Villa
-          </motion.p>
-
-          {/* Description */}
-          <motion.p
-            variants={heroTextItem}
-            className="text-[var(--color-text-secondary)] text-lg md:text-xl max-w-2xl mx-auto mb-10"
-          >
-            At SXM Private Chef, we bring restaurant-quality dining to your
-            villa or yacht, crafting unforgettable culinary experiences in
-            Saint-Martin.
-          </motion.p>
-
-          {/* CTAs */}
-          <motion.div
-            variants={heroTextItem}
-            className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6"
-          >
-            <Link href="/private-chef-services" className="btn btn-primary">
-              <span>Our Services</span>
-            </Link>
-            <Link href="/contact" className="link-underline">
-              Book Your Experience
-            </Link>
-          </motion.div>
-        </motion.div>
+        </AnimatePresence>
       </div>
 
       {/* Scroll Indicator */}
@@ -104,7 +171,7 @@ export default function Hero() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 2, duration: 1 }}
-        className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3"
+        className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 z-10"
       >
         <span className="text-xs tracking-widest uppercase text-[var(--color-text-secondary)]">
           Scroll
@@ -115,6 +182,17 @@ export default function Hero() {
           className="w-[1px] bg-[var(--color-accent)]"
         />
       </motion.div>
+
+      {/* Progress Bar */}
+      <div className="absolute bottom-0 left-0 right-0 h-1 bg-white/10 z-20">
+        <motion.div
+          key={currentSlide}
+          initial={{ width: "0%" }}
+          animate={{ width: "100%" }}
+          transition={{ duration: 6, ease: "linear" }}
+          className="h-full bg-[var(--color-accent)]"
+        />
+      </div>
     </section>
   );
 }
