@@ -220,61 +220,164 @@ export async function POST(request: Request) {
       buffet: "Buffet / Réception",
     };
 
+    // Format date for display
+    const formattedDate = new Date(cleanData.date).toLocaleDateString("fr-FR", {
+      weekday: "long",
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    });
+
     const { error } = await resend.emails.send({
       from: "SXM Private Chef <onboarding@resend.dev>", // Change to your verified domain
       to: "sxmprivatechef@gmail.com",
       replyTo: cleanData.email,
-      subject: `Nouvelle demande de ${cleanData.name} - ${serviceTypeLabels[cleanData.serviceType] || cleanData.serviceType}`,
+      subject: `🍽️ Nouvelle demande — ${cleanData.name} | ${serviceTypeLabels[cleanData.serviceType] || cleanData.serviceType} | ${cleanData.guests} pers.`,
       html: `
-        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-          <h1 style="color: #D4A574; border-bottom: 2px solid #D4A574; padding-bottom: 10px;">
-            Nouvelle demande de réservation
-          </h1>
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body style="margin: 0; padding: 0; background-color: #f5f5f5; font-family: 'Helvetica Neue', Arial, sans-serif;">
+  <table width="100%" cellpadding="0" cellspacing="0" style="background-color: #f5f5f5; padding: 40px 20px;">
+    <tr>
+      <td align="center">
+        <table width="600" cellpadding="0" cellspacing="0" style="background-color: #ffffff; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
 
-          <table style="width: 100%; border-collapse: collapse; margin: 20px 0;">
-            <tr>
-              <td style="padding: 10px; border-bottom: 1px solid #eee; font-weight: bold; width: 150px;">Nom</td>
-              <td style="padding: 10px; border-bottom: 1px solid #eee;">${cleanData.name}</td>
-            </tr>
-            <tr>
-              <td style="padding: 10px; border-bottom: 1px solid #eee; font-weight: bold;">Email</td>
-              <td style="padding: 10px; border-bottom: 1px solid #eee;">
-                <a href="mailto:${cleanData.email}">${cleanData.email}</a>
-              </td>
-            </tr>
-            <tr>
-              <td style="padding: 10px; border-bottom: 1px solid #eee; font-weight: bold;">Téléphone</td>
-              <td style="padding: 10px; border-bottom: 1px solid #eee;">
-                <a href="tel:${cleanData.phone}">${cleanData.phone}</a>
-              </td>
-            </tr>
-            <tr>
-              <td style="padding: 10px; border-bottom: 1px solid #eee; font-weight: bold;">Date souhaitée</td>
-              <td style="padding: 10px; border-bottom: 1px solid #eee;">${cleanData.date}</td>
-            </tr>
-            <tr>
-              <td style="padding: 10px; border-bottom: 1px solid #eee; font-weight: bold;">Type de prestation</td>
-              <td style="padding: 10px; border-bottom: 1px solid #eee;">${serviceTypeLabels[cleanData.serviceType] || cleanData.serviceType}</td>
-            </tr>
-            <tr>
-              <td style="padding: 10px; border-bottom: 1px solid #eee; font-weight: bold;">Nombre de convives</td>
-              <td style="padding: 10px; border-bottom: 1px solid #eee;">${cleanData.guests}</td>
-            </tr>
-          </table>
-
-          ${cleanData.message ? `
-            <div style="margin: 20px 0;">
-              <h3 style="color: #333;">Message</h3>
-              <p style="background: #f5f5f5; padding: 15px; border-left: 3px solid #D4A574;">
-                ${cleanData.message.replace(/\n/g, "<br>")}
+          <!-- Header -->
+          <tr>
+            <td style="background-color: #0C0A09; padding: 40px 40px 30px 40px; text-align: center;">
+              <h1 style="margin: 0; color: #D4A574; font-size: 28px; font-weight: 300; letter-spacing: 2px;">
+                SXM PRIVATE CHEF
+              </h1>
+              <p style="margin: 10px 0 0 0; color: #A8A29E; font-size: 12px; letter-spacing: 3px; text-transform: uppercase;">
+                Nouvelle demande de réservation
               </p>
-            </div>
-          ` : ""}
+            </td>
+          </tr>
 
-          <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #eee; color: #666; font-size: 12px;">
-            <p>Email envoyé depuis le formulaire de contact de sxmprivatechef.com</p>
-          </div>
-        </div>
+          <!-- Alert Banner -->
+          <tr>
+            <td style="background-color: #D4A574; padding: 15px 40px; text-align: center;">
+              <p style="margin: 0; color: #0C0A09; font-size: 14px; font-weight: 600;">
+                📅 ${formattedDate} • ${cleanData.guests} convives • ${serviceTypeLabels[cleanData.serviceType] || cleanData.serviceType}
+              </p>
+            </td>
+          </tr>
+
+          <!-- Client Info -->
+          <tr>
+            <td style="padding: 40px;">
+              <h2 style="margin: 0 0 25px 0; color: #0C0A09; font-size: 18px; font-weight: 600; border-bottom: 2px solid #D4A574; padding-bottom: 10px;">
+                👤 Informations client
+              </h2>
+
+              <table width="100%" cellpadding="0" cellspacing="0">
+                <tr>
+                  <td style="padding: 12px 0; border-bottom: 1px solid #eee;">
+                    <span style="color: #888; font-size: 12px; text-transform: uppercase; letter-spacing: 1px;">Nom</span><br>
+                    <span style="color: #0C0A09; font-size: 16px; font-weight: 500;">${cleanData.name}</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="padding: 12px 0; border-bottom: 1px solid #eee;">
+                    <span style="color: #888; font-size: 12px; text-transform: uppercase; letter-spacing: 1px;">Email</span><br>
+                    <a href="mailto:${cleanData.email}" style="color: #D4A574; font-size: 16px; text-decoration: none;">${cleanData.email}</a>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="padding: 12px 0; border-bottom: 1px solid #eee;">
+                    <span style="color: #888; font-size: 12px; text-transform: uppercase; letter-spacing: 1px;">Téléphone</span><br>
+                    <a href="tel:${cleanData.phone}" style="color: #D4A574; font-size: 16px; text-decoration: none;">${cleanData.phone}</a>
+                  </td>
+                </tr>
+              </table>
+
+              <h2 style="margin: 35px 0 25px 0; color: #0C0A09; font-size: 18px; font-weight: 600; border-bottom: 2px solid #D4A574; padding-bottom: 10px;">
+                🍽️ Détails de la demande
+              </h2>
+
+              <table width="100%" cellpadding="0" cellspacing="0" style="background-color: #FAFAF9; border-radius: 8px; padding: 20px;">
+                <tr>
+                  <td style="padding: 15px 20px;">
+                    <table width="100%" cellpadding="0" cellspacing="0">
+                      <tr>
+                        <td width="50%" style="padding: 8px 0;">
+                          <span style="color: #888; font-size: 11px; text-transform: uppercase;">Date souhaitée</span><br>
+                          <span style="color: #0C0A09; font-size: 15px; font-weight: 500;">${formattedDate}</span>
+                        </td>
+                        <td width="50%" style="padding: 8px 0;">
+                          <span style="color: #888; font-size: 11px; text-transform: uppercase;">Type de prestation</span><br>
+                          <span style="color: #0C0A09; font-size: 15px; font-weight: 500;">${serviceTypeLabels[cleanData.serviceType] || cleanData.serviceType}</span>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td colspan="2" style="padding: 8px 0;">
+                          <span style="color: #888; font-size: 11px; text-transform: uppercase;">Nombre de convives</span><br>
+                          <span style="color: #0C0A09; font-size: 15px; font-weight: 500;">${cleanData.guests} personnes</span>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+              </table>
+
+              ${cleanData.message ? `
+                <h2 style="margin: 35px 0 20px 0; color: #0C0A09; font-size: 18px; font-weight: 600; border-bottom: 2px solid #D4A574; padding-bottom: 10px;">
+                  💬 Message du client
+                </h2>
+                <div style="background-color: #FAFAF9; border-left: 4px solid #D4A574; padding: 20px; border-radius: 0 8px 8px 0;">
+                  <p style="margin: 0; color: #333; font-size: 15px; line-height: 1.6; font-style: italic;">
+                    "${cleanData.message.replace(/\n/g, "<br>")}"
+                  </p>
+                </div>
+              ` : ""}
+
+              <!-- Action Buttons -->
+              <table width="100%" cellpadding="0" cellspacing="0" style="margin-top: 35px;">
+                <tr>
+                  <td align="center">
+                    <table cellpadding="0" cellspacing="0">
+                      <tr>
+                        <td style="padding-right: 10px;">
+                          <a href="mailto:${cleanData.email}?subject=Re: Votre demande de réservation - SXM Private Chef" style="display: inline-block; background-color: #D4A574; color: #0C0A09; text-decoration: none; padding: 14px 28px; border-radius: 4px; font-size: 14px; font-weight: 600;">
+                            ✉️ Répondre par email
+                          </a>
+                        </td>
+                        <td style="padding-left: 10px;">
+                          <a href="https://wa.me/${cleanData.phone.replace(/[^0-9]/g, "")}" style="display: inline-block; background-color: #25D366; color: #ffffff; text-decoration: none; padding: 14px 28px; border-radius: 4px; font-size: 14px; font-weight: 600;">
+                            📱 WhatsApp
+                          </a>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+              </table>
+
+            </td>
+          </tr>
+
+          <!-- Footer -->
+          <tr>
+            <td style="background-color: #0C0A09; padding: 25px 40px; text-align: center;">
+              <p style="margin: 0; color: #A8A29E; font-size: 12px;">
+                Demande reçue via <a href="https://sxmprivatechef.com" style="color: #D4A574; text-decoration: none;">sxmprivatechef.com</a>
+              </p>
+              <p style="margin: 8px 0 0 0; color: #666; font-size: 11px;">
+                Saint-Martin, French West Indies
+              </p>
+            </td>
+          </tr>
+
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>
       `,
     });
 
