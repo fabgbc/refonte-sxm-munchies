@@ -29,7 +29,7 @@ const footerLinks = {
 
 const socialLinks = [
   {
-    href: "https://instagram.com/sxmprivatechef",
+    href: "https://www.instagram.com/sxmunchiesnsweets/",
     label: "Instagram",
     icon: (
       <svg
@@ -213,7 +213,14 @@ export default function Footer() {
         >
           <p className="text-sm text-[var(--color-text-secondary)] mb-4">
             Our Partner:{" "}
-            <span className="text-[var(--color-accent)]">JC Bar Company</span>
+            <a
+              href="http://jcbarcompany.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[var(--color-accent)] hover:underline"
+            >
+              JC Bar Company
+            </a>
           </p>
         </motion.div>
 
