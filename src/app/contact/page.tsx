@@ -429,7 +429,7 @@ export default function ContactPage() {
           {/* Map Container */}
           <div className="relative h-[400px] lg:h-[500px]">
             <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d121543.95028378886!2d-63.12397565!3d18.0708298!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8c0e6f5b5b5b5b5b%3A0x5b5b5b5b5b5b5b5b!2sSaint-Martin!5e0!3m2!1sen!2sfr!4v1705849200000!5m2!1sen!2sfr"
+              src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d121543.95028378886!2d-63.05!3d18.08!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sfr!4v1705849200000!5m2!1sen!2sfr"
               width="100%"
               height="100%"
               style={{ border: 0, filter: "grayscale(100%) contrast(1.1)" }}
