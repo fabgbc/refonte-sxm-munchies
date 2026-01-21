@@ -84,19 +84,19 @@ export default function Testimonials() {
           className="text-center mb-12"
         >
           {/* 5-Star Rating Badge */}
-          <div className="inline-flex items-center gap-6 mb-8 px-8 py-4 bg-[var(--color-bg-primary)]/50 backdrop-blur-sm border border-[var(--color-accent)]/30 rounded-full">
-            <div className="flex items-center gap-3">
-              <StarRating rating={5} size={24} />
-              <span className="text-2xl font-[family-name:var(--font-cormorant)] text-[var(--color-accent)] font-semibold">
+          <div className="inline-flex flex-col sm:flex-row items-center gap-3 sm:gap-6 mb-8 px-5 sm:px-8 py-3 sm:py-4 bg-[var(--color-bg-primary)]/50 backdrop-blur-sm border border-[var(--color-accent)]/30 rounded-2xl sm:rounded-full">
+            <div className="flex items-center gap-2 sm:gap-3">
+              <StarRating rating={5} size={20} />
+              <span className="text-xl sm:text-2xl font-[family-name:var(--font-cormorant)] text-[var(--color-accent)] font-semibold">
                 {testimonialStats.averageRating}
               </span>
             </div>
-            <div className="w-px h-8 bg-[var(--color-accent)]/30" />
-            <div className="text-left">
-              <p className="text-lg font-medium text-[var(--color-text-primary)]">
+            <div className="hidden sm:block w-px h-8 bg-[var(--color-accent)]/30" />
+            <div className="text-center sm:text-left">
+              <p className="text-base sm:text-lg font-medium text-[var(--color-text-primary)]">
                 {testimonialStats.totalReviews}+ Reviews
               </p>
-              <p className="text-xs text-[var(--color-text-secondary)] uppercase tracking-wider">
+              <p className="text-[10px] sm:text-xs text-[var(--color-text-secondary)] uppercase tracking-wider">
                 5 Star Rating
               </p>
             </div>

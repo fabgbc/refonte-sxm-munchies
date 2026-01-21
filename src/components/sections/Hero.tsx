@@ -167,7 +167,7 @@ export default function Hero() {
         </AnimatePresence>
       </div>
 
-      {/* 5-Star Rating Badge */}
+      {/* 5-Star Rating Badge - Desktop */}
       <motion.div
         initial={{ opacity: 0, x: 20 }}
         animate={{ opacity: 1, x: 0 }}
@@ -201,6 +201,38 @@ export default function Hero() {
               {testimonialStats.averageRating} Rating
             </p>
           </div>
+        </Link>
+      </motion.div>
+
+      {/* 5-Star Rating Badge - Mobile */}
+      <motion.div
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 1.5, duration: 0.8 }}
+        className="absolute bottom-20 left-1/2 -translate-x-1/2 z-20 md:hidden"
+      >
+        <Link
+          href="#testimonials"
+          className="flex items-center gap-2 px-4 py-2 bg-[var(--color-bg-primary)]/80 backdrop-blur-sm border border-[var(--color-accent)]/40 rounded-full"
+        >
+          <div className="flex gap-0.5">
+            {[...Array(5)].map((_, i) => (
+              <svg
+                key={i}
+                xmlns="http://www.w3.org/2000/svg"
+                width="12"
+                height="12"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                className="text-[var(--color-accent)]"
+              >
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+              </svg>
+            ))}
+          </div>
+          <span className="text-xs font-medium text-white">
+            {testimonialStats.totalReviews}+ Reviews
+          </span>
         </Link>
       </motion.div>
 
