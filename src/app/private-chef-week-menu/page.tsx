@@ -662,9 +662,10 @@ export default function WeekMenuPage() {
         </section>
 
         {/* Our Signature Themes */}
-        <section className="section bg-[var(--color-bg-primary)] relative">
-          {/* Decorative gradient line */}
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-px h-20 bg-gradient-to-b from-transparent via-[var(--color-accent)] to-transparent" />
+        <section className="section bg-[#F5F3EF] relative overflow-hidden">
+          {/* Decorative gradient lines */}
+          <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[var(--color-accent)]/30 to-transparent" />
+          <div className="absolute top-2 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[var(--color-accent)]/20 to-transparent" />
 
           <div className="container relative">
             <motion.div
@@ -672,20 +673,16 @@ export default function WeekMenuPage() {
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, margin: "-100px" }}
-              className="text-center mb-16"
+              className="text-center mb-12"
             >
               <div className="flex items-center justify-center gap-4 mb-4">
                 <span className="w-16 h-[1px] bg-gradient-to-r from-transparent to-[var(--color-accent)]" />
-                <span className="section-number">05 - Our Signature Themes</span>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" strokeWidth="1.5">
+                  <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                </svg>
                 <span className="w-16 h-[1px] bg-gradient-to-l from-transparent to-[var(--color-accent)]" />
               </div>
-              <h2 className="font-[family-name:var(--font-cormorant)] mt-4 mb-6">
-                Explore Our Menus
-              </h2>
-              <p className="text-[var(--color-text-secondary)] max-w-2xl mx-auto">
-                Discover our carefully crafted menus, each designed to offer a
-                unique culinary experience throughout your week
-              </p>
+              <span className="text-sm uppercase tracking-widest text-[var(--color-accent)]">Our Signature Themes</span>
             </motion.div>
 
             <motion.div
@@ -693,34 +690,105 @@ export default function WeekMenuPage() {
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, margin: "-100px" }}
-              className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
             >
               {[
-                { name: "Gourmet Menu", href: "/gourmet-menu" },
-                { name: "Surf & Turf", href: "/surf-turf-menu" },
-                { name: "Bourguignon Trails", href: "/bourgogne-menu" },
-                { name: "Caribbean", href: "/caribbean-menu" },
-                { name: "Mediterranean", href: "/mediterranean-menu" },
-                { name: "Grill Menu", href: "/grill-menu" },
-                { name: "Weekly Menu", href: "/weekly-menu" },
+                {
+                  name: "Grill & Barbecue",
+                  href: "/grill-menu",
+                  description: "Premium meats, fresh seafood, and grilled vegetables with Caribbean spices.",
+                  icon: (
+                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1">
+                      <circle cx="12" cy="12" r="10" />
+                      <path d="M8 14s1.5 2 4 2 4-2 4-2" />
+                      <line x1="9" y1="9" x2="9.01" y2="9" />
+                      <line x1="15" y1="9" x2="15.01" y2="9" />
+                    </svg>
+                  )
+                },
+                {
+                  name: "Caribbean Fusion",
+                  href: "/caribbean-menu",
+                  description: "Bold flavors, local produce, and traditional island dishes with a twist.",
+                  icon: (
+                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1">
+                      <path d="M6 13.87A4 4 0 0 1 7.41 6a5.11 5.11 0 0 1 1.05-1.54 5 5 0 0 1 7.08 0A5.11 5.11 0 0 1 16.59 6 4 4 0 0 1 18 13.87V21H6Z" />
+                      <line x1="6" x2="18" y1="17" y2="17" />
+                    </svg>
+                  )
+                },
+                {
+                  name: "Gourmet Tasting Menu",
+                  href: "/gourmet-menu",
+                  description: "Refined and artistic plates for a high-end culinary journey.",
+                  icon: (
+                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1">
+                      <path d="M17 8h1a4 4 0 1 1 0 8h-1" />
+                      <path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z" />
+                      <line x1="6" x2="6" y1="2" y2="4" />
+                      <line x1="10" x2="10" y1="2" y2="4" />
+                      <line x1="14" x2="14" y1="2" y2="4" />
+                    </svg>
+                  )
+                },
+                {
+                  name: "Bourguignon Menu",
+                  href: "/bourgogne-menu",
+                  description: "A French classic with slow-cooked beef, rich wine sauce, and comforting sides.",
+                  icon: (
+                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1">
+                      <path d="M8 2h8l4 10H4L8 2Z" />
+                      <path d="M12 12v6" />
+                      <path d="M8 22h8" />
+                      <path d="M12 18h.01" />
+                    </svg>
+                  )
+                },
+                {
+                  name: "Mediterranean",
+                  href: "/mediterranean-menu",
+                  description: "Olive oil, herbs, and sun-soaked flavors from Italy, Greece, and beyond.",
+                  icon: (
+                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1">
+                      <rect width="18" height="18" x="3" y="3" rx="2" />
+                      <path d="M12 8v8" />
+                      <path d="M8 12h8" />
+                    </svg>
+                  )
+                },
+                {
+                  name: "Caribbean Surf & Turf",
+                  href: "/surf-turf-menu",
+                  description: "A bold mix of grilled lobster and tender meat cuts — island-style and full of flavor.",
+                  icon: (
+                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1">
+                      <circle cx="12" cy="12" r="10" />
+                      <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20" />
+                      <path d="M2 12h20" />
+                    </svg>
+                  )
+                },
               ].map((menu, idx) => (
-                <motion.div
-                  key={idx}
-                  variants={staggerItem}
-                  whileHover={{ scale: 1.03, y: -3 }}
-                >
+                <motion.div key={idx} variants={staggerItem}>
                   <Link
                     href={menu.href}
-                    className="block p-6 bg-[var(--color-bg-secondary)] border border-[var(--color-accent-light)] text-center hover:border-[var(--color-accent)] hover:bg-[var(--color-bg-tertiary)] transition-all duration-300 group relative"
+                    className="block bg-[#FAF9F7] p-8 text-center hover:shadow-xl transition-all duration-500 group h-full relative border border-transparent hover:border-[var(--color-accent)]/30 hover:-translate-y-1"
                   >
                     {/* Corner accents on hover */}
-                    <div className="absolute -top-[1px] -left-[1px] w-3 h-3 border-t-2 border-l-2 border-[var(--color-accent)] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                    <div className="absolute -top-[1px] -right-[1px] w-3 h-3 border-t-2 border-r-2 border-[var(--color-accent)] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                    <div className="absolute -bottom-[1px] -left-[1px] w-3 h-3 border-b-2 border-l-2 border-[var(--color-accent)] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                    <div className="absolute -bottom-[1px] -right-[1px] w-3 h-3 border-b-2 border-r-2 border-[var(--color-accent)] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                    <span className="font-[family-name:var(--font-cormorant)] text-lg group-hover:text-[var(--color-accent)] transition-colors">
+                    <div className="absolute -top-1 -left-1 w-3 h-3 border-t-2 border-l-2 border-[var(--color-accent)] opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                    <div className="absolute -top-1 -right-1 w-3 h-3 border-t-2 border-r-2 border-[var(--color-accent)] opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                    <div className="absolute -bottom-1 -left-1 w-3 h-3 border-b-2 border-l-2 border-[var(--color-accent)] opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                    <div className="absolute -bottom-1 -right-1 w-3 h-3 border-b-2 border-r-2 border-[var(--color-accent)] opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
+                    <div className="w-16 h-16 mx-auto mb-4 flex items-center justify-center text-[var(--color-accent)] border border-[var(--color-accent)]/30 rounded-full group-hover:border-[var(--color-accent)] group-hover:bg-[var(--color-accent)]/5 transition-all duration-300">
+                      {menu.icon}
+                    </div>
+                    <h3 className="font-[family-name:var(--font-cormorant)] text-xl text-[#1a1a1a] mb-3 italic group-hover:text-[var(--color-accent)] transition-colors">
                       {menu.name}
-                    </span>
+                    </h3>
+                    <p className="text-sm text-[#666] leading-relaxed">
+                      {menu.description}
+                    </p>
                   </Link>
                 </motion.div>
               ))}

@@ -4,6 +4,7 @@ import { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
+import { testimonialStats } from "@/data/testimonials";
 
 const slides = [
   {
@@ -165,6 +166,43 @@ export default function Hero() {
           </motion.div>
         </AnimatePresence>
       </div>
+
+      {/* 5-Star Rating Badge */}
+      <motion.div
+        initial={{ opacity: 0, x: 20 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ delay: 1.5, duration: 0.8 }}
+        className="absolute bottom-24 right-6 lg:right-12 z-20 hidden md:block"
+      >
+        <Link
+          href="#testimonials"
+          className="flex items-center gap-3 px-5 py-3 bg-[var(--color-bg-primary)]/80 backdrop-blur-sm border border-[var(--color-accent)]/40 rounded-full hover:border-[var(--color-accent)] transition-all group"
+        >
+          <div className="flex gap-0.5">
+            {[...Array(5)].map((_, i) => (
+              <svg
+                key={i}
+                xmlns="http://www.w3.org/2000/svg"
+                width="14"
+                height="14"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                className="text-[var(--color-accent)]"
+              >
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+              </svg>
+            ))}
+          </div>
+          <div className="text-left">
+            <p className="text-sm font-medium text-white group-hover:text-[var(--color-accent)] transition-colors">
+              {testimonialStats.totalReviews}+ Reviews
+            </p>
+            <p className="text-xs text-[var(--color-text-secondary)]">
+              {testimonialStats.averageRating} Rating
+            </p>
+          </div>
+        </Link>
+      </motion.div>
 
       {/* Scroll Indicator */}
       <motion.div
