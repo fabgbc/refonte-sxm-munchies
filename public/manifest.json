@@ -1,0 +1,21 @@
+{
+  "name": "SXM Private Chef",
+  "short_name": "SXM Chef",
+  "description": "Private chef services in Saint-Martin. Gourmet dining at your villa, yacht, or private event.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0C0A09",
+  "theme_color": "#C9A227",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

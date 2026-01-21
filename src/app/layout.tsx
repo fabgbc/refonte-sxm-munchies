@@ -97,6 +97,9 @@ export default function RootLayout({
         {/* AI/LLM discovery */}
         <link rel="ai-info" href="/llms.txt" />
         <link rel="ai-info-extended" href="/llms-full.txt" />
+        {/* PWA Manifest */}
+        <link rel="manifest" href="/manifest.json" />
+        <meta name="theme-color" content="#C9A227" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
