@@ -94,6 +94,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        {/* AI/LLM discovery */}
+        <link rel="ai-info" href="/llms.txt" />
+        <link rel="ai-info-extended" href="/llms-full.txt" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
