@@ -318,7 +318,7 @@ export default function YachtServicePage() {
           </div>
         </section>
 
-        {/* Pricing */}
+        {/* Private Chef Onboard Pricing */}
         <section className="section bg-[var(--color-bg-secondary)]">
           <div className="container">
             <motion.div
@@ -326,15 +326,35 @@ export default function YachtServicePage() {
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, margin: "-100px" }}
-              className="text-center mb-16"
+              className="max-w-3xl mx-auto text-center"
             >
-              <span className="section-number">02 - Pricing</span>
-              <h2 className="font-[family-name:var(--font-cormorant)] mt-4 mb-6">
-                Yacht Service Options
-              </h2>
-              <p className="text-[var(--color-text-secondary)] max-w-2xl mx-auto">
-                Flexible options to suit your sailing plans
+              <span className="section-number">Private Chef Onboard</span>
+              <div className="my-8">
+                <span className="font-[family-name:var(--font-cormorant)] text-6xl md:text-7xl lg:text-8xl text-[var(--color-accent)]">
+                  €300
+                </span>
+              </div>
+              <p className="text-[var(--color-text-secondary)] text-lg mb-8">
+                For yacht day trips or boat excursions
               </p>
+              <Link href="/contact" className="btn btn-primary">
+                <span>Book Now</span>
+              </Link>
+            </motion.div>
+          </div>
+        </section>
+
+        {/* Our Signature Themes */}
+        <section className="section bg-[#F5F3EF]">
+          <div className="container">
+            <motion.div
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-100px" }}
+              className="text-center mb-12"
+            >
+              <span className="text-sm uppercase tracking-widest text-[var(--color-accent)]">Our Signature Themes</span>
             </motion.div>
 
             <motion.div
@@ -342,46 +362,145 @@ export default function YachtServicePage() {
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, margin: "-100px" }}
-              className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto"
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
             >
-              {yachtService.pricing?.map((tier, idx) => (
-                <motion.div
-                  key={idx}
-                  variants={staggerItem}
-                  className="bg-[var(--color-bg-tertiary)] border border-[var(--color-accent-light)] p-8 text-center"
-                >
-                  <span className="text-sm uppercase tracking-wider text-[var(--color-accent)]">
-                    {tier.guests}
-                  </span>
-                  <div className="my-6">
-                    <span className="font-[family-name:var(--font-cormorant)] text-4xl md:text-5xl text-[var(--color-accent)]">
-                      {tier.fee}
-                    </span>
-                  </div>
-                  <p className="text-[var(--color-text-secondary)]">{tier.note}</p>
+              {[
+                {
+                  name: "Grill & Barbecue",
+                  href: "/grill-menu",
+                  description: "Premium meats, fresh seafood, and grilled vegetables with Caribbean spices.",
+                  icon: (
+                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1">
+                      <circle cx="12" cy="12" r="10" />
+                      <path d="M8 14s1.5 2 4 2 4-2 4-2" />
+                      <line x1="9" y1="9" x2="9.01" y2="9" />
+                      <line x1="15" y1="9" x2="15.01" y2="9" />
+                    </svg>
+                  )
+                },
+                {
+                  name: "Caribbean Fusion",
+                  href: "/caribbean-menu",
+                  description: "Bold flavors, local produce, and traditional island dishes with a twist.",
+                  icon: (
+                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1">
+                      <path d="M6 13.87A4 4 0 0 1 7.41 6a5.11 5.11 0 0 1 1.05-1.54 5 5 0 0 1 7.08 0A5.11 5.11 0 0 1 16.59 6 4 4 0 0 1 18 13.87V21H6Z" />
+                      <line x1="6" x2="18" y1="17" y2="17" />
+                    </svg>
+                  )
+                },
+                {
+                  name: "Gourmet Tasting Menu",
+                  href: "/gourmet-menu",
+                  description: "Refined and artistic plates for a high-end culinary journey.",
+                  icon: (
+                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1">
+                      <path d="M17 8h1a4 4 0 1 1 0 8h-1" />
+                      <path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z" />
+                      <line x1="6" x2="6" y1="2" y2="4" />
+                      <line x1="10" x2="10" y1="2" y2="4" />
+                      <line x1="14" x2="14" y1="2" y2="4" />
+                    </svg>
+                  )
+                },
+                {
+                  name: "Bourguignon Menu",
+                  href: "/bourgogne-menu",
+                  description: "A French classic with slow-cooked beef, rich wine sauce, and comforting sides.",
+                  icon: (
+                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1">
+                      <path d="M8 2h8l4 10H4L8 2Z" />
+                      <path d="M12 12v6" />
+                      <path d="M8 22h8" />
+                      <path d="M12 18h.01" />
+                    </svg>
+                  )
+                },
+                {
+                  name: "Mediterranean",
+                  href: "/mediterranean-menu",
+                  description: "Olive oil, herbs, and sun-soaked flavors from Italy, Greece, and beyond.",
+                  icon: (
+                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1">
+                      <rect width="18" height="18" x="3" y="3" rx="2" />
+                      <path d="M12 8v8" />
+                      <path d="M8 12h8" />
+                    </svg>
+                  )
+                },
+                {
+                  name: "Caribbean Surf & Turf",
+                  href: "/surf-turf-menu",
+                  description: "A bold mix of grilled lobster and tender meat cuts — island-style and full of flavor.",
+                  icon: (
+                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1">
+                      <circle cx="12" cy="12" r="10" />
+                      <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20" />
+                      <path d="M2 12h20" />
+                    </svg>
+                  )
+                },
+                {
+                  name: "Breakfast",
+                  href: "/breakfast-brunch",
+                  description: "Enjoy a chef-prepared breakfast or brunch, served in your villa for the perfect start to your day in Saint-Martin.",
+                  icon: (
+                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1">
+                      <path d="M17 8h1a4 4 0 1 1 0 8h-1" />
+                      <path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z" />
+                      <line x1="6" x2="6" y1="2" y2="4" />
+                      <line x1="10" x2="10" y1="2" y2="4" />
+                      <line x1="14" x2="14" y1="2" y2="4" />
+                    </svg>
+                  )
+                },
+              ].map((menu, idx) => (
+                <motion.div key={idx} variants={staggerItem}>
+                  <Link
+                    href={menu.href}
+                    className="block bg-[#FAF9F7] p-8 text-center hover:shadow-lg transition-shadow group h-full"
+                  >
+                    <div className="w-16 h-16 mx-auto mb-4 flex items-center justify-center text-[var(--color-accent)]">
+                      {menu.icon}
+                    </div>
+                    <h3 className="font-[family-name:var(--font-cormorant)] text-xl text-[#1a1a1a] mb-3 italic">
+                      {menu.name}
+                    </h3>
+                    <p className="text-sm text-[#666] leading-relaxed">
+                      {menu.description}
+                    </p>
+                  </Link>
                 </motion.div>
               ))}
             </motion.div>
+          </div>
+        </section>
 
+        {/* Chef Onboard for the Day */}
+        <section className="section bg-[var(--color-bg-secondary)]">
+          <div className="container">
             <motion.div
               variants={fadeUp}
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, margin: "-100px" }}
-              className="mt-12 max-w-2xl mx-auto text-center"
+              className="max-w-3xl mx-auto text-center"
             >
-              <p className="text-[var(--color-text-secondary)]">
-                <strong className="text-[var(--color-text-primary)]">
-                  All yacht services include:
-                </strong>{" "}
-                Fresh ingredients, meal preparation, service, and cleanup.
-                Contact us to discuss your specific requirements.
+              <h2 className="font-[family-name:var(--font-cormorant)] text-3xl md:text-4xl mb-6">
+                Chef Onboard for the Day
+              </h2>
+              <p className="text-[var(--color-text-secondary)] text-lg mb-8">
+                For full-day charters or extended yacht events, Chef Francis can accompany you throughout the day,
+                preparing multiple meals and ensuring a seamless culinary experience from morning to evening.
               </p>
+              <Link href="/contact" className="text-[var(--color-accent)] hover:underline">
+                Contact us for pricing →
+              </Link>
             </motion.div>
           </div>
         </section>
 
-        {/* What to Expect */}
+        {/* Planning Your Experience */}
         <section className="section bg-[var(--color-bg-primary)]">
           <div className="container">
             <motion.div
@@ -391,9 +510,8 @@ export default function YachtServicePage() {
               viewport={{ once: true, margin: "-100px" }}
               className="text-center mb-16"
             >
-              <span className="section-number">03 - What to Expect</span>
-              <h2 className="font-[family-name:var(--font-cormorant)] mt-4 mb-6">
-                Your Onboard Experience
+              <h2 className="font-[family-name:var(--font-cormorant)] text-3xl md:text-4xl mb-6">
+                Planning Your Experience
               </h2>
             </motion.div>
 
@@ -402,74 +520,32 @@ export default function YachtServicePage() {
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, margin: "-100px" }}
-              className="grid grid-cols-1 md:grid-cols-3 gap-8"
+              className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto"
             >
               {[
                 {
-                  icon: (
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="32"
-                      height="32"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="1.5"
-                    >
-                      <circle cx="12" cy="12" r="10" />
-                      <polyline points="12 6 12 12 16 14" />
-                    </svg>
-                  ),
-                  title: "4-Hour Service",
-                  description:
-                    "Our chef joins you aboard for a dedicated service window, preparing and serving your meal fresh",
+                  step: "01",
+                  title: "Contact Us",
+                  description: "Share your yacht details, dates, and preferences",
                 },
                 {
-                  icon: (
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="32"
-                      height="32"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="1.5"
-                    >
-                      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-                    </svg>
-                  ),
-                  title: "Sea-Friendly Menu",
-                  description:
-                    "Specially curated dishes designed to be prepared and served at sea without compromise",
+                  step: "02",
+                  title: "Menu Selection",
+                  description: "Choose from our signature themes or request custom options",
                 },
                 {
-                  icon: (
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="32"
-                      height="32"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="1.5"
-                    >
-                      <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
-                    </svg>
-                  ),
-                  title: "Premium Service",
-                  description:
-                    "Professional service adapted to the yacht environment, ensuring an exceptional experience",
+                  step: "03",
+                  title: "Set Sail",
+                  description: "Enjoy gourmet dining while cruising the Caribbean waters",
                 },
               ].map((item, idx) => (
-                <motion.div
-                  key={idx}
-                  variants={staggerItem}
-                  className="bg-[var(--color-bg-secondary)] p-8 text-center"
-                >
-                  <div className="w-16 h-16 mx-auto mb-6 flex items-center justify-center bg-[var(--color-bg-tertiary)] text-[var(--color-accent)]">
-                    {item.icon}
+                <motion.div key={idx} variants={staggerItem} className="text-center">
+                  <div className="w-16 h-16 mx-auto mb-4 flex items-center justify-center border border-[var(--color-accent)] text-[var(--color-accent)]">
+                    <span className="font-[family-name:var(--font-cormorant)] text-2xl">
+                      {item.step}
+                    </span>
                   </div>
-                  <h3 className="font-[family-name:var(--font-cormorant)] text-xl mb-3">
+                  <h3 className="font-[family-name:var(--font-cormorant)] text-xl mb-2">
                     {item.title}
                   </h3>
                   <p className="text-[var(--color-text-secondary)] text-sm">
@@ -481,7 +557,7 @@ export default function YachtServicePage() {
           </div>
         </section>
 
-        {/* FAQ Section */}
+        {/* Common Questions */}
         <section className="section bg-[var(--color-bg-secondary)]">
           <div className="container">
             <motion.div
@@ -491,9 +567,8 @@ export default function YachtServicePage() {
               viewport={{ once: true, margin: "-100px" }}
               className="text-center mb-16"
             >
-              <span className="section-number">04 - FAQ</span>
-              <h2 className="font-[family-name:var(--font-cormorant)] mt-4 mb-6">
-                Frequently Asked Questions
+              <h2 className="font-[family-name:var(--font-cormorant)] text-3xl md:text-4xl mb-6">
+                Common Questions
               </h2>
             </motion.div>
 
@@ -537,59 +612,8 @@ export default function YachtServicePage() {
           </div>
         </section>
 
-        {/* Our Signature Themes */}
-        <section className="section bg-[var(--color-bg-primary)]">
-          <div className="container">
-            <motion.div
-              variants={fadeUp}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: "-100px" }}
-              className="text-center mb-16"
-            >
-              <span className="section-number">05 - Our Signature Themes</span>
-              <h2 className="font-[family-name:var(--font-cormorant)] mt-4 mb-6">
-                Explore Our Menus
-              </h2>
-              <p className="text-[var(--color-text-secondary)] max-w-2xl mx-auto">
-                Discover our carefully crafted menus, each designed to offer a
-                unique culinary experience onboard
-              </p>
-            </motion.div>
-
-            <motion.div
-              variants={staggerContainer}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: "-100px" }}
-              className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"
-            >
-              {[
-                { name: "Gourmet Menu", href: "/gourmet-menu" },
-                { name: "Surf & Turf", href: "/surf-turf-menu" },
-                { name: "Bourguignon Trails", href: "/bourgogne-menu" },
-                { name: "Caribbean", href: "/caribbean-menu" },
-                { name: "Mediterranean", href: "/mediterranean-menu" },
-                { name: "Grill Menu", href: "/grill-menu" },
-                { name: "Weekly Menu", href: "/weekly-menu" },
-              ].map((menu, idx) => (
-                <motion.div key={idx} variants={staggerItem}>
-                  <Link
-                    href={menu.href}
-                    className="block p-4 bg-[var(--color-bg-secondary)] border border-[var(--color-accent-light)] text-center hover:border-[var(--color-accent)] hover:bg-[var(--color-bg-tertiary)] transition-all group"
-                  >
-                    <span className="font-[family-name:var(--font-cormorant)] text-lg group-hover:text-[var(--color-accent)] transition-colors">
-                      {menu.name}
-                    </span>
-                  </Link>
-                </motion.div>
-              ))}
-            </motion.div>
-          </div>
-        </section>
-
         {/* Wine Pairing */}
-        <section className="section bg-[var(--color-bg-secondary)]">
+        <section className="section bg-[var(--color-bg-primary)]">
           <div className="container">
             <motion.div
               variants={fadeUp}
