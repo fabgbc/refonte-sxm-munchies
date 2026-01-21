@@ -1,0 +1,406 @@
+"use client";
+
+import { motion } from "framer-motion";
+import Image from "next/image";
+import Link from "next/link";
+import Navigation from "@/components/layout/Navigation";
+import Footer from "@/components/layout/Footer";
+import {
+  fadeUp,
+  fadeIn,
+  heroTextContainer,
+  heroTextItem,
+  staggerContainer,
+  staggerItem,
+  imageHover,
+} from "@/lib/animations";
+import { services, serviceCategories } from "@/data/services";
+
+const icons = {
+  villa: (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="32"
+      height="32"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+      <polyline points="9 22 9 12 15 12 15 22" />
+    </svg>
+  ),
+  yacht: (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="32"
+      height="32"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <circle cx="12" cy="5" r="3" />
+      <line x1="12" x2="12" y1="22" y2="8" />
+      <path d="M5 12H2a10 10 0 0 0 20 0h-3" />
+    </svg>
+  ),
+  event: (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="32"
+      height="32"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+    </svg>
+  ),
+};
+
+export default function PrivateChefServicesPage() {
+  return (
+    <>
+      <Navigation />
+      <main>
+        {/* Hero Section */}
+        <section className="relative h-[70vh] min-h-[500px] flex items-center justify-center overflow-hidden">
+          <motion.div
+            variants={fadeIn}
+            initial="hidden"
+            animate="visible"
+            className="absolute inset-0 z-0"
+          >
+            <Image
+              src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=1920&q=80"
+              alt="Private Chef Services in Saint-Martin"
+              fill
+              className="object-cover"
+              priority
+            />
+            <div className="absolute inset-0 bg-gradient-to-b from-[#0C0A09]/70 via-[#0C0A09]/50 to-[#0C0A09]/90" />
+          </motion.div>
+
+          <div className="container relative z-10 text-center">
+            <motion.div
+              variants={heroTextContainer}
+              initial="hidden"
+              animate="visible"
+              className="max-w-4xl mx-auto"
+            >
+              <motion.div
+                variants={heroTextItem}
+                className="flex items-center justify-center gap-4 mb-8"
+              >
+                <span className="decorative-line" />
+                <span className="section-number">Private Chef Services</span>
+                <span className="decorative-line" />
+              </motion.div>
+
+              <motion.h1
+                variants={heroTextItem}
+                className="font-[family-name:var(--font-cormorant)] text-[clamp(2rem,6vw,4rem)] leading-[1.1] mb-6"
+              >
+                Exceptional Culinary Experiences in Saint-Martin
+              </motion.h1>
+
+              <motion.p
+                variants={heroTextItem}
+                className="text-[var(--color-text-secondary)] text-lg md:text-xl max-w-2xl mx-auto"
+              >
+                From intimate villa dinners to yacht cuisine and week-long
+                culinary journeys, discover our exclusive private chef services
+              </motion.p>
+            </motion.div>
+          </div>
+        </section>
+
+        {/* Services Overview */}
+        <section className="section bg-[var(--color-bg-primary)]">
+          <div className="container">
+            <motion.div
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-100px" }}
+              className="text-center mb-16 lg:mb-20"
+            >
+              <span className="section-number">01 - Our Services</span>
+              <h2 className="font-[family-name:var(--font-cormorant)] mt-4 mb-6">
+                Choose Your Experience
+              </h2>
+              <p className="text-[var(--color-text-secondary)] max-w-2xl mx-auto">
+                Chef Francis brings world-class gastronomy directly to you,
+                wherever you are in Saint-Martin
+              </p>
+            </motion.div>
+
+            <motion.div
+              variants={staggerContainer}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-100px" }}
+              className="grid grid-cols-1 lg:grid-cols-3 gap-8"
+            >
+              {services.map((service) => (
+                <motion.article
+                  key={service.id}
+                  variants={staggerItem}
+                  className="group"
+                >
+                  <Link href={service.link} className="block h-full">
+                    <motion.div
+                      initial="rest"
+                      whileHover="hover"
+                      animate="rest"
+                      className="card overflow-hidden h-full flex flex-col"
+                    >
+                      <div className="relative aspect-[4/3] overflow-hidden">
+                        <motion.div
+                          variants={imageHover}
+                          className="w-full h-full"
+                        >
+                          <Image
+                            src={service.image}
+                            alt={service.title}
+                            fill
+                            className="object-cover"
+                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                          />
+                        </motion.div>
+                        <div className="absolute inset-0 bg-gradient-to-t from-[#0C0A09]/80 via-transparent to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-500" />
+                        <div className="absolute top-4 left-4 w-14 h-14 flex items-center justify-center bg-[var(--color-bg-tertiary)]/80 backdrop-blur-sm text-[var(--color-accent)]">
+                          {icons[service.icon]}
+                        </div>
+                      </div>
+
+                      <div className="p-6 flex flex-col flex-grow">
+                        <span className="text-xs uppercase tracking-wider text-[var(--color-accent)] mb-2">
+                          {service.shortTitle}
+                        </span>
+                        <h3 className="font-[family-name:var(--font-cormorant)] text-2xl mb-3 group-hover:text-[var(--color-accent)] transition-colors">
+                          {service.title}
+                        </h3>
+                        <p className="text-[var(--color-text-secondary)] text-sm mb-6 flex-grow">
+                          {service.longDescription || service.description}
+                        </p>
+
+                        {service.features && (
+                          <ul className="space-y-2 mb-6">
+                            {service.features.slice(0, 3).map((feature, idx) => (
+                              <li
+                                key={idx}
+                                className="text-sm text-[var(--color-text-secondary)] flex items-start gap-2"
+                              >
+                                <svg
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  width="16"
+                                  height="16"
+                                  viewBox="0 0 24 24"
+                                  fill="none"
+                                  stroke="currentColor"
+                                  strokeWidth="2"
+                                  className="text-[var(--color-accent)] flex-shrink-0 mt-0.5"
+                                >
+                                  <polyline points="20 6 9 17 4 12" />
+                                </svg>
+                                {feature}
+                              </li>
+                            ))}
+                          </ul>
+                        )}
+
+                        <span className="text-sm text-[var(--color-accent)] flex items-center gap-2 mt-auto">
+                          Discover more
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="16"
+                            height="16"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            className="transition-transform group-hover:translate-x-1"
+                          >
+                            <line x1="5" y1="12" x2="19" y2="12" />
+                            <polyline points="12 5 19 12 12 19" />
+                          </svg>
+                        </span>
+                      </div>
+                    </motion.div>
+                  </Link>
+                </motion.article>
+              ))}
+            </motion.div>
+          </div>
+        </section>
+
+        {/* Why Choose Us */}
+        <section className="section bg-[var(--color-bg-secondary)]">
+          <div className="container">
+            <motion.div
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-100px" }}
+              className="text-center mb-16"
+            >
+              <span className="section-number">02 - Why Us</span>
+              <h2 className="font-[family-name:var(--font-cormorant)] mt-4 mb-6">
+                The Chef Francis Experience
+              </h2>
+            </motion.div>
+
+            <motion.div
+              variants={staggerContainer}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-100px" }}
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8"
+            >
+              {[
+                {
+                  title: "Personalized Menus",
+                  description:
+                    "Every menu is tailored to your preferences, dietary needs, and special requests",
+                  icon: (
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="28"
+                      height="28"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="1.5"
+                    >
+                      <path d="M12 20h9" />
+                      <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z" />
+                    </svg>
+                  ),
+                },
+                {
+                  title: "Fresh & Local",
+                  description:
+                    "We source the finest local ingredients and freshest seafood from Caribbean waters",
+                  icon: (
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="28"
+                      height="28"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="1.5"
+                    >
+                      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                    </svg>
+                  ),
+                },
+                {
+                  title: "Full Service",
+                  description:
+                    "From shopping and preparation to serving and cleanup - we handle everything",
+                  icon: (
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="28"
+                      height="28"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="1.5"
+                    >
+                      <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+                      <polyline points="22 4 12 14.01 9 11.01" />
+                    </svg>
+                  ),
+                },
+                {
+                  title: "Flexible Locations",
+                  description:
+                    "Villa, yacht, beach - we bring exceptional dining wherever you are",
+                  icon: (
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="28"
+                      height="28"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="1.5"
+                    >
+                      <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                      <circle cx="12" cy="10" r="3" />
+                    </svg>
+                  ),
+                },
+              ].map((item, idx) => (
+                <motion.div
+                  key={idx}
+                  variants={staggerItem}
+                  className="text-center"
+                >
+                  <div className="w-16 h-16 mx-auto mb-4 flex items-center justify-center bg-[var(--color-bg-tertiary)] text-[var(--color-accent)]">
+                    {item.icon}
+                  </div>
+                  <h3 className="font-[family-name:var(--font-cormorant)] text-xl mb-2">
+                    {item.title}
+                  </h3>
+                  <p className="text-[var(--color-text-secondary)] text-sm">
+                    {item.description}
+                  </p>
+                </motion.div>
+              ))}
+            </motion.div>
+          </div>
+        </section>
+
+        {/* CTA Section */}
+        <section className="section bg-[var(--color-bg-primary)]">
+          <div className="container">
+            <motion.div
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-100px" }}
+              className="max-w-3xl mx-auto text-center"
+            >
+              <h2 className="font-[family-name:var(--font-cormorant)] mb-6">
+                Ready to Book Your Experience?
+              </h2>
+              <p className="text-[var(--color-text-secondary)] mb-8">
+                Contact us to discuss your culinary vision. We will create a
+                personalized experience tailored to your preferences.
+              </p>
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <Link href="/#contact" className="btn btn-primary">
+                  <span>Contact Us</span>
+                </Link>
+                <a
+                  href="https://wa.me/590690000000"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn btn-outline"
+                >
+                  <span>WhatsApp</span>
+                </a>
+              </div>
+            </motion.div>
+          </div>
+        </section>
+      </main>
+      <Footer />
+    </>
+  );
+}
