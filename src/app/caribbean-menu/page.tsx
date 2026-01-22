@@ -88,9 +88,9 @@ export default function CaribbeanMenuPage() {
                 variants={heroTextItem}
                 className="flex items-center justify-center gap-4 mb-6"
               >
-                <span className="w-12 h-[1px] bg-[var(--color-accent)]" />
-                <span className="section-number">Menu {menu.number}</span>
-                <span className="w-12 h-[1px] bg-[var(--color-accent)]" />
+                <span className="w-16 h-[1px] bg-[var(--color-accent)]" />
+                <span className="text-[var(--color-accent)] text-xl">✦</span>
+                <span className="w-16 h-[1px] bg-[var(--color-accent)]" />
               </motion.div>
 
               <motion.h1
@@ -197,7 +197,7 @@ export default function CaribbeanMenuPage() {
                   <h2 className="font-[family-name:var(--font-cormorant)] text-3xl lg:text-4xl tracking-wide">
                     {menu.name}
                   </h2>
-                  <p className="text-[var(--color-accent)] text-xl mt-2 font-[family-name:var(--font-cormorant)]">
+                  <p className="text-[var(--color-accent)] text-2xl lg:text-3xl mt-3 font-[family-name:var(--font-cormorant)]">
                     — {menu.priceLabel.replace('$', '').replace(' / guest', '')}$ per guest —
                   </p>
                 </div>

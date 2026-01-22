@@ -88,9 +88,9 @@ export default function WeeklyMenuPage() {
                 variants={heroTextItem}
                 className="flex items-center justify-center gap-4 mb-6"
               >
-                <span className="w-12 h-[1px] bg-[var(--color-accent)]" />
-                <span className="section-number">Menu {menu.number}</span>
-                <span className="w-12 h-[1px] bg-[var(--color-accent)]" />
+                <span className="w-16 h-[1px] bg-[var(--color-accent)]" />
+                <span className="text-[var(--color-accent)] text-xl">✦</span>
+                <span className="w-16 h-[1px] bg-[var(--color-accent)]" />
               </motion.div>
 
               <motion.h1
