@@ -41,13 +41,17 @@ const SUSPICIOUS_PATTERNS = [
   /http[s]?:\/\/[^\s]+/gi, // Count URLs
 ];
 
+// Schema flexible pour accepter les deux types de formulaires
 const contactSchema = z.object({
   name: z.string().min(2),
   email: z.string().email(),
   phone: z.string().min(10),
-  date: z.string().min(1),
-  serviceType: z.string().min(1),
-  guests: z.string().min(1),
+  // Formulaire booking (homepage)
+  date: z.string().optional(),
+  serviceType: z.string().optional(),
+  guests: z.string().optional(),
+  // Formulaire contact simple (page contact)
+  subject: z.string().optional(),
   message: z.string().optional(),
   // Anti-spam fields
   _honeypot: z.string().optional(), // Should be empty
@@ -204,8 +208,12 @@ export async function POST(request: Request) {
       date: validatedData.date,
       serviceType: validatedData.serviceType,
       guests: validatedData.guests,
+      subject: validatedData.subject,
       message: validatedData.message,
     };
+
+    // Determine form type
+    const isBookingForm = !!(cleanData.date && cleanData.serviceType && cleanData.guests);
 
     // Log the data
     console.log("New contact form submission:", cleanData);
@@ -220,19 +228,34 @@ export async function POST(request: Request) {
       buffet: "Buffet / Réception",
     };
 
-    // Format date for display
-    const formattedDate = new Date(cleanData.date).toLocaleDateString("fr-FR", {
-      weekday: "long",
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-    });
+    const subjectLabels: Record<string, string> = {
+      villa: "Chef privé en villa",
+      yacht: "Chef privé à bord",
+      week: "Forfait semaine",
+      event: "Événement / Traiteur",
+      other: "Autre demande",
+    };
+
+    // Format date for display (only for booking form)
+    const formattedDate = cleanData.date
+      ? new Date(cleanData.date).toLocaleDateString("fr-FR", {
+          weekday: "long",
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+        })
+      : null;
+
+    // Build email subject based on form type
+    const emailSubject = isBookingForm
+      ? `🍽️ Nouvelle réservation — ${cleanData.name} | ${serviceTypeLabels[cleanData.serviceType!] || cleanData.serviceType} | ${cleanData.guests} pers.`
+      : `📩 Nouveau message — ${cleanData.name} | ${subjectLabels[cleanData.subject!] || cleanData.subject}`;
 
     const { error } = await resend.emails.send({
       from: "SXM Private Chef <onboarding@resend.dev>", // Change to your verified domain
       to: "sxmprivatechef@gmail.com",
       replyTo: cleanData.email,
-      subject: `🍽️ Nouvelle demande — ${cleanData.name} | ${serviceTypeLabels[cleanData.serviceType] || cleanData.serviceType} | ${cleanData.guests} pers.`,
+      subject: emailSubject,
       html: `
 <!DOCTYPE html>
 <html>
@@ -262,7 +285,10 @@ export async function POST(request: Request) {
           <tr>
             <td style="background-color: #D4A574; padding: 15px 40px; text-align: center;">
               <p style="margin: 0; color: #0C0A09; font-size: 14px; font-weight: 600;">
-                📅 ${formattedDate} • ${cleanData.guests} convives • ${serviceTypeLabels[cleanData.serviceType] || cleanData.serviceType}
+                ${isBookingForm
+                  ? `📅 ${formattedDate} • ${cleanData.guests} convives • ${serviceTypeLabels[cleanData.serviceType!] || cleanData.serviceType}`
+                  : `📩 ${subjectLabels[cleanData.subject!] || cleanData.subject}`
+                }
               </p>
             </td>
           </tr>
@@ -295,8 +321,9 @@ export async function POST(request: Request) {
                 </tr>
               </table>
 
+              ${isBookingForm ? `
               <h2 style="margin: 35px 0 25px 0; color: #0C0A09; font-size: 18px; font-weight: 600; border-bottom: 2px solid #D4A574; padding-bottom: 10px;">
-                🍽️ Détails de la demande
+                🍽️ Détails de la réservation
               </h2>
 
               <table width="100%" cellpadding="0" cellspacing="0" style="background-color: #FAFAF9; border-radius: 8px; padding: 20px;">
@@ -310,7 +337,7 @@ export async function POST(request: Request) {
                         </td>
                         <td width="50%" style="padding: 8px 0;">
                           <span style="color: #888; font-size: 11px; text-transform: uppercase;">Type de prestation</span><br>
-                          <span style="color: #0C0A09; font-size: 15px; font-weight: 500;">${serviceTypeLabels[cleanData.serviceType] || cleanData.serviceType}</span>
+                          <span style="color: #0C0A09; font-size: 15px; font-weight: 500;">${serviceTypeLabels[cleanData.serviceType!] || cleanData.serviceType}</span>
                         </td>
                       </tr>
                       <tr>
@@ -323,6 +350,19 @@ export async function POST(request: Request) {
                   </td>
                 </tr>
               </table>
+              ` : `
+              <h2 style="margin: 35px 0 25px 0; color: #0C0A09; font-size: 18px; font-weight: 600; border-bottom: 2px solid #D4A574; padding-bottom: 10px;">
+                📋 Objet de la demande
+              </h2>
+
+              <table width="100%" cellpadding="0" cellspacing="0" style="background-color: #FAFAF9; border-radius: 8px;">
+                <tr>
+                  <td style="padding: 20px;">
+                    <span style="color: #0C0A09; font-size: 15px; font-weight: 500;">${subjectLabels[cleanData.subject!] || cleanData.subject}</span>
+                  </td>
+                </tr>
+              </table>
+              `}
 
               ${cleanData.message ? `
                 <h2 style="margin: 35px 0 20px 0; color: #0C0A09; font-size: 18px; font-weight: 600; border-bottom: 2px solid #D4A574; padding-bottom: 10px;">
