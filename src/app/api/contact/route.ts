@@ -225,10 +225,28 @@ export async function POST(request: Request) {
     const resend = new Resend(process.env.RESEND_API_KEY);
 
     const serviceTypeLabels: Record<string, string> = {
+      // Booking form types
       villa: "Villa privée",
       yacht: "Yacht / Bateau",
       event: "Événement",
       buffet: "Buffet / Réception",
+      // Menu pages
+      "surf-turf-menu": "Menu Surf & Turf",
+      "bourgogne-menu": "Menu Bourguignon",
+      "caribbean-menu": "Menu Caribéen",
+      "mediterranean-menu": "Menu Méditerranéen",
+      "gourmet-menu": "Menu Gastronomique",
+      "weekly-menu": "Menu Semaine",
+      "grill-menu": "Menu Grill",
+      // Service pages
+      "breakfast-brunch": "Breakfast & Brunch",
+      "buffet-patisserie": "Buffet Pâtisserie",
+      "gourmet-platters": "Plateaux Gourmands",
+      "salads-tapas-buffet": "Salades, Tapas & Buffet",
+      "wine": "Sélection Vins",
+      "chefs": "Page Chefs",
+      "private-chef-services": "Services Chef Privé",
+      "book-your-chef-in-saint-martin": "Réserver un Chef",
     };
 
     const subjectLabels: Record<string, string> = {
@@ -250,9 +268,10 @@ export async function POST(request: Request) {
       : null;
 
     // Build email subject based on form type
+    const pageOrigin = cleanData.serviceType ? serviceTypeLabels[cleanData.serviceType] || cleanData.serviceType : null;
     const emailSubject = isBookingForm
       ? `🍽️ Nouvelle réservation — ${cleanData.name} | ${serviceTypeLabels[cleanData.serviceType!] || cleanData.serviceType} | ${cleanData.guests} pers.`
-      : `📩 Nouveau message — ${cleanData.name} | ${subjectLabels[cleanData.subject!] || cleanData.subject}`;
+      : `📩 Nouveau message — ${cleanData.name} | ${subjectLabels[cleanData.subject!] || cleanData.subject}${pageOrigin ? ` | ${pageOrigin}` : ''}`;
 
     const { error } = await resend.emails.send({
       from: "SXM Private Chef <contact@sxmprivatechef.com>",
@@ -290,7 +309,7 @@ export async function POST(request: Request) {
               <p style="margin: 0; color: #0C0A09; font-size: 14px; font-weight: 600;">
                 ${isBookingForm
                   ? `📅 ${formattedDate} • ${cleanData.guests} convives • ${serviceTypeLabels[cleanData.serviceType!] || cleanData.serviceType}`
-                  : `📩 ${subjectLabels[cleanData.subject!] || cleanData.subject}`
+                  : `📩 ${subjectLabels[cleanData.subject!] || cleanData.subject}${cleanData.serviceType ? ` • via ${serviceTypeLabels[cleanData.serviceType] || cleanData.serviceType}` : ''}`
                 }
               </p>
             </td>
