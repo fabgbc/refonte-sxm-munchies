@@ -99,7 +99,7 @@ export default function PrivateChefServicesPage() {
       <Navigation />
       <main>
         {/* Hero Section */}
-        <section className="relative h-[70vh] min-h-[500px] flex items-center justify-center overflow-hidden vignette">
+        <section className="relative min-h-[70vh] flex items-center justify-center pt-24 pb-16 lg:pt-32 lg:pb-24 overflow-hidden vignette">
           <motion.div
             variants={fadeIn}
             initial="hidden"
