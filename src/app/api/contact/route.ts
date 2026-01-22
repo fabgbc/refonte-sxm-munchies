@@ -182,9 +182,11 @@ export async function POST(request: Request) {
     }
 
     const body = await request.json();
+    console.log("Received body:", JSON.stringify(body, null, 2));
 
     // Validate the data
     const validatedData = contactSchema.parse(body);
+    console.log("Validated data:", JSON.stringify(validatedData, null, 2));
 
     // Spam check
     const spamCheck = isSpam(validatedData);
@@ -219,6 +221,7 @@ export async function POST(request: Request) {
     console.log("New contact form submission:", cleanData);
 
     // Send email via Resend
+    console.log("RESEND_API_KEY exists:", !!process.env.RESEND_API_KEY);
     const resend = new Resend(process.env.RESEND_API_KEY);
 
     const serviceTypeLabels: Record<string, string> = {
@@ -252,7 +255,7 @@ export async function POST(request: Request) {
       : `📩 Nouveau message — ${cleanData.name} | ${subjectLabels[cleanData.subject!] || cleanData.subject}`;
 
     const { error } = await resend.emails.send({
-      from: "SXM Private Chef <onboarding@resend.dev>", // Change to your verified domain
+      from: "SXM Private Chef <contact@sxmprivatechef.com>",
       to: "sxmprivatechef@gmail.com",
       replyTo: cleanData.email,
       subject: emailSubject,
@@ -422,9 +425,9 @@ export async function POST(request: Request) {
     });
 
     if (error) {
-      console.error("Error sending email:", error);
+      console.error("Resend error:", JSON.stringify(error, null, 2));
       return NextResponse.json(
-        { message: "Erreur lors de l'envoi de l'email" },
+        { message: "Erreur lors de l'envoi de l'email", error: error.message },
         { status: 500 }
       );
     }

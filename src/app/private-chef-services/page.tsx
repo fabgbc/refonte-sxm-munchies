@@ -677,7 +677,7 @@ export default function PrivateChefServicesPage() {
                 <form onSubmit={handleSubmit} className="space-y-6">
                   <input type="text" placeholder="Your name" value={formData.name} onChange={(e) => setFormData({ ...formData, name: e.target.value })} required className="form-input" />
                   <input type="email" placeholder="Your email" value={formData.email} onChange={(e) => setFormData({ ...formData, email: e.target.value })} required className="form-input" />
-                  <input type="tel" placeholder="Your phone" value={formData.phone} onChange={(e) => setFormData({ ...formData, phone: e.target.value })} className="form-input" />
+                  <input type="tel" placeholder="Your phone" value={formData.phone} onChange={(e) => setFormData({ ...formData, phone: e.target.value })} required className="form-input" />
                   <input type="text" placeholder="Subject" value={formData.subject} onChange={(e) => setFormData({ ...formData, subject: e.target.value })} className="form-input" />
                   <textarea placeholder="Your message (optional)" value={formData.message} onChange={(e) => setFormData({ ...formData, message: e.target.value })} rows={4} className="form-input resize-none" />
                   <button type="submit" disabled={isSubmitting} className="btn btn-primary w-full btn-shine">{isSubmitting ? "Sending..." : "SUBMIT"}</button>
@@ -771,30 +771,6 @@ export default function PrivateChefServicesPage() {
               </motion.a>
             </motion.div>
 
-            {/* Contact Form with corner accents */}
-            <motion.div
-              variants={fadeUp}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: "-100px" }}
-              className="max-w-xl mx-auto bg-[var(--color-bg-tertiary)] border border-[var(--color-accent-light)] p-8 lg:p-12 relative"
-            >
-              {/* Corner accents */}
-              <div className="absolute -top-2 -left-2 w-6 h-6 border-t-2 border-l-2 border-[var(--color-accent)]" />
-              <div className="absolute -top-2 -right-2 w-6 h-6 border-t-2 border-r-2 border-[var(--color-accent)]" />
-              <div className="absolute -bottom-2 -left-2 w-6 h-6 border-b-2 border-l-2 border-[var(--color-accent)]" />
-              <div className="absolute -bottom-2 -right-2 w-6 h-6 border-b-2 border-r-2 border-[var(--color-accent)]" />
-
-              <h3 className="font-[family-name:var(--font-cormorant)] text-2xl text-center mb-8">Contact Us</h3>
-              <div className="space-y-6">
-                <input type="text" placeholder="Your name" className="form-input" />
-                <input type="email" placeholder="Your email" className="form-input" />
-                <input type="tel" placeholder="Your phone" className="form-input" />
-                <input type="text" placeholder="Subject" className="form-input" />
-                <textarea placeholder="Your message (optional)" rows={4} className="form-input resize-none" />
-                <button type="button" className="btn btn-primary w-full btn-shine">SUBMIT</button>
-              </div>
-            </motion.div>
           </div>
         </section>
       </main>

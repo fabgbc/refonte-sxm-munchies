@@ -537,6 +537,7 @@ export default function GrillMenuPage() {
                       placeholder="Your phone"
                       value={formData.phone}
                       onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                      required
                       className="form-input"
                     />
                     <input
