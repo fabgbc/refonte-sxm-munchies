@@ -50,19 +50,19 @@ export const menus: Menu[] = [
     courses: [
       {
         category: "Amuse-bouche",
-        items: ["As an amuse-bouche"],
+        items: ["Chilled gazpacho shot"],
       },
       {
         category: "Starter",
-        items: ["With crisp salad and green curry dressing"],
+        items: ["Wahoo gravlax with crisp salad and green curry dressing"],
       },
       {
         category: "Main Course",
-        items: ["Bisque sauce, green asparagus and polenta"],
+        items: ["Lobster tail and beef tenderloin, bisque sauce, green asparagus and polenta"],
       },
       {
         category: "Dessert",
-        items: ["Served with a spiced infused rum"],
+        items: ["Mango and passion fruit pavlova, served with a spiced infused rum"],
       },
     ],
     note: "This menu is customizable based on dietary preferences or restrictions. Vegetarian alternatives and adjustments are available upon request.",
@@ -70,7 +70,7 @@ export const menus: Menu[] = [
   {
     id: 3,
     number: "03",
-    name: "Bourguignon Trails Menu",
+    name: "Burgundy Trails Menu",
     slug: "bourgogne-menu",
     description:
       "A journey through the rich traditions of Burgundy, crafted to surprise and delight even the most refined palates.",
@@ -80,23 +80,23 @@ export const menus: Menu[] = [
     courses: [
       {
         category: "First Course",
-        items: ["Creamy Chardonnay sauce"],
+        items: ["Snail casserole in puff pastry, creamy Chardonnay sauce"],
       },
       {
         category: "Second Course",
-        items: ["Œuf en meurette"],
+        items: ["Poached egg in red wine sauce (Œuf en meurette)"],
       },
       {
         category: "Third Course",
-        items: ["Classic Burgundy preparation"],
+        items: ["Chicken ballotine with foie gras"],
       },
       {
         category: "Interlude",
-        items: ["With blackcurrant sorbet"],
+        items: ["Frozen marc de Bourgogne granita"],
       },
       {
         category: "Dessert",
-        items: ["Traditional French dessert"],
+        items: ["Red wine–poached pear with blackcurrant sorbet"],
       },
     ],
     note: "This menu is customizable based on dietary preferences or restrictions. Vegetarian alternatives and adjustments are available upon request.",
@@ -108,28 +108,38 @@ export const menus: Menu[] = [
     slug: "caribbean-menu",
     description:
       "A journey through Caribbean flavors, designed to surprise and delight even the most refined palates.",
-    price: 95,
-    priceLabel: "$95 / guest",
+    price: 90,
+    priceLabel: "$90 / guest",
     includes: "Includes starter, main course, dessert and your choice of side.",
     courses: [
       {
         category: "Starter",
         items: [
-          "With sweet & spicy mango dip",
-          "With ginger-lime dressing",
+          "Shrimp and pineapple salad with ginger-lime dressing",
+          "Coconut-breaded chicken with sweet & spicy mango dip",
         ],
       },
       {
         category: "Main Course",
-        items: ["Caribbean-style preparation"],
+        items: [
+          "Caramelized braised pork cheek",
+          "Mahi-mahi with passion fruit sauce",
+        ],
       },
       {
-        category: "Side Dishes",
-        items: ["Choice of one"],
+        category: "Side Dishes (choice of one)",
+        items: [
+          "Creole rice",
+          "Gratin of giromon (Caribbean squash)",
+          "Roasted sweet potato",
+        ],
       },
       {
         category: "Dessert",
-        items: ["Tropical dessert"],
+        items: [
+          "Mango cheesecake",
+          "Guava flan",
+        ],
       },
     ],
     note: "This menu is customizable based on dietary preferences or restrictions. Vegetarian alternatives and adjustments are available upon request.",
@@ -143,22 +153,28 @@ export const menus: Menu[] = [
       "Summer cuisine with Provençal flavors — travel the Mediterranean without leaving your villa.",
     price: 90,
     priceLabel: "$90 / guest",
-    includes: "Includes starter, main course, dessert and your choice of side.",
+    includes: "Includes starter, main course and dessert.",
     courses: [
       {
         category: "Starter",
         items: [
-          "With fresh burrata and tomato salad",
-          "Parmesan and parsley-garlic seasoning",
+          "Flaked cod with artichoke, parmesan and parsley-garlic seasoning",
+          "Red pesto focaccia with fresh burrata and tomato salad",
         ],
       },
       {
         category: "Main Course",
-        items: ["With Provençal sauce"],
+        items: [
+          "Lamb confit moussaka",
+          "Stuffed calamari tube with Provençal sauce",
+        ],
       },
       {
         category: "Dessert",
-        items: ["Mediterranean-inspired dessert"],
+        items: [
+          "Frozen nougat",
+          "Tiramisu",
+        ],
       },
     ],
     note: "This menu can be adapted based on dietary restrictions or personal preferences. Vegetarian alternatives are available upon request.",

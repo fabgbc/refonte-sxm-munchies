@@ -174,72 +174,81 @@ export default function CaribbeanMenuPage() {
                 </motion.div>
               )}
 
-              {/* Section Title */}
-              <motion.div variants={staggerItem} className="text-center mb-12">
-                <span className="section-number">Selection</span>
-                <h2 className="font-[family-name:var(--font-cormorant)] mt-4">Our Caribbean Courses</h2>
-              </motion.div>
+              {/* Elegant Menu Card */}
+              <motion.div
+                variants={staggerItem}
+                className="relative bg-[var(--color-bg-secondary)] border border-[var(--color-accent)]/20 p-8 lg:p-16"
+              >
+                {/* Decorative corners */}
+                <div className="absolute top-4 left-4 w-8 h-8 border-t-2 border-l-2 border-[var(--color-accent)]" />
+                <div className="absolute top-4 right-4 w-8 h-8 border-t-2 border-r-2 border-[var(--color-accent)]" />
+                <div className="absolute bottom-4 left-4 w-8 h-8 border-b-2 border-l-2 border-[var(--color-accent)]" />
+                <div className="absolute bottom-4 right-4 w-8 h-8 border-b-2 border-r-2 border-[var(--color-accent)]" />
 
-              {/* Courses Grid */}
-              {menu.courses && (
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20">
-                  {menu.courses.map((course, index) => (
-                    <motion.div key={index} variants={staggerItem} className="relative">
-                      <div className="flex items-center gap-4 mb-10">
-                        {/* Caribbean-themed icons based on course type */}
-                        {course.category === "Starter" && (
-                          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" strokeWidth="1.5">
-                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z" />
-                            <path d="M12 6v6l4 2" />
-                            <path d="M8 14c1 2 2.5 3 4 3s3-1 4-3" />
-                          </svg>
-                        )}
-                        {course.category === "Main Course" && (
-                          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" strokeWidth="1.5">
-                            <path d="M3 12h18" />
-                            <path d="M12 3c-4.97 0-9 3.13-9 7h18c0-3.87-4.03-7-9-7z" />
-                            <path d="M5 12v6c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2v-6" />
-                            <path d="M12 3v-1" />
-                          </svg>
-                        )}
-                        {course.category === "Side Dishes" && (
-                          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" strokeWidth="1.5">
-                            <path d="M12 2L2 7l10 5 10-5-10-5z" />
-                            <path d="M2 17l10 5 10-5" />
-                            <path d="M2 12l10 5 10-5" />
-                          </svg>
-                        )}
-                        {course.category === "Dessert" && (
-                          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" strokeWidth="1.5">
-                            <path d="M12 2C8 2 5 5 5 9c0 2.5 1.5 4.5 3.5 5.5L7 22h10l-1.5-7.5C17.5 13.5 19 11.5 19 9c0-4-3-7-7-7z" />
-                            <path d="M12 2v3" />
-                            <path d="M9 5l3-3 3 3" />
-                          </svg>
-                        )}
-                        <h3 className="text-[var(--color-accent)] text-2xl font-[family-name:var(--font-cormorant)]">
+                {/* Menu Header */}
+                <div className="text-center mb-12">
+                  <div className="flex items-center justify-center gap-4 mb-4">
+                    <span className="w-16 h-[1px] bg-gradient-to-r from-transparent to-[var(--color-accent)]" />
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" strokeWidth="1">
+                      <path d="M12 2l2 7h7l-5.5 4 2 7-5.5-4-5.5 4 2-7L3 9h7z" />
+                    </svg>
+                    <span className="w-16 h-[1px] bg-gradient-to-l from-transparent to-[var(--color-accent)]" />
+                  </div>
+                  <h2 className="font-[family-name:var(--font-cormorant)] text-3xl lg:text-4xl tracking-wide">
+                    {menu.name}
+                  </h2>
+                  <p className="text-[var(--color-accent)] text-xl mt-2 font-[family-name:var(--font-cormorant)]">
+                    — {menu.priceLabel.replace('$', '').replace(' / guest', '')}$ per guest —
+                  </p>
+                </div>
+
+                {/* Courses */}
+                {menu.courses && (
+                  <div className="space-y-10 max-w-2xl mx-auto">
+                    {menu.courses.map((course, index) => (
+                      <div key={index} className="text-center">
+                        {/* Category Title */}
+                        <h3 className="text-[var(--color-accent)] text-lg uppercase tracking-[0.3em] font-medium mb-6">
                           {course.category}
                         </h3>
-                      </div>
-                      <ul className="space-y-6">
-                        {course.items.map((item, itemIndex) => (
-                          <li
-                            key={itemIndex}
-                            className="group flex justify-between items-center gap-4 pb-4 border-b border-[var(--color-accent-light)]/30 hover:border-[var(--color-accent)] transition-colors"
-                          >
-                            <span className="text-[var(--color-text-primary)] group-hover:text-[var(--color-accent)] transition-colors">
+
+                        {/* Items */}
+                        <div className="space-y-3">
+                          {course.items.map((item, itemIndex) => (
+                            <p
+                              key={itemIndex}
+                              className="text-[var(--color-text-primary)] font-[family-name:var(--font-cormorant)] text-lg lg:text-xl leading-relaxed"
+                            >
                               {item}
-                            </span>
-                            <span className="flex-1 border-b border-dotted border-[var(--color-accent-light)]/50 mx-4 min-w-[40px]" />
-                            <span className="text-[var(--color-accent)] font-[family-name:var(--font-cormorant)] text-xl italic whitespace-nowrap">
-                              Included
-                            </span>
-                          </li>
-                        ))}
-                      </ul>
-                    </motion.div>
-                  ))}
+                            </p>
+                          ))}
+                        </div>
+
+                        {/* Decorative separator (except for last item) */}
+                        {menu.courses && index < menu.courses.length - 1 && (
+                          <div className="flex items-center justify-center gap-3 mt-10">
+                            <span className="w-8 h-[1px] bg-[var(--color-accent)]/40" />
+                            <svg width="8" height="8" viewBox="0 0 8 8" fill="var(--color-accent)" opacity="0.4">
+                              <rect x="2" y="2" width="4" height="4" transform="rotate(45 4 4)" />
+                            </svg>
+                            <span className="w-8 h-[1px] bg-[var(--color-accent)]/40" />
+                          </div>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                )}
+
+                {/* Bottom ornament */}
+                <div className="flex items-center justify-center gap-4 mt-12">
+                  <span className="w-12 h-[1px] bg-gradient-to-r from-transparent to-[var(--color-accent)]" />
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" strokeWidth="1">
+                    <circle cx="12" cy="12" r="3" />
+                    <path d="M12 2v4M12 18v4M2 12h4M18 12h4" />
+                  </svg>
+                  <span className="w-12 h-[1px] bg-gradient-to-l from-transparent to-[var(--color-accent)]" />
                 </div>
-              )}
+              </motion.div>
             </motion.div>
           </div>
         </section>
