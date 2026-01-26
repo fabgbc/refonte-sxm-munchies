@@ -8,31 +8,31 @@ export const menus: Menu[] = [
     slug: "gourmet-menu",
     description:
       "A curated four-course dining experience designed to elevate your evening.",
-    price: 125,
-    priceLabel: "$125 / guest",
+    price: 145,
+    priceLabel: "$145 / guest",
     includes: "Includes 1 appetizer, 1 starter, 1 main course, and 1 dessert.",
     courses: [
       {
         category: "Appetizer",
-        items: ["Served with sesame crackers for a delicate start"],
+        items: ["Cold Asparagus served with sesame crackers"],
       },
       {
         category: "Starter",
         items: [
-          "Served with a mango tahini sauce",
-          "With pomegranate, coriander, and a sesame ginger dressing",
+          "Tuna Tartar served with pomegranate, coriander and sesame-ginger dressing",
+          "Foie gras Mango Gyoza served with mango tahini sauce",
         ],
       },
       {
         category: "Main Course",
         items: [
-          "Served with saffron risotto",
-          "Accompanied by Maxim's potatoes and baby vegetables",
+          "Beef tenderloin with truffle sauce, served with Maxim's potatoes and baby vegetables",
+          "Pan seared scallops with cognac, served with saffron risotto",
         ],
       },
       {
         category: "Dessert",
-        items: ["Sponge cake layered with locally made sorbet"],
+        items: ["Omelette Norvégienne (Baked Alaska) — sponge cake layered with locally made sorbet (various flavors available upon request)"],
       },
     ],
     note: "Menus can be adapted upon request to accommodate allergies or dietary preferences. Vegetarian or pescatarian variations are also possible.",
