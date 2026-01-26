@@ -22,11 +22,10 @@ export const services: Service[] = [
       "Transform your villa into a world-class restaurant without the crowds",
     ],
     pricing: [
-      { guests: "1-2 Guests", fee: "$175", note: "+ menu price" },
-      { guests: "3-4 Guests", fee: "$200", note: "+ menu price" },
-      { guests: "5-8 Guests", fee: "$350", note: "+ menu price" },
-      { guests: "9-12 Guests", fee: "$400", note: "+ menu price" },
-      { guests: "13+ Guests", fee: "$500", note: "+ menu price" },
+      { guests: "2 Guests", fee: "$175", note: "Chef only", feeAlt: "$250", noteAlt: "Chef + Waiter" },
+      { guests: "3-5 Guests", fee: "$250", note: "Chef only", feeAlt: "$350", noteAlt: "Chef + Waiter" },
+      { guests: "6-9 Guests", fee: "$400", note: "Chef + Waiter" },
+      { guests: "10-14 Guests", fee: "$500", note: "Chef + Waiter" },
     ],
   },
   {

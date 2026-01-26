@@ -509,7 +509,7 @@ export default function VillaServicePage() {
                 </div>
 
                 {/* Table Body */}
-                {villaService.pricing?.map((tier, idx) => (
+                {villaService.pricing?.map((tier: { guests: string; fee: string; note: string; feeAlt?: string; noteAlt?: string }, idx: number) => (
                   <motion.div
                     key={idx}
                     variants={staggerItem}
@@ -524,15 +524,25 @@ export default function VillaServicePage() {
                         {tier.guests}
                       </span>
                     </div>
-                    <div className="p-4 md:p-6 flex items-center justify-center border-x border-[var(--color-accent-light)]">
+                    <div className="p-4 md:p-6 flex flex-col items-center justify-center border-x border-[var(--color-accent-light)]">
                       <span className="font-[family-name:var(--font-cormorant)] text-2xl md:text-3xl text-[var(--color-accent)]">
                         {tier.fee}
                       </span>
+                      {tier.feeAlt && (
+                        <span className="font-[family-name:var(--font-cormorant)] text-lg md:text-xl text-[var(--color-text-secondary)] mt-1">
+                          or {tier.feeAlt}
+                        </span>
+                      )}
                     </div>
-                    <div className="p-4 md:p-6 flex items-center justify-center">
+                    <div className="p-4 md:p-6 flex flex-col items-center justify-center">
                       <span className="text-sm text-[var(--color-text-secondary)]">
                         {tier.note}
                       </span>
+                      {tier.noteAlt && (
+                        <span className="text-sm text-[var(--color-text-secondary)] mt-1">
+                          {tier.noteAlt}
+                        </span>
+                      )}
                     </div>
                   </motion.div>
                 ))}

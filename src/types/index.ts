@@ -44,6 +44,8 @@ export interface ServicePricing {
   guests: string;
   fee: string;
   note: string;
+  feeAlt?: string;
+  noteAlt?: string;
 }
 
 export interface ServiceFaq {
