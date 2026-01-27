@@ -267,44 +267,32 @@ export default function SaladsTapasBuffetPage() {
                 </h3>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div className="text-center p-6">
-                  <div className="w-12 h-12 mx-auto mb-4 flex items-center justify-center border border-[var(--color-accent)] rounded-full">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" strokeWidth="1.5">
-                      <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
-                      <circle cx="9" cy="7" r="4" />
-                      <path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" />
-                    </svg>
-                  </div>
-                  <h4 className="text-[var(--color-text-primary)] mb-2">Minimum Guests</h4>
-                  <p className="text-[var(--color-text-secondary)] text-sm">
-                    Available for groups of 10 or more
-                  </p>
-                </div>
-                <div className="text-center p-6">
-                  <div className="w-12 h-12 mx-auto mb-4 flex items-center justify-center border border-[var(--color-accent)] rounded-full">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" strokeWidth="1.5">
-                      <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.563-2.512 5.563-5.563C22 6.5 17.5 2 12 2z" />
-                    </svg>
-                  </div>
-                  <h4 className="text-[var(--color-text-primary)] mb-2">Fresh Ingredients</h4>
-                  <p className="text-[var(--color-text-secondary)] text-sm">
-                    Locally-sourced, prepared on the day
-                  </p>
-                </div>
-                <div className="text-center p-6">
-                  <div className="w-12 h-12 mx-auto mb-4 flex items-center justify-center border border-[var(--color-accent)] rounded-full">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" strokeWidth="1.5">
-                      <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
-                      <polyline points="22 4 12 14.01 9 11.01" />
-                    </svg>
-                  </div>
-                  <h4 className="text-[var(--color-text-primary)] mb-2">Dietary Options</h4>
-                  <p className="text-[var(--color-text-secondary)] text-sm">
-                    Vegetarian, vegan & gluten-free available
-                  </p>
-                </div>
-              </div>
+              <ul className="space-y-4 max-w-md mx-auto">
+                <li className="flex items-center gap-3 text-[var(--color-text-secondary)]">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" strokeWidth="2">
+                    <polyline points="20 6 9 17 4 12" />
+                  </svg>
+                  Minimum 10 guests for both salads and tapas
+                </li>
+                <li className="flex items-center gap-3 text-[var(--color-text-secondary)]">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" strokeWidth="2">
+                    <polyline points="20 6 9 17 4 12" />
+                  </svg>
+                  Orders must be confirmed 48h in advance
+                </li>
+                <li className="flex items-center gap-3 text-[var(--color-text-secondary)]">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" strokeWidth="2">
+                    <polyline points="20 6 9 17 4 12" />
+                  </svg>
+                  Delivery available for villas and yachts
+                </li>
+                <li className="flex items-center gap-3 text-[var(--color-text-secondary)]">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" strokeWidth="2">
+                    <polyline points="20 6 9 17 4 12" />
+                  </svg>
+                  Portions and variety tailored to your preferences
+                </li>
+              </ul>
             </motion.div>
           </div>
         </section>

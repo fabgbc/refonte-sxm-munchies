@@ -294,38 +294,43 @@ export const breakfastOptions = [
 ];
 
 export const gourmetPlatters = [
-  { name: "Cheese Platter", description: "A seasonal mix of soft and aged cheeses", pricePerPerson: true },
-  { name: "Crudités Platter", description: "Colorful, crunchy vegetables — served with dips", pricePerPerson: true },
-  { name: "Carpaccio Platter", description: "An assortment of fresh fish carpaccio", pricePerPerson: true },
-  { name: "Charcuterie Platter", description: "A classic charcuterie mix — perfect for sharing", pricePerPerson: true },
-  { name: "French Cold Cuts", description: "A French-style cold cut served with mayo", pricePerPerson: true },
-  { name: "Beef Tataki", description: "Lightly seared beef with basil, caper, balsamic", pricePerPerson: true },
+  { name: "Cheese Assortment", description: "A curated mix of soft and aged cheeses", pricePerPerson: true },
+  { name: "Raw Veggies Platter", description: "Colorful, crunchy vegetables — served with dips", pricePerPerson: true },
+  { name: "Sashimi Platter", description: "An assortment of fresh cuts prepared with precision", pricePerPerson: true },
+  { name: "Assortment of Deli Meats", description: "A classic charcuterie mix — perfect for sharing", pricePerPerson: true },
+  { name: "Roasted Beef with Gribiche Sauce", description: "A French-style cold cut served with creamy gribiche", pricePerPerson: true },
+  { name: "Beef Tataki with Wasabi Cream", description: "Lightly seared beef with bold, elegant flavors", pricePerPerson: true },
 ];
 
 export const saladOptions = [
-  { name: "Caesar Salad", description: "Tangy and satisfying, a crowd pleaser" },
-  { name: "Spicy Asian Salad", description: "Crispy, spicy and packed with flavor" },
-  { name: "Fresh Salad", description: "Choose your flavor — fresh and raw" },
-  { name: "Seafood Salad", description: "A balanced option with a seafood note" },
-  { name: "Tropical Salad", description: "Tropical, colorful and nutrient-rich" },
-  { name: "Provençal Salad", description: "Light, fresh and Provençal" },
-  { name: "Warm Salad", description: "Warm and comforting" },
-  { name: "Za'atar Salad", description: "A crunchy blend with za'atar tastes" },
+  { name: "Ginger Lime Chicken with Rice", description: "Fragrant and satisfying, a crowd-pleaser" },
+  { name: "Thai Beef Salad", description: "Tangy, spicy, and packed with flavor" },
+  { name: "Lobster & Citrus Salad / Green Curry Shrimp Salad", description: "Choose your favorite — both are fresh and flavorful" },
+  { name: "Squid & Potato Salad with Spicy Mayo", description: "Bold and surprising seafood twist" },
+  { name: "Mango Avocado Quinoa", description: "Tropical, colorful, and nutrient-rich" },
+  { name: "Mint Tabouleh", description: "Light, fresh, and herbaceous" },
+  { name: "Mild Spicy Lentil Salad", description: "Warm and comforting with a hint of spice" },
+  { name: "Caesar Salad", description: "A classic favorite with a creamy house dressing" },
 ];
 
 export const tapasOptions = [
-  { name: "Crostini Parmesan", description: "Mini toasted baguette with toppings" },
-  { name: "Mixed Grill Tapas", description: "Beef, chicken curry, shrimp sauce" },
-  { name: "Fish Tapas", description: "Cream Curry Salmon / Fish Greek style" },
+  { name: "Mini Salad Box", description: "Raw Veggies, Croutons, Parmesan" },
+  { name: "Rare Snacked Sesame Tuna", description: "Seared to perfection" },
+  { name: "Vegetarian Mini Club Sandwich", description: "Fresh and satisfying" },
+  { name: "Guacamole & Hummus Duo with Toasted Tortillas", description: "Perfect for sharing" },
+  { name: "Smoked Salmon or Lobster Mini Wraps", description: "Elegant and flavorful" },
+  { name: "Mini Skewers", description: "Beef teriyaki, chicken curry, shrimp sweet chili" },
+  { name: "Mini Burgers", description: "Green Curry Salmon / Foie Gras & Fig" },
+  { name: "Caramelized Pork Quesadillas", description: "Sweet and savory" },
 ];
 
 export const patisserieOptions = [
-  { name: "Bavarois", description: "Airy medallion Bavarois — a French classic" },
-  { name: "Fresh Fruit Platter", description: "Seasonal fruits, cut and served fresh" },
-  { name: "Mini Moelleux", description: "Mini chocolate moelleux, bite-sized dark chocolate" },
-  { name: "Almond Pistachio Bavarois", description: "Airy medallion — almond, pistachio" },
-  { name: "Brownies", description: "Soft, gooey and always satisfying" },
-  { name: "Caribbean Tart", description: "A decadent tart with Caribbean flavors" },
-  { name: "Dense Chocolate Cake", description: "Rich, dense and delightful" },
-  { name: "Tropical Mousse", description: "Light and tropical — a crowd favorite" },
+  { name: "Macarons (3 pieces)", description: "Ask for available flavors — a French classic" },
+  { name: "Fresh Fruit Cups", description: "Seasonal fruits, cut and served fresh" },
+  { name: "Cookies (4 pieces)", description: "White or dark chocolate chips, with dried fruits" },
+  { name: "Financier", description: "Ask for available flavors — almond, pistachio" },
+  { name: "Caramel Fudge Cake", description: "Soft, gooey and deeply satisfying" },
+  { name: "Mango Chocolate Cheesecake", description: "A decadent twist with Caribbean flavors" },
+  { name: "Pecan Brownie", description: "Rich, dense, and just the right crunch" },
+  { name: "Passion Fruit Cream Puffs", description: "Light and tropical — a crowd favorite" },
 ];
