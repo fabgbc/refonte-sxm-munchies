@@ -88,19 +88,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     // Buffets
     {
-      url: `${baseUrl}/buffet-patisserie`,
-      lastModified: currentDate,
-      changeFrequency: 'monthly',
-      priority: 0.7,
-    },
-    {
-      url: `${baseUrl}/salads-tapas-buffet`,
-      lastModified: currentDate,
-      changeFrequency: 'monthly',
-      priority: 0.7,
-    },
-    {
-      url: `${baseUrl}/gourmet-platters`,
+      url: `${baseUrl}/buffets`,
       lastModified: currentDate,
       changeFrequency: 'monthly',
       priority: 0.7,

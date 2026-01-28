@@ -418,7 +418,7 @@ export default function PrivateChefServicesPage() {
                 {
                   title: "Flexible Locations",
                   description:
-                    "Villa, yacht, beach - we bring exceptional dining wherever you are",
+                    "Villa or yacht — we bring exceptional dining wherever you are",
                   icon: (
                     <svg
                       xmlns="http://www.w3.org/2000/svg"

@@ -244,6 +244,8 @@ export async function POST(request: Request) {
       "gourmet-platters": "Plateaux Gourmands",
       "salads-tapas-buffet": "Salades, Tapas & Buffet",
       "wine": "Sélection Vins",
+      "buffets": "Page Buffets",
+      "floater-contact": "Floater Contact",
       "chefs": "Page Chefs",
       "private-chef-services": "Services Chef Privé",
       "book-your-chef-in-saint-martin": "Réserver un Chef",

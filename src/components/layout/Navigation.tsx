@@ -36,15 +36,7 @@ const navLinks = [
       { href: "/wine", label: "Our Wine Selection" },
     ],
   },
-  {
-    href: "#buffets",
-    label: "Buffet",
-    submenu: [
-      { href: "/buffet-patisserie", label: "Buffet Patisserie" },
-      { href: "/salads-tapas-buffet", label: "Salads & Tapas Buffet" },
-      { href: "/gourmet-platters", label: "Gourmet Platters" },
-    ],
-  },
+  { href: "/buffets", label: "Buffet" },
   { href: "/chefs", label: "The Chef" },
   { href: "/#testimonials", label: "Testimonials" },
 ];

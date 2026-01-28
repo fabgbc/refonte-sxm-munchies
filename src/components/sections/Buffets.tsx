@@ -14,20 +14,20 @@ const buffetOptions = [
   {
     title: "Gourmet Platters",
     description: "A refined selection of cold platters for sharing",
-    href: "/gourmet-platters",
-    price: "Min 4 guests",
+    href: "/buffets",
+    price: "On request",
   },
   {
     title: "Salads & Tapas",
     description: "Fresh, flavorful options perfect for private events",
-    href: "/salads-tapas-buffet",
-    price: "Min 10 guests",
+    href: "/buffets",
+    price: "On request",
   },
   {
     title: "Buffet Pâtisserie",
     description: "Sweet treats perfect for sharing with your guests",
-    href: "/buffet-patisserie",
-    price: "Min 12 guests",
+    href: "/buffets",
+    price: "On request",
   },
 ];
 

@@ -4,7 +4,7 @@ import "./globals.css";
 import SmoothScroll from "@/components/effects/SmoothScroll";
 import CustomCursor from "@/components/effects/CustomCursor";
 import GrainOverlay from "@/components/effects/GrainOverlay";
-import WhatsAppButton from "@/components/effects/WhatsAppButton";
+import ContactFloater from "@/components/effects/ContactFloater";
 import ScrollToTop from "@/components/effects/ScrollToTop";
 
 const cormorant = Cormorant_Garamond({
@@ -180,7 +180,7 @@ export default function RootLayout({
           {children}
           <CustomCursor />
           <GrainOverlay />
-          <WhatsAppButton />
+          <ContactFloater />
         </SmoothScroll>
       </body>
     </html>

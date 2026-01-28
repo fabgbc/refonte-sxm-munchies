@@ -20,10 +20,8 @@ const footerLinks = {
     { href: "/grill-menu", label: "Grill Menu" },
   ],
   buffets: [
+    { href: "/buffets", label: "Buffet & Catering" },
     { href: "/breakfast-brunch", label: "Breakfast & Brunch" },
-    { href: "/gourmet-platters", label: "Gourmet Platters" },
-    { href: "/salads-tapas-buffet", label: "Salads & Tapas" },
-    { href: "/buffet-patisserie", label: "Pâtisserie" },
   ],
 };
 
