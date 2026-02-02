@@ -70,7 +70,7 @@ export default function Partnership() {
             </ul>
 
             <a
-              href="http://jcbarcompany.com/"
+              href="https://jcbarcompany.com/"
               target="_blank"
               rel="noopener noreferrer"
               className="btn btn-primary"
