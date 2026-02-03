@@ -6,6 +6,7 @@ import CustomCursor from "@/components/effects/CustomCursor";
 import GrainOverlay from "@/components/effects/GrainOverlay";
 import ContactFloater from "@/components/effects/ContactFloater";
 import ScrollToTop from "@/components/effects/ScrollToTop";
+import { contactInfo, siteInfo } from "@/data/contact";
 
 const cormorant = Cormorant_Garamond({
   variable: "--font-cormorant",
@@ -22,7 +23,7 @@ const inter = Inter({
   display: "swap",
 });
 
-const baseUrl = 'https://sxmprivatechef.com';
+const baseUrl = siteInfo.url;
 
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),
@@ -106,23 +107,23 @@ export default function RootLayout({
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "FoodService",
-              name: "SXM Private Chef",
+              name: siteInfo.name,
               description:
                 "Exclusive private chef services in Saint-Martin. Gourmet dining at your villa, yacht, or private event.",
-              url: "https://sxmprivatechef.com",
-              telephone: "+590 690 35 77 75",
-              email: "contact@sxmprivatechef.com",
+              url: siteInfo.url,
+              telephone: contactInfo.phone,
+              email: contactInfo.emailFrom,
               address: {
                 "@type": "PostalAddress",
-                addressLocality: "Saint-Martin",
-                addressRegion: "Caribbean",
-                addressCountry: "MF",
+                addressLocality: contactInfo.address.locality,
+                addressRegion: contactInfo.address.region,
+                addressCountry: contactInfo.address.country,
               },
               areaServed: {
                 "@type": "Place",
                 name: "Saint-Martin / Sint Maarten",
               },
-              priceRange: "$$$",
+              priceRange: siteInfo.priceRange,
               aggregateRating: {
                 "@type": "AggregateRating",
                 ratingValue: "5",

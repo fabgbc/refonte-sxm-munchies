@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { slideInLeft, slideInRight } from "@/lib/animations";
+import { contactInfo } from "@/data/contact";
 
 const contactSchema = z.object({
   name: z.string().min(2, "Le nom doit contenir au moins 2 caractères"),
@@ -22,6 +23,7 @@ type ContactFormData = z.infer<typeof contactSchema>;
 export default function Contact() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [isError, setIsError] = useState(false);
   const [formLoadTime, setFormLoadTime] = useState<number>(Date.now());
   const [honeypot, setHoneypot] = useState("");
 
@@ -41,6 +43,7 @@ export default function Contact() {
 
   const onSubmit = async (data: ContactFormData) => {
     setIsSubmitting(true);
+    setIsError(false);
     try {
       const response = await fetch("/api/contact", {
         method: "POST",
@@ -58,9 +61,14 @@ export default function Contact() {
         setHoneypot("");
         setFormLoadTime(Date.now());
         setTimeout(() => setIsSuccess(false), 5000);
+      } else {
+        setIsError(true);
+        setTimeout(() => setIsError(false), 5000);
       }
     } catch (error) {
       console.error("Error submitting form:", error);
+      setIsError(true);
+      setTimeout(() => setIsError(false), 5000);
     } finally {
       setIsSubmitting(false);
     }
@@ -108,10 +116,10 @@ export default function Contact() {
                 <div>
                   <h4 className="font-medium mb-1">Phone</h4>
                   <a
-                    href="tel:+590690535739"
+                    href={`tel:${contactInfo.phoneClean}`}
                     className="text-[var(--color-text-secondary)] hover:text-[var(--color-accent)] transition-colors"
                   >
-                    +590 690 53 57 39
+                    {contactInfo.phone}
                   </a>
                 </div>
               </div>
@@ -135,7 +143,7 @@ export default function Contact() {
                 <div>
                   <h4 className="font-medium mb-1">WhatsApp</h4>
                   <a
-                    href="https://wa.me/590690535739"
+                    href={contactInfo.whatsappUrl}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-[var(--color-text-secondary)] hover:text-[var(--color-accent)] transition-colors"
@@ -165,10 +173,10 @@ export default function Contact() {
                 <div>
                   <h4 className="font-medium mb-1">Email</h4>
                   <a
-                    href="mailto:sxmprivatechef@gmail.com"
+                    href={`mailto:${contactInfo.email}`}
                     className="text-[var(--color-text-secondary)] hover:text-[var(--color-accent)] transition-colors"
                   >
-                    sxmprivatechef@gmail.com
+                    {contactInfo.email}
                   </a>
                 </div>
               </div>
@@ -381,6 +389,18 @@ export default function Contact() {
                 >
                   Merci ! Votre demande a bien été envoyée. Nous vous
                   recontactons très rapidement.
+                </motion.div>
+              )}
+
+              {/* Error Message */}
+              {isError && (
+                <motion.div
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="p-4 bg-red-500/10 border border-red-500/30 text-red-400 text-center"
+                >
+                  Une erreur est survenue. Veuillez réessayer ou nous contacter
+                  directement par téléphone.
                 </motion.div>
               )}
             </form>

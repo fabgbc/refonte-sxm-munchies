@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { staggerContainer, staggerItem, fadeUp } from "@/lib/animations";
+import { contactInfo } from "@/data/contact";
 
 const footerLinks = {
   services: [
@@ -48,7 +49,7 @@ const socialLinks = [
     ),
   },
   {
-    href: "https://wa.me/590690535739",
+    href: contactInfo.whatsappUrl,
     label: "WhatsApp",
     icon: (
       <svg
@@ -100,21 +101,21 @@ export default function Footer() {
             <div className="space-y-2 text-sm text-[var(--color-text-secondary)]">
               <p>
                 <a
-                  href="tel:+590690535739"
+                  href={`tel:${contactInfo.phoneClean}`}
                   className="hover:text-[var(--color-accent)] transition-colors"
                 >
-                  +590 690 53 57 39
+                  {contactInfo.phone}
                 </a>
               </p>
               <p>
                 <a
-                  href="mailto:sxmprivatechef@gmail.com"
+                  href={`mailto:${contactInfo.email}`}
                   className="hover:text-[var(--color-accent)] transition-colors"
                 >
-                  sxmprivatechef@gmail.com
+                  {contactInfo.email}
                 </a>
               </p>
-              <p>Saint-Martin / Sint Maarten</p>
+              <p>{contactInfo.address.locality} / Sint Maarten</p>
             </div>
 
             {/* Social Links */}

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
@@ -18,7 +18,7 @@ const slides = [
   },
   {
     id: 2,
-    image: "/images/home-page-private-cgef-boat.jpg",
+    image: "/images/home-page-private-chef-boat.jpg",
     label: "Yacht Catering Experience",
     title: "Chef Onboard a Motor Yacht",
     subtitle: "Saint-Martin · Up to 8 Guests",
@@ -39,6 +39,7 @@ const slides = [
 export default function Hero() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
+  const resumeTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const nextSlide = useCallback(() => {
     setCurrentSlide((prev) => (prev + 1) % slides.length);
@@ -47,9 +48,22 @@ export default function Hero() {
   const goToSlide = (index: number) => {
     setCurrentSlide(index);
     setIsAutoPlaying(false);
+    // Clear any existing timeout
+    if (resumeTimeoutRef.current) {
+      clearTimeout(resumeTimeoutRef.current);
+    }
     // Resume auto-play after 10 seconds
-    setTimeout(() => setIsAutoPlaying(true), 10000);
+    resumeTimeoutRef.current = setTimeout(() => setIsAutoPlaying(true), 10000);
   };
+
+  // Cleanup timeout on unmount
+  useEffect(() => {
+    return () => {
+      if (resumeTimeoutRef.current) {
+        clearTimeout(resumeTimeoutRef.current);
+      }
+    };
+  }, []);
 
   useEffect(() => {
     if (!isAutoPlaying) return;

@@ -2,11 +2,17 @@ import { NextResponse } from "next/server";
 import { z, ZodError } from "zod";
 import { headers } from "next/headers";
 import { Resend } from "resend";
+import { contactInfo, siteInfo } from "@/data/contact";
 
-// Rate limiting store (in production, use Redis)
+// Rate limiting store
+// NOTE: In serverless environments (Vercel), each instance has its own memory.
+// This means rate limiting is per-instance, not global. For production-grade
+// rate limiting, consider using Vercel KV, Upstash Redis, or similar.
 const rateLimitStore = new Map<string, { count: number; resetTime: number }>();
 const RATE_LIMIT_MAX = 5; // Max 5 submissions
 const RATE_LIMIT_WINDOW = 60 * 60 * 1000; // Per hour
+
+const isDev = process.env.NODE_ENV !== "production";
 
 // Spam keywords to filter
 const SPAM_KEYWORDS = [
@@ -182,11 +188,11 @@ export async function POST(request: Request) {
     }
 
     const body = await request.json();
-    console.log("Received body:", JSON.stringify(body, null, 2));
+    if (isDev) console.log("Received body:", JSON.stringify(body, null, 2));
 
     // Validate the data
     const validatedData = contactSchema.parse(body);
-    console.log("Validated data:", JSON.stringify(validatedData, null, 2));
+    if (isDev) console.log("Validated data:", JSON.stringify(validatedData, null, 2));
 
     // Spam check
     const spamCheck = isSpam(validatedData);
@@ -217,11 +223,11 @@ export async function POST(request: Request) {
     // Determine form type
     const isBookingForm = !!(cleanData.date && cleanData.serviceType && cleanData.guests);
 
-    // Log the data
-    console.log("New contact form submission:", cleanData);
-
-    // Send email via Resend
-    console.log("RESEND_API_KEY exists:", !!process.env.RESEND_API_KEY);
+    // Log the data (dev only)
+    if (isDev) {
+      console.log("New contact form submission:", cleanData);
+      console.log("RESEND_API_KEY exists:", !!process.env.RESEND_API_KEY);
+    }
     const resend = new Resend(process.env.RESEND_API_KEY);
 
     const serviceTypeLabels: Record<string, string> = {
@@ -276,8 +282,8 @@ export async function POST(request: Request) {
       : `📩 Nouveau message — ${cleanData.name} | ${subjectLabels[cleanData.subject!] || cleanData.subject}${pageOrigin ? ` | ${pageOrigin}` : ''}`;
 
     const { error } = await resend.emails.send({
-      from: "SXM Private Chef <contact@sxmprivatechef.com>",
-      to: "sxmprivatechef@gmail.com",
+      from: `${siteInfo.name} <${contactInfo.emailFrom}>`,
+      to: contactInfo.email,
       replyTo: cleanData.email,
       subject: emailSubject,
       html: `
@@ -297,7 +303,7 @@ export async function POST(request: Request) {
           <tr>
             <td style="background-color: #0C0A09; padding: 40px 40px 30px 40px; text-align: center;">
               <h1 style="margin: 0; color: #D4A574; font-size: 28px; font-weight: 300; letter-spacing: 2px;">
-                SXM PRIVATE CHEF
+                ${siteInfo.name.toUpperCase()}
               </h1>
               <p style="margin: 10px 0 0 0; color: #A8A29E; font-size: 12px; letter-spacing: 3px; text-transform: uppercase;">
                 Nouvelle demande de réservation
@@ -428,10 +434,10 @@ export async function POST(request: Request) {
           <tr>
             <td style="background-color: #0C0A09; padding: 25px 40px; text-align: center;">
               <p style="margin: 0; color: #A8A29E; font-size: 12px;">
-                Demande reçue via <a href="https://sxmprivatechef.com" style="color: #D4A574; text-decoration: none;">sxmprivatechef.com</a>
+                Demande reçue via <a href="${siteInfo.url}" style="color: #D4A574; text-decoration: none;">${siteInfo.url.replace('https://', '')}</a>
               </p>
               <p style="margin: 8px 0 0 0; color: #666; font-size: 11px;">
-                Saint-Martin, French West Indies
+                ${contactInfo.address.locality}, ${contactInfo.address.countryName}
               </p>
             </td>
           </tr>

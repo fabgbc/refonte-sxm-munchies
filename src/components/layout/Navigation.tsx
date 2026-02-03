@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
@@ -45,6 +45,21 @@ export default function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeSubmenu, setActiveSubmenu] = useState<string | null>(null);
+  const submenuTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const handleSubmenuEnter = (label: string) => {
+    if (submenuTimeoutRef.current) {
+      clearTimeout(submenuTimeoutRef.current);
+      submenuTimeoutRef.current = null;
+    }
+    setActiveSubmenu(label);
+  };
+
+  const handleSubmenuLeave = () => {
+    submenuTimeoutRef.current = setTimeout(() => {
+      setActiveSubmenu(null);
+    }, 150); // Small delay to allow moving to submenu
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -97,8 +112,8 @@ export default function Navigation() {
               <div
                 key={link.href}
                 className="relative group"
-                onMouseEnter={() => link.submenu && setActiveSubmenu(link.label)}
-                onMouseLeave={() => setActiveSubmenu(null)}
+                onMouseEnter={() => link.submenu && handleSubmenuEnter(link.label)}
+                onMouseLeave={handleSubmenuLeave}
               >
                 <Link
                   href={link.href}
@@ -114,6 +129,8 @@ export default function Navigation() {
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: 10 }}
                     className="absolute top-full left-0 pt-2"
+                    onMouseEnter={() => handleSubmenuEnter(link.label)}
+                    onMouseLeave={handleSubmenuLeave}
                   >
                     <div className="bg-[#0C0A09]/95 backdrop-blur-[12px] border border-[var(--color-accent-light)] min-w-[200px] py-2">
                       {link.submenu.map((sublink) => (

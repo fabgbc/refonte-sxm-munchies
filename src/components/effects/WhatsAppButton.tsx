@@ -1,14 +1,13 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { contactInfo } from "@/data/contact";
 
 export default function WhatsAppButton() {
-  const phoneNumber = "590690535739";
-  const whatsappUrl = `https://wa.me/${phoneNumber}`;
 
   return (
     <motion.a
-      href={whatsappUrl}
+      href={contactInfo.whatsappUrl}
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Contact us on WhatsApp"
