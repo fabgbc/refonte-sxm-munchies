@@ -208,7 +208,7 @@ export default function YachtServicePage() {
                   <div className="absolute -bottom-2 -left-2 w-4 h-4 border-b-2 border-l-2 border-[var(--color-accent)]" />
                   <div className="absolute -bottom-2 -right-2 w-4 h-4 border-b-2 border-r-2 border-[var(--color-accent)]" />
                   <h2 className="font-[family-name:var(--font-cormorant)] text-2xl md:text-3xl lg:text-4xl text-[var(--color-accent)]">
-                    Total = Service Fee + Menu + Dishes
+                    Total = Service Fee + Menu (per guest)
                   </h2>
                 </div>
                 <p className="text-[var(--color-text-secondary)] text-lg">
@@ -304,10 +304,10 @@ export default function YachtServicePage() {
                     </svg>
                   </div>
                   <h3 className="font-[family-name:var(--font-cormorant)] text-xl mb-3 group-hover:text-[var(--color-accent)] transition-colors">
-                    Select Your Dishes
+                    Customize Your Menu
                   </h3>
                   <p className="text-[var(--color-text-secondary)] text-sm">
-                    Pricing depends on the dishes included.
+                    Each menu has a set price per guest. Simply choose your favorite dishes.
                   </p>
                 </motion.div>
               </motion.div>
