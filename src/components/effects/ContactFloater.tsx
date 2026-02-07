@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import TurnstileWidget from "@/components/ui/TurnstileWidget";
 
 export default function ContactFloater() {
   const [isOpen, setIsOpen] = useState(false);
@@ -15,6 +16,7 @@ export default function ContactFloater() {
   const [isSuccess, setIsSuccess] = useState(false);
   const [honeypot, setHoneypot] = useState("");
   const [timestamp, setTimestamp] = useState<number>(0);
+  const [turnstileToken, setTurnstileToken] = useState("");
 
   useEffect(() => {
     setTimestamp(Date.now());
@@ -34,6 +36,7 @@ export default function ContactFloater() {
           serviceType: "floater-contact",
           _honeypot: honeypot,
           _timestamp: timestamp,
+          _turnstileToken: turnstileToken,
         }),
       });
       if (response.ok) {
@@ -137,6 +140,7 @@ export default function ContactFloater() {
                 rows={3}
                 className="form-input text-sm resize-none"
               />
+              <TurnstileWidget onSuccess={setTurnstileToken} />
               <button
                 type="submit"
                 disabled={isSubmitting}

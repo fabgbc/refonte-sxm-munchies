@@ -7,6 +7,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { slideInLeft, slideInRight } from "@/lib/animations";
 import { contactInfo } from "@/data/contact";
+import TurnstileWidget from "@/components/ui/TurnstileWidget";
 
 const contactSchema = z.object({
   name: z.string().min(2, "Le nom doit contenir au moins 2 caractères"),
@@ -26,6 +27,7 @@ export default function Contact() {
   const [isError, setIsError] = useState(false);
   const [formLoadTime, setFormLoadTime] = useState<number>(Date.now());
   const [honeypot, setHoneypot] = useState("");
+  const [turnstileToken, setTurnstileToken] = useState("");
 
   // Track when the form is loaded (for spam detection)
   useEffect(() => {
@@ -52,6 +54,7 @@ export default function Contact() {
           ...data,
           _honeypot: honeypot,
           _timestamp: formLoadTime,
+          _turnstileToken: turnstileToken,
         }),
       });
 
@@ -344,6 +347,8 @@ export default function Contact() {
                   aria-required="false"
                 />
               </div>
+
+              <TurnstileWidget onSuccess={setTurnstileToken} />
 
               {/* Submit */}
               <button

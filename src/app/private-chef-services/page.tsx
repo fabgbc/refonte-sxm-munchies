@@ -6,6 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import Navigation from "@/components/layout/Navigation";
 import Footer from "@/components/layout/Footer";
+import TurnstileWidget from "@/components/ui/TurnstileWidget";
 import {
   fadeUp,
   fadeIn,
@@ -72,6 +73,7 @@ export default function PrivateChefServicesPage() {
   const [formData, setFormData] = useState({ name: "", email: "", phone: "", subject: "", message: "" });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [turnstileToken, setTurnstileToken] = useState("");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -80,7 +82,7 @@ export default function PrivateChefServicesPage() {
       const response = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...formData, serviceType: "private-chef-services" }),
+        body: JSON.stringify({ ...formData, serviceType: "private-chef-services", _turnstileToken: turnstileToken }),
       });
       if (response.ok) {
         setIsSuccess(true);
@@ -680,6 +682,7 @@ export default function PrivateChefServicesPage() {
                   <input type="tel" placeholder="Your phone" value={formData.phone} onChange={(e) => setFormData({ ...formData, phone: e.target.value })} required className="form-input" />
                   <input type="text" placeholder="Subject" value={formData.subject} onChange={(e) => setFormData({ ...formData, subject: e.target.value })} className="form-input" />
                   <textarea placeholder="Your message (optional)" value={formData.message} onChange={(e) => setFormData({ ...formData, message: e.target.value })} rows={4} className="form-input resize-none" />
+                  <TurnstileWidget onSuccess={setTurnstileToken} />
                   <button type="submit" disabled={isSubmitting} className="btn btn-primary w-full btn-shine">{isSubmitting ? "Sending..." : "SUBMIT"}</button>
                   {isSuccess && (
                     <motion.p

@@ -14,6 +14,21 @@ const RATE_LIMIT_WINDOW = 60 * 60 * 1000; // Per hour
 
 const isDev = process.env.NODE_ENV !== "production";
 
+// Valid enum values for subject and serviceType
+const VALID_SUBJECTS = ["villa", "yacht", "week", "event", "other"];
+const VALID_SERVICE_TYPES = [
+  // Booking form
+  "villa", "yacht", "event", "buffet",
+  // Menu pages
+  "surf-turf-menu", "bourgogne-menu", "caribbean-menu", "mediterranean-menu",
+  "gourmet-menu", "weekly-menu", "grill-menu",
+  // Service pages
+  "breakfast-brunch", "buffet-patisserie", "gourmet-platters",
+  "salads-tapas-buffet", "wine", "buffets",
+  "floater-contact", "chefs", "private-chef-services",
+  "book-your-chef-in-saint-martin", "villa-chef",
+];
+
 // Spam keywords to filter
 const SPAM_KEYWORDS = [
   "viagra",
@@ -62,6 +77,7 @@ const contactSchema = z.object({
   // Anti-spam fields
   _honeypot: z.string().optional(), // Should be empty
   _timestamp: z.number().optional(), // Form load time
+  _turnstileToken: z.string().optional(), // Cloudflare Turnstile
 });
 
 function getClientIP(headersList: Headers): string {
@@ -100,6 +116,62 @@ function countUrls(text: string): number {
   return matches ? matches.length : 0;
 }
 
+function isGibberish(text: string): boolean {
+  if (!text || text.length < 4) return false;
+
+  const words = text.trim().split(/\s+/);
+
+  for (const word of words) {
+    if (word.length < 4) continue;
+
+    // Long single word with no spaces (real names are rarely 15+ chars without spaces)
+    if (word.length > 15) return true;
+
+    // Check vowel ratio — gibberish strings have very few vowels
+    const letters = word.match(/[a-zA-Z]/g) || [];
+    const vowels = word.match(/[aeiouyAEIOUY]/gi) || [];
+    if (letters.length > 5 && vowels.length / letters.length < 0.15) return true;
+
+    // Detect random casing patterns (e.g. "IYCCVrgAvxiKuqdvC")
+    if (word.length > 6) {
+      let transitions = 0;
+      for (let i = 1; i < word.length; i++) {
+        const prevUpper = word[i - 1] >= "A" && word[i - 1] <= "Z";
+        const currUpper = word[i] >= "A" && word[i] <= "Z";
+        if (prevUpper !== currUpper) transitions++;
+      }
+      if (transitions / word.length > 0.4) return true;
+    }
+
+    // 3+ consecutive consonants repeated (e.g. "qIrIjrJVSkKMF")
+    if (/[bcdfghjklmnpqrstvwxz]{5,}/i.test(word)) return true;
+  }
+
+  return false;
+}
+
+async function verifyTurnstileToken(token: string): Promise<boolean> {
+  const secret = process.env.TURNSTILE_SECRET_KEY;
+  if (!secret) {
+    // If Turnstile is not configured, skip verification
+    if (isDev) console.log("TURNSTILE_SECRET_KEY not set, skipping verification");
+    return true;
+  }
+
+  try {
+    const response = await fetch("https://challenges.cloudflare.com/turnstile/v0/siteverify", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: new URLSearchParams({ secret, response: token }),
+    });
+    const data = await response.json();
+    return data.success === true;
+  } catch {
+    console.error("Turnstile verification failed");
+    return false;
+  }
+}
+
 function hasSuspiciousPatterns(text: string): boolean {
   return SUSPICIOUS_PATTERNS.some((pattern) => {
     if (pattern.global) {
@@ -114,6 +186,8 @@ function hasSuspiciousPatterns(text: string): boolean {
 function isSpam(data: {
   name: string;
   email: string;
+  subject?: string;
+  serviceType?: string;
   message?: string;
   _honeypot?: string;
   _timestamp?: number;
@@ -131,19 +205,38 @@ function isSpam(data: {
     }
   }
 
-  // 3. Check name for spam
+  // 3. Gibberish detection — random strings like "IYCCVrgAvxiKuqdvC"
+  if (isGibberish(data.name)) {
+    return { isSpam: true, reason: "gibberish_name" };
+  }
+  if (data.subject && isGibberish(data.subject)) {
+    return { isSpam: true, reason: "gibberish_subject" };
+  }
+  if (data.message && isGibberish(data.message)) {
+    return { isSpam: true, reason: "gibberish_message" };
+  }
+
+  // 4. Enum validation — subject and serviceType must be known values
+  if (data.subject && !VALID_SUBJECTS.includes(data.subject)) {
+    return { isSpam: true, reason: "invalid_subject" };
+  }
+  if (data.serviceType && !VALID_SERVICE_TYPES.includes(data.serviceType)) {
+    return { isSpam: true, reason: "invalid_service_type" };
+  }
+
+  // 5. Check name for spam
   if (containsSpamKeywords(data.name)) {
     return { isSpam: true, reason: "spam_keywords_name" };
   }
 
-  // 4. Check email domain for known spam domains
+  // 6. Check email domain for known spam domains
   const spamDomains = ["tempmail", "throwaway", "guerrillamail", "mailinator", "10minutemail"];
   const emailDomain = data.email.split("@")[1]?.toLowerCase() || "";
   if (spamDomains.some((domain) => emailDomain.includes(domain))) {
     return { isSpam: true, reason: "spam_email_domain" };
   }
 
-  // 5. Check message for spam
+  // 7. Check message for spam
   if (data.message) {
     if (containsSpamKeywords(data.message)) {
       return { isSpam: true, reason: "spam_keywords_message" };
@@ -163,7 +256,7 @@ function isSpam(data: {
     }
   }
 
-  // 6. Check for all caps (often spam)
+  // 8. Check for all caps (often spam)
   const capsRatio = (data.message?.match(/[A-Z]/g)?.length || 0) / (data.message?.length || 1);
   if (data.message && data.message.length > 50 && capsRatio > 0.7) {
     return { isSpam: true, reason: "excessive_caps" };
@@ -193,6 +286,25 @@ export async function POST(request: Request) {
     // Validate the data
     const validatedData = contactSchema.parse(body);
     if (isDev) console.log("Validated data:", JSON.stringify(validatedData, null, 2));
+
+    // Turnstile verification
+    if (validatedData._turnstileToken) {
+      const isValidToken = await verifyTurnstileToken(validatedData._turnstileToken);
+      if (!isValidToken) {
+        console.log(`Turnstile verification failed for IP: ${clientIP}`);
+        return NextResponse.json(
+          { message: "Demande envoyée avec succès" },
+          { status: 200 }
+        );
+      }
+    } else if (process.env.TURNSTILE_SECRET_KEY) {
+      // Turnstile is configured but no token provided — likely a bot
+      console.log(`No Turnstile token from IP: ${clientIP}`);
+      return NextResponse.json(
+        { message: "Demande envoyée avec succès" },
+        { status: 200 }
+      );
+    }
 
     // Spam check
     const spamCheck = isSpam(validatedData);

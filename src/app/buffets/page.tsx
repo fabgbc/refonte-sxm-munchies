@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import Navigation from "@/components/layout/Navigation";
 import Footer from "@/components/layout/Footer";
+import TurnstileWidget from "@/components/ui/TurnstileWidget";
 import {
   fadeUp,
   staggerContainer,
@@ -81,6 +82,7 @@ export default function BuffetsPage() {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [turnstileToken, setTurnstileToken] = useState("");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -89,7 +91,7 @@ export default function BuffetsPage() {
       const response = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...formData, serviceType: "buffets" }),
+        body: JSON.stringify({ ...formData, serviceType: "buffets", _turnstileToken: turnstileToken }),
       });
       if (response.ok) {
         setIsSuccess(true);
@@ -389,6 +391,7 @@ export default function BuffetsPage() {
                     rows={5}
                     className="form-input resize-none"
                   />
+                  <TurnstileWidget onSuccess={setTurnstileToken} />
                   <div className="text-center">
                     <button
                       type="submit"

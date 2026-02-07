@@ -7,6 +7,7 @@ import Link from "next/link";
 import Navigation from "@/components/layout/Navigation";
 import Footer from "@/components/layout/Footer";
 import RelatedServices from "@/components/ui/RelatedServices";
+import TurnstileWidget from "@/components/ui/TurnstileWidget";
 import {
   fadeUp,
   fadeIn,
@@ -33,6 +34,7 @@ export default function VillaServicePage() {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [turnstileToken, setTurnstileToken] = useState("");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -41,7 +43,7 @@ export default function VillaServicePage() {
       const response = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...formData, serviceType: "villa-chef" }),
+        body: JSON.stringify({ ...formData, serviceType: "villa-chef", _turnstileToken: turnstileToken }),
       });
       if (response.ok) {
         setIsSuccess(true);
@@ -1107,6 +1109,7 @@ export default function VillaServicePage() {
                     rows={4}
                     className="form-input resize-none"
                   />
+                  <TurnstileWidget onSuccess={setTurnstileToken} />
                   <div className="text-center">
                     <button
                       type="submit"

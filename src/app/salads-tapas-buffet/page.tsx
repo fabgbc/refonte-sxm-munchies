@@ -6,6 +6,7 @@ import Image from "next/image";
 import Navigation from "@/components/layout/Navigation";
 import Footer from "@/components/layout/Footer";
 import RelatedMenus from "@/components/ui/RelatedMenus";
+import TurnstileWidget from "@/components/ui/TurnstileWidget";
 import { saladOptions, tapasOptions } from "@/data/menus";
 import {
   fadeUp,
@@ -19,6 +20,7 @@ export default function SaladsTapasBuffetPage() {
   const [formData, setFormData] = useState({ name: "", email: "", phone: "", subject: "", message: "" });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [turnstileToken, setTurnstileToken] = useState("");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -27,7 +29,7 @@ export default function SaladsTapasBuffetPage() {
       const response = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...formData, serviceType: "salads-tapas-buffet" }),
+        body: JSON.stringify({ ...formData, serviceType: "salads-tapas-buffet", _turnstileToken: turnstileToken }),
       });
       if (response.ok) {
         setIsSuccess(true);
@@ -492,6 +494,7 @@ export default function SaladsTapasBuffetPage() {
                     rows={4}
                     className="form-input resize-none"
                   />
+                  <TurnstileWidget onSuccess={setTurnstileToken} />
                   <div className="text-center">
                     <button
                       type="submit"
