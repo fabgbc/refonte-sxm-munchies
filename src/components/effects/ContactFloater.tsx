@@ -77,7 +77,7 @@ export default function ContactFloater() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.95 }}
             transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
-            className="fixed bottom-24 right-6 z-[9999] w-[calc(100vw-3rem)] max-w-sm bg-[#0C0A09] border border-[var(--color-accent-light)] shadow-2xl"
+            className="fixed bottom-24 left-6 right-6 z-[9999] max-w-sm ml-auto bg-[#0C0A09] border border-[var(--color-accent-light)] shadow-2xl"
           >
             {/* Header */}
             <div className="flex items-center justify-between px-5 py-4 border-b border-[var(--color-accent-light)]">
