@@ -1,11 +1,10 @@
 "use client";
 
-import { useState } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import Navigation from "@/components/layout/Navigation";
 import Footer from "@/components/layout/Footer";
-import TurnstileWidget from "@/components/ui/TurnstileWidget";
+import ServiceContactForm from "@/components/ui/ServiceContactForm";
 import { chefInfo, testimonials } from "@/data/testimonials";
 import {
   fadeUp,
@@ -18,32 +17,6 @@ import {
 } from "@/lib/animations";
 
 export default function ChefsPage() {
-  const [formData, setFormData] = useState({ name: "", email: "", phone: "", subject: "", message: "" });
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isSuccess, setIsSuccess] = useState(false);
-  const [turnstileToken, setTurnstileToken] = useState("");
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    try {
-      const response = await fetch("/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...formData, serviceType: "chefs", _turnstileToken: turnstileToken }),
-      });
-      if (response.ok) {
-        setIsSuccess(true);
-        setFormData({ name: "", email: "", phone: "", subject: "", message: "" });
-        setTimeout(() => setIsSuccess(false), 5000);
-      }
-    } catch (error) {
-      console.error("Error:", error);
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
-
   return (
     <>
       <Navigation />
@@ -270,16 +243,9 @@ export default function ChefsPage() {
             <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} className="text-center mb-12">
               <h3 className="font-[family-name:var(--font-cormorant)] text-2xl">Make A Reservation</h3>
             </motion.div>
-            <motion.form variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} onSubmit={handleSubmit} className="max-w-xl mx-auto space-y-6">
-              <input type="text" placeholder="Your name" value={formData.name} onChange={(e) => setFormData({ ...formData, name: e.target.value })} required className="form-input" />
-              <input type="email" placeholder="Your email" value={formData.email} onChange={(e) => setFormData({ ...formData, email: e.target.value })} required className="form-input" />
-              <input type="tel" placeholder="Your phone" value={formData.phone} onChange={(e) => setFormData({ ...formData, phone: e.target.value })} required className="form-input" />
-              <input type="text" placeholder="Subject" value={formData.subject} onChange={(e) => setFormData({ ...formData, subject: e.target.value })} className="form-input" />
-              <textarea placeholder="Your message (optional)" value={formData.message} onChange={(e) => setFormData({ ...formData, message: e.target.value })} rows={4} className="form-input resize-none" />
-              <TurnstileWidget onSuccess={setTurnstileToken} />
-              <button type="submit" disabled={isSubmitting} className="btn btn-primary w-full">{isSubmitting ? "Sending..." : "SUBMIT"}</button>
-              {isSuccess && <p className="text-green-400 text-center">Thank you! Your message has been sent.</p>}
-            </motion.form>
+            <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} className="max-w-xl mx-auto">
+              <ServiceContactForm serviceType="chefs" placeholder="Your message (optional)" buttonText="SUBMIT" />
+            </motion.div>
           </div>
         </section>
       </main>

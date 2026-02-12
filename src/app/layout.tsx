@@ -176,6 +176,19 @@ export default function RootLayout({
         />
       </head>
       <body className={`${cormorant.variable} ${inter.variable}`}>
+        {/* Hidden Netlify form for build-time detection */}
+        <form name="contact" data-netlify="true" data-netlify-honeypot="bot-field" hidden>
+          <input type="hidden" name="form-name" value="contact" />
+          <input name="bot-field" />
+          <input name="name" />
+          <input name="email" />
+          <input name="phone" />
+          <input name="subject" />
+          <input name="serviceType" />
+          <input name="guests" />
+          <input name="date" />
+          <textarea name="message" />
+        </form>
         <ScrollToTop />
         <SmoothScroll>
           {children}

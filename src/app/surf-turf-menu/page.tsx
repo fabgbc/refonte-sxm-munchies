@@ -1,12 +1,11 @@
 "use client";
 
-import { useState } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Navigation from "@/components/layout/Navigation";
 import Footer from "@/components/layout/Footer";
 import RelatedMenus from "@/components/ui/RelatedMenus";
-import TurnstileWidget from "@/components/ui/TurnstileWidget";
+import ServiceContactForm from "@/components/ui/ServiceContactForm";
 import { menus } from "@/data/menus";
 import {
   fadeUp,
@@ -18,38 +17,6 @@ import {
 
 export default function SurfTurfMenuPage() {
   const menu = menus.find((m) => m.slug === "surf-turf-menu");
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    subject: "",
-    message: "",
-  });
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isSuccess, setIsSuccess] = useState(false);
-  const [turnstileToken, setTurnstileToken] = useState("");
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    try {
-      const response = await fetch("/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...formData, serviceType: "surf-turf-menu", _turnstileToken: turnstileToken }),
-      });
-      if (response.ok) {
-        setIsSuccess(true);
-        setFormData({ name: "", email: "", phone: "", subject: "", message: "" });
-        setTimeout(() => setIsSuccess(false), 5000);
-      }
-    } catch (error) {
-      console.error("Error:", error);
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
-
   if (!menu) {
     return null;
   }
@@ -491,69 +458,7 @@ export default function SurfTurfMenuPage() {
                   Send Us a Message
                 </h3>
 
-                <form onSubmit={handleSubmit} className="space-y-6">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <input
-                      type="text"
-                      placeholder="Your name"
-                      value={formData.name}
-                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      required
-                      className="form-input"
-                    />
-                    <input
-                      type="email"
-                      placeholder="Your email"
-                      value={formData.email}
-                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      required
-                      className="form-input"
-                    />
-                  </div>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <input
-                      type="tel"
-                      placeholder="Your phone"
-                      value={formData.phone}
-                      onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                      required
-                      className="form-input"
-                    />
-                    <input
-                      type="text"
-                      placeholder="Subject"
-                      value={formData.subject}
-                      onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
-                      className="form-input"
-                    />
-                  </div>
-                  <textarea
-                    placeholder="Tell us about your event..."
-                    value={formData.message}
-                    onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                    rows={4}
-                    className="form-input resize-none"
-                  />
-                  <TurnstileWidget onSuccess={setTurnstileToken} />
-                  <div className="text-center">
-                    <button
-                      type="submit"
-                      disabled={isSubmitting}
-                      className="btn btn-primary px-12"
-                    >
-                      <span>{isSubmitting ? "Sending..." : "Request a Quote"}</span>
-                    </button>
-                  </div>
-                  {isSuccess && (
-                    <motion.p
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      className="text-green-400 text-center"
-                    >
-                      Thank you! Your message has been sent.
-                    </motion.p>
-                  )}
-                </form>
+                <ServiceContactForm serviceType="surf-turf-menu" />
               </motion.div>
             </div>
           </div>

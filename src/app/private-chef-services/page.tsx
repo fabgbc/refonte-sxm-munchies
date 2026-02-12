@@ -1,12 +1,11 @@
 "use client";
 
-import { useState } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import Navigation from "@/components/layout/Navigation";
 import Footer from "@/components/layout/Footer";
-import TurnstileWidget from "@/components/ui/TurnstileWidget";
+import ServiceContactForm from "@/components/ui/ServiceContactForm";
 import {
   fadeUp,
   fadeIn,
@@ -70,32 +69,6 @@ const icons = {
 };
 
 export default function PrivateChefServicesPage() {
-  const [formData, setFormData] = useState({ name: "", email: "", phone: "", subject: "", message: "" });
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isSuccess, setIsSuccess] = useState(false);
-  const [turnstileToken, setTurnstileToken] = useState("");
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    try {
-      const response = await fetch("/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...formData, serviceType: "private-chef-services", _turnstileToken: turnstileToken }),
-      });
-      if (response.ok) {
-        setIsSuccess(true);
-        setFormData({ name: "", email: "", phone: "", subject: "", message: "" });
-        setTimeout(() => setIsSuccess(false), 5000);
-      }
-    } catch (error) {
-      console.error("Error:", error);
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
-
   return (
     <>
       <Navigation />
@@ -676,24 +649,7 @@ export default function PrivateChefServicesPage() {
                 <span className="section-number block mb-2">Private Chef Services by Chef Francis</span>
                 <h2 className="font-[family-name:var(--font-cormorant)] text-2xl lg:text-3xl mb-8">Get in touch</h2>
                 <p className="text-[var(--color-text-secondary)] mb-8">You have a piece of advice or a suggestion that you would like to share with us? Feel free to contact us.</p>
-                <form onSubmit={handleSubmit} className="space-y-6">
-                  <input type="text" placeholder="Your name" value={formData.name} onChange={(e) => setFormData({ ...formData, name: e.target.value })} required className="form-input" />
-                  <input type="email" placeholder="Your email" value={formData.email} onChange={(e) => setFormData({ ...formData, email: e.target.value })} required className="form-input" />
-                  <input type="tel" placeholder="Your phone" value={formData.phone} onChange={(e) => setFormData({ ...formData, phone: e.target.value })} required className="form-input" />
-                  <input type="text" placeholder="Subject" value={formData.subject} onChange={(e) => setFormData({ ...formData, subject: e.target.value })} className="form-input" />
-                  <textarea placeholder="Your message (optional)" value={formData.message} onChange={(e) => setFormData({ ...formData, message: e.target.value })} rows={4} className="form-input resize-none" />
-                  <TurnstileWidget onSuccess={setTurnstileToken} />
-                  <button type="submit" disabled={isSubmitting} className="btn btn-primary w-full btn-shine">{isSubmitting ? "Sending..." : "SUBMIT"}</button>
-                  {isSuccess && (
-                    <motion.p
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      className="text-green-400 text-center"
-                    >
-                      Thank you! Your message has been sent.
-                    </motion.p>
-                  )}
-                </form>
+                <ServiceContactForm serviceType="private-chef-services" placeholder="Your message (optional)" buttonText="SUBMIT" />
               </motion.div>
             </div>
           </div>

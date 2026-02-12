@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -9,7 +9,7 @@ import Navigation from "@/components/layout/Navigation";
 import Footer from "@/components/layout/Footer";
 import { fadeUp, slideInLeft, slideInRight, heroTextContainer, heroTextItem } from "@/lib/animations";
 import { contactInfo } from "@/data/testimonials";
-import TurnstileWidget from "@/components/ui/TurnstileWidget";
+import { submitNetlifyForm } from "@/lib/submitNetlifyForm";
 
 const contactSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters"),
@@ -24,13 +24,6 @@ type ContactFormData = z.infer<typeof contactSchema>;
 export default function ContactPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
-  const [formLoadTime, setFormLoadTime] = useState<number>(Date.now());
-  const [honeypot, setHoneypot] = useState("");
-  const [turnstileToken, setTurnstileToken] = useState("");
-
-  useEffect(() => {
-    setFormLoadTime(Date.now());
-  }, []);
 
   const {
     register,
@@ -44,22 +37,13 @@ export default function ContactPage() {
   const onSubmit = async (data: ContactFormData) => {
     setIsSubmitting(true);
     try {
-      const response = await fetch("/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          ...data,
-          _honeypot: honeypot,
-          _timestamp: formLoadTime,
-          _turnstileToken: turnstileToken,
-        }),
+      await submitNetlifyForm("contact", {
+        ...data,
+        message: data.message || "",
       });
-
-      if (response.ok) {
-        setIsSuccess(true);
-        reset();
-        setTimeout(() => setIsSuccess(false), 5000);
-      }
+      setIsSuccess(true);
+      reset();
+      setTimeout(() => setIsSuccess(false), 5000);
     } catch (error) {
       console.error("Error submitting form:", error);
     } finally {
@@ -260,20 +244,6 @@ export default function ContactPage() {
                 </h2>
 
                 <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-                  {/* Honeypot field - hidden from humans, visible to bots */}
-                  <div className="absolute -left-[9999px] opacity-0 h-0 overflow-hidden" aria-hidden="true">
-                    <label htmlFor="contact-website">Website</label>
-                    <input
-                      type="text"
-                      id="contact-website"
-                      name="website"
-                      value={honeypot}
-                      onChange={(e) => setHoneypot(e.target.value)}
-                      tabIndex={-1}
-                      autoComplete="off"
-                    />
-                  </div>
-
                   {/* Name */}
                   <div className="form-group">
                     <label htmlFor="contact-name" className="sr-only">Your name</label>
@@ -363,8 +333,6 @@ export default function ContactPage() {
                       aria-required="false"
                     />
                   </div>
-
-                  <TurnstileWidget onSuccess={setTurnstileToken} />
 
                   {/* Submit */}
                   <button

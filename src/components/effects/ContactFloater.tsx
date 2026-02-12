@@ -1,8 +1,8 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import TurnstileWidget from "@/components/ui/TurnstileWidget";
+import { submitNetlifyForm } from "@/lib/submitNetlifyForm";
 
 export default function ContactFloater() {
   const [isOpen, setIsOpen] = useState(false);
@@ -14,39 +14,21 @@ export default function ContactFloater() {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
-  const [honeypot, setHoneypot] = useState("");
-  const [timestamp, setTimestamp] = useState<number>(0);
-  const [turnstileToken, setTurnstileToken] = useState("");
-
-  useEffect(() => {
-    setTimestamp(Date.now());
-  }, [isOpen]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (honeypot) return;
-
     setIsSubmitting(true);
     try {
-      const response = await fetch("/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          ...formData,
-          serviceType: "floater-contact",
-          _honeypot: honeypot,
-          _timestamp: timestamp,
-          _turnstileToken: turnstileToken,
-        }),
+      await submitNetlifyForm("contact", {
+        ...formData,
+        serviceType: "floater-contact",
       });
-      if (response.ok) {
-        setIsSuccess(true);
-        setFormData({ name: "", email: "", phone: "", message: "" });
-        setTimeout(() => {
-          setIsSuccess(false);
-          setIsOpen(false);
-        }, 3000);
-      }
+      setIsSuccess(true);
+      setFormData({ name: "", email: "", phone: "", message: "" });
+      setTimeout(() => {
+        setIsSuccess(false);
+        setIsOpen(false);
+      }, 3000);
     } catch (error) {
       console.error("Error:", error);
     } finally {
@@ -97,18 +79,6 @@ export default function ContactFloater() {
 
             {/* Form */}
             <form onSubmit={handleSubmit} className="p-5 space-y-3">
-              {/* Honeypot */}
-              <input
-                type="text"
-                name="website"
-                value={honeypot}
-                onChange={(e) => setHoneypot(e.target.value)}
-                className="hidden"
-                tabIndex={-1}
-                autoComplete="off"
-                aria-hidden="true"
-              />
-
               <input
                 type="text"
                 placeholder="Your name"
@@ -140,7 +110,6 @@ export default function ContactFloater() {
                 rows={3}
                 className="form-input text-sm resize-none"
               />
-              <TurnstileWidget onSuccess={setTurnstileToken} />
               <button
                 type="submit"
                 disabled={isSubmitting}
