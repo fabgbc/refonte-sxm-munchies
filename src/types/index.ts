@@ -6,6 +6,7 @@ export interface MenuCourse {
 export interface GrillItem {
   name: string;
   price: number;
+  description?: string;
 }
 
 export interface GrillItems {

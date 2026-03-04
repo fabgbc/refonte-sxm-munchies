@@ -169,15 +169,22 @@ export default function GrillMenuPage() {
                       {menu.grillItems.meats.map((item, index) => (
                         <li
                           key={index}
-                          className="group flex justify-between items-center gap-4 pb-4 border-b border-[var(--color-accent-light)]/30 hover:border-[var(--color-accent)] transition-colors"
+                          className="group pb-4 border-b border-[var(--color-accent-light)]/30 hover:border-[var(--color-accent)] transition-colors"
                         >
-                          <span className="text-[var(--color-text-primary)] group-hover:text-[var(--color-accent)] transition-colors">
-                            {item.name}
-                          </span>
-                          <span className="flex-1 border-b border-dotted border-[var(--color-accent-light)]/50 mx-4 min-w-[40px]" />
-                          <span className="text-[var(--color-accent)] font-[family-name:var(--font-cormorant)] text-xl italic whitespace-nowrap">
-                            ${item.price}
-                          </span>
+                          <div className="flex justify-between items-center gap-4">
+                            <span className="text-[var(--color-text-primary)] group-hover:text-[var(--color-accent)] transition-colors">
+                              {item.name}
+                            </span>
+                            <span className="flex-1 border-b border-dotted border-[var(--color-accent-light)]/50 mx-4 min-w-[40px]" />
+                            <span className="text-[var(--color-accent)] font-[family-name:var(--font-cormorant)] text-xl italic whitespace-nowrap">
+                              ${item.price}
+                            </span>
+                          </div>
+                          {item.description && (
+                            <p className="text-[var(--color-text-secondary)] text-sm mt-1 italic">
+                              {item.description}
+                            </p>
+                          )}
                         </li>
                       ))}
                     </ul>
@@ -202,15 +209,22 @@ export default function GrillMenuPage() {
                       {menu.grillItems.seafood.map((item, index) => (
                         <li
                           key={index}
-                          className="group flex justify-between items-center gap-4 pb-4 border-b border-[var(--color-accent-light)]/30 hover:border-[var(--color-accent)] transition-colors"
+                          className="group pb-4 border-b border-[var(--color-accent-light)]/30 hover:border-[var(--color-accent)] transition-colors"
                         >
-                          <span className="text-[var(--color-text-primary)] group-hover:text-[var(--color-accent)] transition-colors">
-                            {item.name}
-                          </span>
-                          <span className="flex-1 border-b border-dotted border-[var(--color-accent-light)]/50 mx-4 min-w-[40px]" />
-                          <span className="text-[var(--color-accent)] font-[family-name:var(--font-cormorant)] text-xl italic whitespace-nowrap">
-                            ${item.price}
-                          </span>
+                          <div className="flex justify-between items-center gap-4">
+                            <span className="text-[var(--color-text-primary)] group-hover:text-[var(--color-accent)] transition-colors">
+                              {item.name}
+                            </span>
+                            <span className="flex-1 border-b border-dotted border-[var(--color-accent-light)]/50 mx-4 min-w-[40px]" />
+                            <span className="text-[var(--color-accent)] font-[family-name:var(--font-cormorant)] text-xl italic whitespace-nowrap">
+                              ${item.price}
+                            </span>
+                          </div>
+                          {item.description && (
+                            <p className="text-[var(--color-text-secondary)] text-sm mt-1 italic">
+                              {item.description}
+                            </p>
+                          )}
                         </li>
                       ))}
                     </ul>
