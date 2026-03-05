@@ -197,14 +197,14 @@ export const menus: Menu[] = [
         { name: "Duck Breast", price: 40, description: "Seasoned with cinnamon parfumed salt" },
         { name: "Royal Skewer 300g", price: 45, description: "With beef, duck, veal, lamb and chicken filet" },
         { name: "Beef Prime Rib", price: 8, description: "Per 100g, for two to share" },
-        { name: "Beef Tenderloin 500g", price: 70, description: "For meat lovers only!" },
-        { name: "Beef Tenderloin 300g", price: 45, description: "At its best with the Rossini Twist" },
+        { name: "Beef Tenderloin 500g", price: 75, description: "For meat lovers only!" },
+        { name: "Beef Tenderloin 300g", price: 55, description: "At its best with the Rossini Twist" },
       ],
       seafood: [
         { name: "Shrimps Skewers", price: 25, description: "Marinated in sweet chili sauce" },
         { name: "Tuna Steak", price: 30, description: "Try it with the Rossini Twist!" },
         { name: "Whole Snapper", price: 7, description: "Per 100g, with creole sauce" },
-        { name: "Lobster", price: 11, description: "Per 100g, topped with herb butter and creole sauce" },
+        { name: "Lobster", price: 15, description: "Per 100g, topped with herb butter and creole sauce" },
       ],
       sides: [
         "Grilled vegetables",
