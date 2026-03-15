@@ -13,111 +13,331 @@ import {
   heroTextItem,
 } from "@/lib/animations";
 
-const wineCategories = [
+interface WineItem {
+  name: string;
+  price: number;
+}
+
+interface WineGroup {
+  name: string;
+  subtitle?: string;
+  wines: WineItem[];
+}
+
+interface WineSection {
+  id: string;
+  name: string;
+  groups: WineGroup[];
+}
+
+const wineHighlights: WineSection[] = [
   {
-    name: "Champagne & Sparkling",
-    description:
-      "Prestigious champagnes and sparkling wines for special celebrations.",
-    icon: (
-      <svg
-        width="32"
-        height="32"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="var(--color-accent)"
-        strokeWidth="1.5"
-      >
-        <path d="M8 22h8M12 11v11M12 11a4 4 0 0 0 4-4V3H8v4a4 4 0 0 0 4 4z" />
-      </svg>
-    ),
+    id: "champagnes",
+    name: "Champagnes & Sparkling",
+    groups: [
+      {
+        name: "Bernard Robert",
+        subtitle: "Maison d'excellence depuis 1945",
+        wines: [
+          { name: "Réserve Brut Côte des Bar", price: 33.60 },
+          { name: 'Réserve "Demi-sec"', price: 34.35 },
+        ],
+      },
+      {
+        name: "Canard-Duchêne",
+        subtitle: "Maison fondée en 1868",
+        wines: [
+          { name: '"Cuvée Léonie Iconic" Brut', price: 46.80 },
+          { name: "Brut Rosé Essentiel", price: 50.25 },
+        ],
+      },
+      {
+        name: "Laurent-Perrier",
+        subtitle: "Maison fondée en 1812",
+        wines: [
+          { name: 'Brut "La Cuvée"', price: 68.85 },
+          { name: "Brut Cuvée Rosé", price: 122.85 },
+          { name: "Grand Siècle Grande Cuvée 100% Grands Crus", price: 240.00 },
+        ],
+      },
+      {
+        name: "Louis Roederer",
+        subtitle: "Maison fondée en 1776",
+        wines: [
+          { name: "Brut Collection", price: 74.25 },
+          { name: "Cristal Vintage 2015", price: 363.00 },
+          { name: "Cristal Rosé 2013/14", price: 652.50 },
+        ],
+      },
+      {
+        name: "Gosset",
+        subtitle: "La plus ancienne Maison — Aÿ 1584",
+        wines: [
+          { name: "Grande Réserve Brut", price: 64.50 },
+          { name: "Célébris Vintage 2012 Brut", price: 202.50 },
+        ],
+      },
+      {
+        name: "Bruno Paillard",
+        subtitle: "Reims",
+        wines: [
+          { name: "Première Cuvée Extra-Brut", price: 71.85 },
+          { name: "N.P.U. 2009 Grand Cru", price: 307.50 },
+        ],
+      },
+    ],
   },
   {
+    id: "roses",
+    name: "Rosé Wines",
+    groups: [
+      {
+        name: "Provence",
+        wines: [
+          { name: "Maison Charlotte Belle Cuvée Méditerranée IGP", price: 8.25 },
+          { name: "Château Gabriel Cannet des Maures", price: 15.15 },
+          { name: "Domaine Siouvette L'Exception — La Mole", price: 16.65 },
+          { name: "Château de Pampelonne Ramatuelle", price: 21.60 },
+        ],
+      },
+      {
+        name: "Château Saint-Maur",
+        subtitle: "Cru Classé",
+        wines: [
+          { name: "Excellence Cru Classé Grimaud", price: 27.90 },
+          { name: "Clos de Capelune Cru Classé Grimaud", price: 57.90 },
+        ],
+      },
+      {
+        name: "Domaines Ott*",
+        wines: [
+          { name: "By.Ott* Sélection Taradeau", price: 21.90 },
+          { name: "Château de Selle Cru Classé Taradeau", price: 41.25 },
+          { name: "Étoile — Assemblage du Clos Mireille", price: 136.50 },
+        ],
+      },
+      {
+        name: "Château d'Esclans",
+        subtitle: "Domaines Sacha Lichine",
+        wines: [
+          { name: "Whispering Angel", price: 27.75 },
+          { name: "Rock Angel", price: 38.85 },
+          { name: "Château d'Esclans La Motte", price: 43.50 },
+          { name: '"Garrus" La Motte', price: 148.50 },
+        ],
+      },
+    ],
+  },
+  {
+    id: "whites",
     name: "White Wines",
-    description:
-      "Crisp, refreshing whites perfect for seafood and lighter dishes.",
-    icon: (
-      <svg
-        width="32"
-        height="32"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="var(--color-accent)"
-        strokeWidth="1.5"
-      >
-        <path d="M8 22h8M12 11v11M10 3h4l2 4v4h-8V7l2-4z" />
-      </svg>
-    ),
+    groups: [
+      {
+        name: "Alsace",
+        wines: [
+          { name: "Crémant d'Alsace Comtes d'Isenbourg", price: 22.20 },
+          { name: "Gewurztraminer Grand Cru Kirchberg de Barr 2020 Klipfel", price: 28.20 },
+        ],
+      },
+      {
+        name: "Vallée de la Loire",
+        wines: [
+          { name: 'Sancerre "Les Baronnes" 2023/24 Henri Bourgeois', price: 27.75 },
+          { name: "Pouilly Fumé La Moynerie 2022/23 Michel Redde & Fils", price: 25.65 },
+        ],
+      },
+      {
+        name: "Bourgogne",
+        wines: [
+          { name: "Pouilly-Fuissé 2023 Jean-Claude Boisset", price: 39.75 },
+          { name: "Chablis 1er Cru Vaillons 2022 William Fèvre", price: 65.25 },
+          { name: "Meursault 2020 Château de Pommard", price: 85.50 },
+          { name: "Puligny-Montrachet 2023/24 Maison Louis Latour", price: 124.65 },
+        ],
+      },
+      {
+        name: "Vallée du Rhône",
+        wines: [
+          { name: "Châteauneuf-du-Pape 2023/24 Château Mont Redon", price: 44.25 },
+          { name: "Condrieu Chery 2022/23 Domaine André Perret", price: 81.00 },
+        ],
+      },
+    ],
   },
   {
-    name: "Rose Wines",
-    description:
-      "Elegant roses ideal for Caribbean sunsets and relaxed gatherings.",
-    icon: (
-      <svg
-        width="32"
-        height="32"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="var(--color-accent)"
-        strokeWidth="1.5"
-      >
-        <path d="M12 3c-1.5 2-3 3.5-3 6 0 2.5 1.5 4 3 4s3-1.5 3-4c0-2.5-1.5-4-3-6z" />
-        <path d="M8 22h8M12 13v9" />
-      </svg>
-    ),
-  },
-  {
+    id: "reds",
     name: "Red Wines",
-    description: "Full-bodied reds to complement grilled meats and rich sauces.",
-    icon: (
-      <svg
-        width="32"
-        height="32"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="var(--color-accent)"
-        strokeWidth="1.5"
-      >
-        <path d="M8 22h8M12 15v7" />
-        <path d="M17 3H7v5c0 3.5 2 5 5 7 3-2 5-3.5 5-7V3z" />
-      </svg>
-    ),
+    groups: [
+      {
+        name: "Vallée du Rhône",
+        wines: [
+          { name: "Côtes du Rhône Réserve Mont-Redon", price: 12.90 },
+          { name: "Châteauneuf-du-Pape 2020 Château Mont Redon", price: 48.45 },
+          { name: "Côte-Rôtie Laurus 2022 Gabriel Meffre", price: 74.85 },
+          { name: "Hermitage La Chapelle 2022 Domaine de la Chapelle", price: 286.50 },
+        ],
+      },
+      {
+        name: "Bourgogne",
+        wines: [
+          { name: "Bourgogne Pinot Noir 2022/23 Millebuis", price: 19.35 },
+          { name: "Gevrey-Chambertin 2020 Bouchard Père & Fils", price: 85.35 },
+          { name: "Clos des Lambrays 2023 Domaine des Lambrays", price: 823.50 },
+          { name: "Vosne-Romanée 2022 Bouchard Père & Fils", price: 94.50 },
+        ],
+      },
+      {
+        name: "Bordeaux",
+        wines: [
+          { name: "Château Pey la Tour 2019/20 Réserve du Château", price: 15.75 },
+          { name: "Château Gloria 2020 Saint-Julien", price: 67.50 },
+          { name: "Château Lagrange 2017 3ème Cru Classé Saint-Julien", price: 79.50 },
+          { name: "Pauillac de Latour 2019/20 3ème Vin du Cru Classé", price: 114.00 },
+        ],
+      },
+    ],
   },
   {
-    name: "Dessert Wines",
-    description: "Sweet wines and late harvests to pair with our patisserie.",
-    icon: (
-      <svg
-        width="32"
-        height="32"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="var(--color-accent)"
-        strokeWidth="1.5"
-      >
-        <circle cx="12" cy="8" r="5" />
-        <path d="M8 22h8M12 13v9" />
-        <path d="M9 6l6 4M9 10l6-4" />
-      </svg>
-    ),
+    id: "american",
+    name: "American Wines",
+    groups: [
+      {
+        name: "California",
+        wines: [
+          { name: "J. Lohr Cabernet Sauvignon Hilltop 2022/23 Paso Robles", price: 40.95 },
+          { name: "Silver Oak Cabernet Sauvignon 2021 Alexander Valley", price: 109.50 },
+          { name: "Opus One 2021 Napa Valley", price: 586.50 },
+          { name: "Screaming Eagle Cabernet Sauvignon 2021 Oakville", price: 3462.00 },
+        ],
+      },
+      {
+        name: "Oregon & Washington",
+        wines: [
+          { name: "Duck Pond Pinot Noir 2023/24 Willamette Valley", price: 25.50 },
+          { name: "Cristom Chardonnay Eola-Amity Hills 2021/22", price: 54.00 },
+          { name: "Château Ste. Michelle Chardonnay Columbia Valley", price: 20.25 },
+        ],
+      },
+    ],
   },
   {
-    name: "Premium Selection",
-    description: "Rare vintages and exceptional bottles for connoisseurs.",
-    icon: (
-      <svg
-        width="32"
-        height="32"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="var(--color-accent)"
-        strokeWidth="1.5"
-      >
-        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
-      </svg>
-    ),
+    id: "world",
+    name: "World Wines",
+    groups: [
+      {
+        name: "Italy",
+        wines: [
+          { name: "Montelvini Prosecco Brut DOC Treviso", price: 13.35 },
+          { name: "Bertani Amarone della Valpolicella Classico 2015", price: 166.50 },
+          { name: "Barolo Ratti Marcenasco 2019/20 DOCG", price: 74.40 },
+          { name: "Sassicaia 2020 Tenuta San Guido DOC", price: 567.00 },
+        ],
+      },
+      {
+        name: "Spain",
+        wines: [
+          { name: "Rueda Blanco Verdejo 2024/25 Marqués de Riscal", price: 13.35 },
+          { name: "Rioja Reserva 2020/21 Marqués de Riscal", price: 22.95 },
+          { name: "Mas La Plana Cabernet Sauvignon 2018/19 Torres", price: 76.50 },
+        ],
+      },
+      {
+        name: "Chile",
+        wines: [
+          { name: "Viña Santa Rita Cabernet Sauvignon 120 Valle Central", price: 9.45 },
+          { name: "Almaviva 2022 Puente Alto", price: 280.50 },
+        ],
+      },
+      {
+        name: "Argentina",
+        wines: [
+          { name: "Domaine Bousquet Malbec 2024 Tupungato Uco Valley", price: 11.10 },
+          { name: "Cheval des Andes 2020 Mendoza", price: 148.50 },
+        ],
+      },
+    ],
+  },
+  {
+    id: "spirits",
+    name: "Spirits & Digestifs",
+    groups: [
+      {
+        name: "Cognac",
+        wines: [
+          { name: 'Lheraud VS "Terres Et Bois" 3yo 40%', price: 33.00 },
+          { name: "Frapin VSOP Grande Champagne", price: 43.50 },
+          { name: "Frapin XO Carafe VIP", price: 147.00 },
+        ],
+      },
+      {
+        name: "Rhum Agricole",
+        wines: [
+          { name: "Reimonenq Blanc Cœur de Chauffe 50% (Guadeloupe)", price: 17.25 },
+          { name: "St James Vieux VO 42% (Martinique)", price: 14.85 },
+          { name: "J. Bally Vieux Pyramide 3 Ans 45% (Martinique)", price: 37.50 },
+        ],
+      },
+      {
+        name: "Grappa",
+        wines: [
+          { name: "Nonino della Tradizione Friulana 43%", price: 22.50 },
+          { name: "Gaja Barbaresco (Nebbiolo) Piemonte 45°", price: 63.00 },
+        ],
+      },
+    ],
   },
 ];
+
+const categoryIcons: Record<string, React.ReactNode> = {
+  "champagnes": (
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+      <path d="M8 22h8M12 11v11M12 11a4 4 0 0 0 4-4V3H8v4a4 4 0 0 0 4 4z" />
+    </svg>
+  ),
+  "roses": (
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+      <path d="M12 3c-1.5 2-3 3.5-3 6 0 2.5 1.5 4 3 4s3-1.5 3-4c0-2.5-1.5-4-3-6z" />
+      <path d="M8 22h8M12 13v9" />
+    </svg>
+  ),
+  "whites": (
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+      <path d="M10 3h4l2 4v4h-8V7l2-4z" />
+      <path d="M8 22h8M12 11v11" />
+    </svg>
+  ),
+  "reds": (
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+      <path d="M8 22h8M12 15v7" />
+      <path d="M17 3H7v5c0 3.5 2 5 5 7 3-2 5-3.5 5-7V3z" />
+    </svg>
+  ),
+  "american": (
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+      <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+    </svg>
+  ),
+  "world": (
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+      <circle cx="12" cy="12" r="10" />
+      <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+    </svg>
+  ),
+  "spirits": (
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+      <path d="M8 22h8M12 11v11" />
+      <path d="M7 2v9a5 5 0 0 0 10 0V2" />
+      <path d="M7 6h10" />
+    </svg>
+  ),
+};
+
+function formatPrice(price: number): string {
+  return price.toLocaleString("fr-FR", {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  }) + " €";
+}
 
 export default function WinePage() {
   return (
@@ -126,7 +346,6 @@ export default function WinePage() {
       <main>
         {/* Hero Section */}
         <section className="relative min-h-[70vh] flex items-center justify-center pt-24 pb-16 lg:pt-32 lg:pb-24 vignette">
-          {/* Background Image */}
           <div className="absolute inset-0">
             <Image
               src="/images/hero-menus/Wine.jpg"
@@ -138,7 +357,6 @@ export default function WinePage() {
             <div className="absolute inset-0 bg-gradient-to-b from-[#0C0A09]/80 via-[#0C0A09]/60 to-[#0C0A09]/95" />
           </div>
 
-          {/* Decorative corner elements */}
           <div className="absolute top-24 left-8 lg:left-16 w-20 h-20 border-t border-l border-[var(--color-accent)]/30 z-10" />
           <div className="absolute top-24 right-8 lg:right-16 w-20 h-20 border-t border-r border-[var(--color-accent)]/30 z-10" />
           <div className="absolute bottom-8 left-8 lg:left-16 w-20 h-20 border-b border-l border-[var(--color-accent)]/30 z-10" />
@@ -151,7 +369,6 @@ export default function WinePage() {
               animate="visible"
               className="text-center max-w-4xl mx-auto"
             >
-              {/* Decorative line */}
               <motion.div
                 variants={heroTextItem}
                 className="flex items-center justify-center gap-4 mb-6"
@@ -172,13 +389,26 @@ export default function WinePage() {
                 variants={heroTextItem}
                 className="text-[var(--color-text-secondary)] text-lg lg:text-xl mb-10 max-w-2xl mx-auto font-[family-name:var(--font-cormorant)] italic"
               >
-                Fine wines to pair with every dish. Our sommelier-curated
-                selection complements each menu perfectly.
+                Over 750 wines curated by our sommelier — from prestigious
+                Champagnes to rare Californian vintages.
               </motion.p>
+
+              <motion.a
+                variants={heroTextItem}
+                href="/wine-list.pdf"
+                download
+                className="inline-flex items-center gap-3 px-8 py-4 bg-[var(--color-accent)] text-[var(--color-bg-primary)] font-medium tracking-wider uppercase text-sm hover:bg-[var(--color-accent-hover)] transition-colors"
+              >
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                  <polyline points="7 10 12 15 17 10" />
+                  <line x1="12" y1="15" x2="12" y2="3" />
+                </svg>
+                Download Full Wine List (PDF)
+              </motion.a>
             </motion.div>
           </div>
 
-          {/* Scroll indicator */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -199,9 +429,8 @@ export default function WinePage() {
           </motion.div>
         </section>
 
-        {/* Wine Categories Section */}
+        {/* Wine Highlights Section */}
         <section className="section bg-[var(--color-bg-primary)] relative">
-          {/* Decorative background pattern */}
           <div className="absolute inset-0 opacity-[0.02]" style={{
             backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0L60 30L30 60L0 30z' fill='%23D4A574' fill-opacity='1'/%3E%3C/svg%3E")`,
             backgroundSize: '60px 60px'
@@ -215,52 +444,138 @@ export default function WinePage() {
               viewport={{ once: true, margin: "-100px" }}
               className="max-w-5xl mx-auto"
             >
-              {/* Section Title */}
-              <motion.div variants={staggerItem} className="text-center mb-12">
-                <span className="section-number">Categories</span>
-                <h2 className="font-[family-name:var(--font-cormorant)] mt-4">Our Wine Selection</h2>
+              <motion.div variants={staggerItem} className="text-center mb-16">
+                <span className="section-number">Highlights</span>
+                <h2 className="font-[family-name:var(--font-cormorant)] mt-4">A Taste of Our Selection</h2>
+                <p className="text-[var(--color-text-secondary)] mt-4 max-w-xl mx-auto">
+                  A curated preview of our extensive collection. Download our full catalog for the complete list of over 750 references.
+                </p>
               </motion.div>
 
-              {/* Wine Categories Grid */}
-              <motion.div
-                variants={staggerContainer}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, margin: "-100px" }}
-                className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
-              >
-                {wineCategories.map((category, index) => (
+              {/* Wine Sections */}
+              <div className="space-y-16">
+                {wineHighlights.map((section) => (
                   <motion.div
-                    key={index}
-                    variants={staggerItem}
-                    whileHover={{ y: -5 }}
-                    className="group p-8 text-center bg-[var(--color-bg-secondary)] border border-[var(--color-accent-light)] hover:border-[var(--color-accent)] transition-all duration-300 relative"
+                    key={section.id}
+                    variants={fadeUp}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, margin: "-50px" }}
                   >
-                    {/* Corner accents */}
-                    <div className="absolute -top-2 -left-2 w-4 h-4 border-t-2 border-l-2 border-[var(--color-accent)] opacity-0 group-hover:opacity-100 transition-opacity" />
-                    <div className="absolute -top-2 -right-2 w-4 h-4 border-t-2 border-r-2 border-[var(--color-accent)] opacity-0 group-hover:opacity-100 transition-opacity" />
-                    <div className="absolute -bottom-2 -left-2 w-4 h-4 border-b-2 border-l-2 border-[var(--color-accent)] opacity-0 group-hover:opacity-100 transition-opacity" />
-                    <div className="absolute -bottom-2 -right-2 w-4 h-4 border-b-2 border-r-2 border-[var(--color-accent)] opacity-0 group-hover:opacity-100 transition-opacity" />
-
-                    <div className="w-16 h-16 mx-auto mb-6 flex items-center justify-center border border-[var(--color-accent)] rounded-full group-hover:bg-[var(--color-accent)]/10 transition-colors">
-                      {category.icon}
+                    {/* Section Header */}
+                    <div className="flex items-center gap-4 mb-8">
+                      <div className="w-12 h-12 flex items-center justify-center border border-[var(--color-accent)] rounded-full text-[var(--color-accent)]">
+                        {categoryIcons[section.id]}
+                      </div>
+                      <h3 className="text-2xl font-[family-name:var(--font-cormorant)] text-[var(--color-accent)]">
+                        {section.name}
+                      </h3>
+                      <span className="flex-1 h-[1px] bg-[var(--color-accent)]/20" />
                     </div>
-                    <h3 className="text-[var(--color-accent)] text-xl font-[family-name:var(--font-cormorant)] mb-4">
-                      {category.name}
-                    </h3>
-                    <p className="text-[var(--color-text-secondary)]">
-                      {category.description}
-                    </p>
+
+                    {/* Groups */}
+                    <div className="space-y-8">
+                      {section.groups.map((group, gi) => (
+                        <div key={gi} className="pl-4 lg:pl-16">
+                          {/* Producer/Region Name */}
+                          <div className="mb-3">
+                            <h4 className="text-lg font-[family-name:var(--font-cormorant)] text-[var(--color-text-primary)] font-semibold">
+                              {group.name}
+                            </h4>
+                            {group.subtitle && (
+                              <p className="text-sm text-[var(--color-text-secondary)] italic font-[family-name:var(--font-cormorant)]">
+                                {group.subtitle}
+                              </p>
+                            )}
+                          </div>
+
+                          {/* Wine Items */}
+                          <div className="space-y-2">
+                            {group.wines.map((wine, wi) => (
+                              <div
+                                key={wi}
+                                className="group flex items-baseline gap-2 py-1 hover:bg-[var(--color-accent)]/5 px-2 -mx-2 transition-colors rounded"
+                              >
+                                <span className="text-[var(--color-text-secondary)] group-hover:text-[var(--color-text-primary)] transition-colors text-sm lg:text-base">
+                                  {wine.name}
+                                </span>
+                                <span className="flex-1 border-b border-dotted border-[var(--color-accent)]/20 min-w-[2rem] translate-y-[-4px]" />
+                                <span className="text-[var(--color-accent)] font-medium whitespace-nowrap text-sm lg:text-base">
+                                  {formatPrice(wine.price)}
+                                </span>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
                   </motion.div>
                 ))}
-              </motion.div>
+              </div>
+            </motion.div>
+          </div>
+        </section>
+
+        {/* Download CTA Section */}
+        <section className="py-20 lg:py-28 bg-[var(--color-bg-secondary)] relative overflow-hidden">
+          <div className="absolute inset-0 opacity-[0.02]" style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0L60 30L30 60L0 30z' fill='%23D4A574' fill-opacity='1'/%3E%3C/svg%3E")`,
+            backgroundSize: '60px 60px'
+          }} />
+
+          <div className="container relative">
+            <motion.div
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-100px" }}
+              className="max-w-3xl mx-auto text-center"
+            >
+              <div className="p-10 lg:p-16 bg-[var(--color-bg-tertiary)] border border-[var(--color-accent-light)] relative">
+                <div className="absolute -top-2 -left-2 w-6 h-6 border-t-2 border-l-2 border-[var(--color-accent)]" />
+                <div className="absolute -top-2 -right-2 w-6 h-6 border-t-2 border-r-2 border-[var(--color-accent)]" />
+                <div className="absolute -bottom-2 -left-2 w-6 h-6 border-b-2 border-l-2 border-[var(--color-accent)]" />
+                <div className="absolute -bottom-2 -right-2 w-6 h-6 border-b-2 border-r-2 border-[var(--color-accent)]" />
+
+                <div className="w-20 h-20 mx-auto mb-6 flex items-center justify-center border border-[var(--color-accent)] rounded-full">
+                  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" strokeWidth="1.5">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                    <polyline points="14 2 14 8 20 8" />
+                    <line x1="16" y1="13" x2="8" y2="13" />
+                    <line x1="16" y1="17" x2="8" y2="17" />
+                    <polyline points="10 9 9 9 8 9" />
+                  </svg>
+                </div>
+
+                <h2 className="font-[family-name:var(--font-cormorant)] text-3xl lg:text-4xl mb-4 golden-glow-text">
+                  Full Wine Catalog
+                </h2>
+                <p className="text-[var(--color-text-secondary)] text-lg mb-4">
+                  Over 750 wines from France, Italy, Spain, USA, Chile, Argentina, and more.
+                </p>
+                <p className="text-[var(--color-text-secondary)] text-sm mb-8">
+                  Prices valid from October 1st, 2025 to September 30th, 2026
+                </p>
+
+                <a
+                  href="/wine-list.pdf"
+                  download
+                  className="inline-flex items-center gap-3 px-10 py-4 bg-[var(--color-accent)] text-[var(--color-bg-primary)] font-medium tracking-wider uppercase text-sm hover:bg-[var(--color-accent-hover)] transition-colors"
+                >
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                    <polyline points="7 10 12 15 17 10" />
+                    <line x1="12" y1="15" x2="12" y2="3" />
+                  </svg>
+                  Download Complete Wine List (PDF)
+                </a>
+              </div>
             </motion.div>
           </div>
         </section>
 
         {/* Pairing Section */}
-        <section className="section bg-[var(--color-bg-secondary)] relative">
-          {/* Decorative background pattern */}
+        <section className="section bg-[var(--color-bg-primary)] relative">
           <div className="absolute inset-0 opacity-[0.02]" style={{
             backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0L60 30L30 60L0 30z' fill='%23D4A574' fill-opacity='1'/%3E%3C/svg%3E")`,
             backgroundSize: '60px 60px'
@@ -289,8 +604,7 @@ export default function WinePage() {
                 variants={staggerItem}
                 className="grid grid-cols-1 md:grid-cols-2 gap-8"
               >
-                <div className="group p-8 bg-[var(--color-bg-tertiary)] border border-[var(--color-accent-light)] hover:border-[var(--color-accent)] transition-all duration-300 relative">
-                  {/* Corner accents */}
+                <div className="group p-8 bg-[var(--color-bg-secondary)] border border-[var(--color-accent-light)] hover:border-[var(--color-accent)] transition-all duration-300 relative">
                   <div className="absolute -top-2 -left-2 w-4 h-4 border-t-2 border-l-2 border-[var(--color-accent)]" />
                   <div className="absolute -top-2 -right-2 w-4 h-4 border-t-2 border-r-2 border-[var(--color-accent)]" />
                   <div className="absolute -bottom-2 -left-2 w-4 h-4 border-b-2 border-l-2 border-[var(--color-accent)]" />
@@ -298,14 +612,7 @@ export default function WinePage() {
 
                   <div className="flex items-center gap-4 mb-4">
                     <div className="w-12 h-12 flex items-center justify-center border border-[var(--color-accent)] rounded-full">
-                      <svg
-                        width="24"
-                        height="24"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="var(--color-accent)"
-                        strokeWidth="1.5"
-                      >
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" strokeWidth="1.5">
                         <circle cx="12" cy="12" r="10" />
                         <path d="M12 6v6l4 2" />
                       </svg>
@@ -319,8 +626,7 @@ export default function WinePage() {
                     perfect wines to accompany each course.
                   </p>
                 </div>
-                <div className="group p-8 bg-[var(--color-bg-tertiary)] border border-[var(--color-accent-light)] hover:border-[var(--color-accent)] transition-all duration-300 relative">
-                  {/* Corner accents */}
+                <div className="group p-8 bg-[var(--color-bg-secondary)] border border-[var(--color-accent-light)] hover:border-[var(--color-accent)] transition-all duration-300 relative">
                   <div className="absolute -top-2 -left-2 w-4 h-4 border-t-2 border-l-2 border-[var(--color-accent)]" />
                   <div className="absolute -top-2 -right-2 w-4 h-4 border-t-2 border-r-2 border-[var(--color-accent)]" />
                   <div className="absolute -bottom-2 -left-2 w-4 h-4 border-b-2 border-l-2 border-[var(--color-accent)]" />
@@ -328,14 +634,7 @@ export default function WinePage() {
 
                   <div className="flex items-center gap-4 mb-4">
                     <div className="w-12 h-12 flex items-center justify-center border border-[var(--color-accent)] rounded-full">
-                      <svg
-                        width="24"
-                        height="24"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="var(--color-accent)"
-                        strokeWidth="1.5"
-                      >
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" strokeWidth="1.5">
                         <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
                       </svg>
                     </div>
@@ -354,8 +653,7 @@ export default function WinePage() {
         </section>
 
         {/* Good to Know Section */}
-        <section className="py-20 lg:py-28 bg-[var(--color-bg-primary)] relative overflow-hidden">
-          {/* Decorative elements */}
+        <section className="py-20 lg:py-28 bg-[var(--color-bg-secondary)] relative overflow-hidden">
           <div className="absolute top-0 left-0 w-64 h-64 bg-[var(--color-accent)]/5 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2" />
           <div className="absolute bottom-0 right-0 w-64 h-64 bg-[var(--color-accent)]/5 rounded-full blur-3xl translate-x-1/2 translate-y-1/2" />
 
@@ -388,9 +686,9 @@ export default function WinePage() {
                       <path d="M8 22h8M12 11v11M12 11a4 4 0 0 0 4-4V3H8v4a4 4 0 0 0 4 4z" />
                     </svg>
                   </div>
-                  <h4 className="text-[var(--color-text-primary)] mb-2">Sommelier Curated</h4>
+                  <h4 className="text-[var(--color-text-primary)] mb-2">750+ References</h4>
                   <p className="text-[var(--color-text-secondary)] text-sm">
-                    Expert wine selection for every palate
+                    From everyday wines to rare vintages and Grand Crus
                   </p>
                 </div>
                 <div className="text-center p-6">
@@ -416,56 +714,16 @@ export default function WinePage() {
                   </div>
                   <h4 className="text-[var(--color-text-primary)] mb-2">Premium Imports</h4>
                   <p className="text-[var(--color-text-secondary)] text-sm">
-                    Partnered with premium importers
+                    Partnered with premium importers worldwide
                   </p>
                 </div>
               </div>
-
-              {/* Info Box */}
-              <motion.div
-                variants={staggerItem}
-                className="mt-12 text-center p-8 lg:p-12 bg-[var(--color-bg-secondary)] border border-[var(--color-accent-light)] relative"
-              >
-                {/* Corner accents */}
-                <div className="absolute -top-2 -left-2 w-4 h-4 border-t-2 border-l-2 border-[var(--color-accent)]" />
-                <div className="absolute -top-2 -right-2 w-4 h-4 border-t-2 border-r-2 border-[var(--color-accent)]" />
-                <div className="absolute -bottom-2 -left-2 w-4 h-4 border-b-2 border-l-2 border-[var(--color-accent)]" />
-                <div className="absolute -bottom-2 -right-2 w-4 h-4 border-b-2 border-r-2 border-[var(--color-accent)]" />
-
-                <div className="flex items-center justify-center gap-4 mb-6">
-                  <svg
-                    width="32"
-                    height="32"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="var(--color-accent)"
-                    strokeWidth="1.5"
-                  >
-                    <circle cx="12" cy="12" r="10" />
-                    <line x1="12" y1="8" x2="12" y2="12" />
-                    <line x1="12" y1="16" x2="12.01" y2="16" />
-                  </svg>
-                  <span className="text-xl font-[family-name:var(--font-cormorant)] text-[var(--color-accent)]">
-                    Availability & Special Requests
-                  </span>
-                </div>
-                <p className="text-[var(--color-text-secondary)] text-lg mb-6">
-                  Wine availability may vary based on current inventory. For
-                  specific vintages or rare bottles, please contact us in
-                  advance so we can source them for your event.
-                </p>
-                <p className="text-[var(--color-text-secondary)]">
-                  We partner with premium importers to bring exceptional wines
-                  to Saint-Martin. Special orders typically require 1-2 weeks
-                  advance notice.
-                </p>
-              </motion.div>
             </motion.div>
           </div>
         </section>
 
         {/* Photo Gallery */}
-        <section className="section bg-[var(--color-bg-secondary)]">
+        <section className="section bg-[var(--color-bg-primary)]">
           <div className="container">
             <motion.div
               variants={fadeUp}
@@ -504,9 +762,7 @@ export default function WinePage() {
                   fill
                   className="object-cover transition-all duration-700 group-hover:scale-110"
                 />
-                {/* Hover overlay with vignette */}
                 <div className="absolute inset-0 bg-gradient-to-t from-[#0C0A09]/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                {/* Corner frame on hover */}
                 <div className="absolute inset-4 border border-[var(--color-accent)]/0 group-hover:border-[var(--color-accent)]/50 transition-all duration-500 pointer-events-none" />
               </motion.div>
               <motion.div
@@ -519,9 +775,7 @@ export default function WinePage() {
                   fill
                   className="object-cover transition-all duration-700 group-hover:scale-110"
                 />
-                {/* Hover overlay with vignette */}
                 <div className="absolute inset-0 bg-gradient-to-t from-[#0C0A09]/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                {/* Corner frame on hover */}
                 <div className="absolute inset-4 border border-[var(--color-accent)]/0 group-hover:border-[var(--color-accent)]/50 transition-all duration-500 pointer-events-none" />
               </motion.div>
             </motion.div>
@@ -529,8 +783,7 @@ export default function WinePage() {
         </section>
 
         {/* Booking Section */}
-        <section className="section bg-[var(--color-bg-primary)] relative overflow-hidden">
-          {/* Decorative background */}
+        <section className="section bg-[var(--color-bg-secondary)] relative overflow-hidden">
           <div className="absolute inset-0 opacity-[0.03]" style={{
             backgroundImage: `radial-gradient(circle at 2px 2px, var(--color-accent) 1px, transparent 0)`,
             backgroundSize: '40px 40px'
@@ -558,7 +811,6 @@ export default function WinePage() {
                 </p>
               </motion.div>
 
-              {/* Contact Cards */}
               <motion.div
                 variants={staggerContainer}
                 initial="hidden"
@@ -600,7 +852,6 @@ export default function WinePage() {
                 </motion.a>
               </motion.div>
 
-              {/* Contact Form */}
               <motion.div
                 variants={fadeUp}
                 initial="hidden"
@@ -608,7 +859,6 @@ export default function WinePage() {
                 viewport={{ once: true, margin: "-100px" }}
                 className="bg-[var(--color-bg-tertiary)] border border-[var(--color-accent-light)] p-8 lg:p-12 relative"
               >
-                {/* Corner accents */}
                 <div className="absolute -top-2 -left-2 w-6 h-6 border-t-2 border-l-2 border-[var(--color-accent)]" />
                 <div className="absolute -top-2 -right-2 w-6 h-6 border-t-2 border-r-2 border-[var(--color-accent)]" />
                 <div className="absolute -bottom-2 -left-2 w-6 h-6 border-b-2 border-l-2 border-[var(--color-accent)]" />
