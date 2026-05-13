@@ -1,16 +1,16 @@
 version: 2
 updates:
-  # Mises à jour des dépendances npm
+  # Mises à jour des dépendances npm — MENSUELLES, groupées
   - package-ecosystem: "npm"
     directory: "/"
     schedule:
-      interval: "weekly"
+      interval: "monthly"
       day: "monday"
       time: "09:00"
       timezone: "America/Martinique"
-    open-pull-requests-limit: 10
+    open-pull-requests-limit: 5
     groups:
-      minor-and-patch:
+      all-deps:
         patterns:
           - "*"
         update-types:
@@ -21,16 +21,15 @@ updates:
       - "automated"
     commit-message:
       prefix: "deps"
-    # Ignorer les mises à jour majeures (merge manuel requis)
     ignore:
       - dependency-name: "*"
         update-types: ["version-update:semver-major"]
 
-  # Mises à jour des GitHub Actions
+  # Mises à jour des GitHub Actions — MENSUELLES
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
-      interval: "weekly"
+      interval: "monthly"
       day: "monday"
       time: "09:00"
       timezone: "America/Martinique"
