@@ -57,6 +57,6 @@ export default function robots(): MetadataRoute.Robots {
       ...SCRAPER_BOTS.map((userAgent) => ({ userAgent, disallow: "/" })),
       ...REALTIME_BOTS.map((userAgent) => ({ userAgent, allow: "/" })),
     ],
-    sitemap: `${baseUrl}/sitemap.xml`,
+    sitemap: "https://sxmprivatechef.com/sitemap.xml",
   };
 }
