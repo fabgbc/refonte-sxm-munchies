@@ -4,7 +4,7 @@ import { siteInfo } from "@/data/contact";
 const url = `${siteInfo.url}/bourgogne-menu`;
 const title = "Burgundy Trails Menu — French Bourgogne Tasting";
 const description =
-  "Five-course Burgundy-inspired tasting menu: snail puff pastry, œuf en meurette, chicken-foie gras ballotine. $105 per guest by SXM Private Chef in Saint-Martin.";
+  "Five-course Burgundy-inspired tasting menu: snail puff pastry, œuf en meurette, chicken-foie gras ballotine. $105/guest by SXM Private Chef in Saint-Martin.";
 
 export const metadata: Metadata = {
   title,
