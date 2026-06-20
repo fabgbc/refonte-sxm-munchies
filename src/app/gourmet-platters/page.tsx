@@ -25,7 +25,7 @@ export default function GourmetPlattersPage() {
           {/* Background Image */}
           <div className="absolute inset-0">
             <Image
-              src="/images/hero-menus/platters.jpg"
+              src="/images/hero-menus/Gourmet-Platters.jpg"
               alt="Gourmet Platters"
               fill
               className="object-cover"
