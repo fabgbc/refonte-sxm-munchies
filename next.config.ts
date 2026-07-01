@@ -55,6 +55,11 @@ const securityHeaders = [
 
 const nextConfig: NextConfig = {
   images: {
+    // Sert les images optimisées en AVIF/WebP (plus légères) et garde chaque
+    // variante en cache 1 an côté CDN → moins de ré-optimisations (Functions)
+    // et moins de bande passante répétée.
+    formats: ["image/avif", "image/webp"],
+    minimumCacheTTL: 31536000,
     remotePatterns: [
       {
         protocol: "https",

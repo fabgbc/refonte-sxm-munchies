@@ -1,3 +1,10 @@
+# Redirection du domaine de déploiement Netlify vers le domaine canonique.
+# Fait au niveau edge (0 invocation de Function), en remplacement du middleware
+# proxy.ts. Scopé au seul sous-domaine de production : les deploy previews
+# (*--sxm-munchies.netlify.app) restent accessibles pour les tests.
+http://sxm-munchies.netlify.app/*    https://sxmprivatechef.com/:splat    301!
+https://sxm-munchies.netlify.app/*   https://sxmprivatechef.com/:splat    301!
+
 # Redirections des anciennes pages vers les nouvelles
 
 # Pages de navigation obsolètes

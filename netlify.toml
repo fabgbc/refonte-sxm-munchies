@@ -1,0 +1,23 @@
+# Configuration Netlify — optimisation de la consommation (bande passante / functions).
+# Le build Next.js est géré automatiquement par le runtime Netlify Next ; on
+# n'ajoute ici que des en-têtes de cache pour les assets statiques servis
+# depuis /public. (Les variantes next/image sont, elles, mises en cache via
+# images.minimumCacheTTL dans next.config.ts.)
+
+# Images statiques dans /public/images : contenu stable, nom de fichier fixe.
+[[headers]]
+  for = "/images/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# PDF (carte des vins) : gros fichier téléchargé tel quel → cache long.
+[[headers]]
+  for = "/*.pdf"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# Icônes / manifeste / SVG statiques.
+[[headers]]
+  for = "/*.svg"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
