@@ -58,8 +58,8 @@ export const metadata: Metadata = {
     images: [
       {
         url: "/images/home-page-private-chef-st-martin.jpg",
-        width: 1200,
-        height: 630,
+        width: 2000,
+        height: 1335,
         alt: "SXM Private Chef - Luxury dining in Saint-Martin",
       },
     ],

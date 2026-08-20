@@ -213,7 +213,7 @@ export default function Footer() {
           <p className="text-sm text-[var(--color-text-secondary)] mb-4">
             Our Partner:{" "}
             <a
-              href="http://jcbarcompany.com/"
+              href="https://jcbarcompany.com/"
               target="_blank"
               rel="noopener noreferrer"
               className="text-[var(--color-accent)] hover:underline"
