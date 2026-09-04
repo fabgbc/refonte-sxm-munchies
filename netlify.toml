@@ -21,3 +21,10 @@
   for = "/*.svg"
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
+
+[build.environment]
+  # Next 16.3 : le cache Turbopack écrit les valeurs des variables d'environnement
+  # dans ses fichiers .sst ; le scanner de secrets les lit dans la copie du Runtime
+  # (.netlify/.next/cache) et fait échouer le build. Ce cache n'est jamais servi.
+  # Posé préventivement sur tout le parc (2026-09-04) avant l'arrivée de 16.3 ici.
+  SECRETS_SCAN_OMIT_PATHS = ".next/cache/**,.netlify/.next/cache/**"
