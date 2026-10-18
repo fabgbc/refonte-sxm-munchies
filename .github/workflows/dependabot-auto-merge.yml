@@ -49,7 +49,20 @@ jobs:
 
       - name: Activer auto-merge
         if: steps.metadata.outputs.update-type != 'version-update:semver-major'
-        run: gh pr merge --squash "$PR_URL"
+        # Only the monthly grouped PR and fixes to direct production dependencies
+        # trigger a Netlify deploy (~15 credits). The rest (indirect or dev
+        # dependencies, GitHub Actions) gets [skip ci] and goes live with the next deploy.
+        run: |
+          SUBJECT="$PR_TITLE (#$PR_NUMBER)"
+          if [ "$ECOSYSTEM" = "github_actions" ] || { [ -z "$GROUP" ] && [ "$DEP_TYPE" != "direct:production" ]; }; then
+            SUBJECT="$SUBJECT [skip ci]"
+          fi
+          gh pr merge --squash --subject "$SUBJECT" "$PR_URL"
         env:
           PR_URL: ${{ github.event.pull_request.html_url }}
+          PR_TITLE: ${{ github.event.pull_request.title }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          ECOSYSTEM: ${{ steps.metadata.outputs.package-ecosystem }}
+          GROUP: ${{ steps.metadata.outputs.dependency-group }}
+          DEP_TYPE: ${{ steps.metadata.outputs.dependency-type }}
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
