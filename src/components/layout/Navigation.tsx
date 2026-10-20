@@ -22,7 +22,7 @@ const navLinks = [
     ],
   },
   {
-    href: "#menus",
+    href: "/#menus",
     label: "Menus",
     submenu: [
       { href: "/grill-menu", label: "Grill Menu" },
